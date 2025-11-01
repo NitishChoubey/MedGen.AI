@@ -1,0 +1,58 @@
+Heart Failure (Congestive Heart Failure)
+
+Heart failure is a chronic condition where the heart doesn't pump blood as well as it should. It doesn't mean the heart has stopped working, but that it's working less efficiently.
+
+Common Symptoms:
+- Shortness of breath during activity or at rest
+- Fatigue and weakness
+- Swelling in legs, ankles, and feet (edema)
+- Rapid or irregular heartbeat
+- Reduced ability to exercise
+- Persistent cough or wheezing with white or pink blood-tinged phlegm
+- Increased need to urinate at night
+- Swelling of abdomen (ascites)
+- Sudden weight gain from fluid retention
+- Lack of appetite and nausea
+- Difficulty concentrating or confusion
+
+Types:
+1. Left-sided heart failure:
+   - Systolic failure (heart can't contract forcefully)
+   - Diastolic failure (heart can't relax properly)
+2. Right-sided heart failure
+3. Congestive heart failure (both sides affected)
+
+Common Causes:
+- Coronary artery disease
+- Heart attack (myocardial infarction)
+- High blood pressure (hypertension)
+- Faulty heart valves
+- Cardiomyopathy
+- Myocarditis
+- Congenital heart defects
+- Arrhythmias
+
+Risk Factors:
+- High blood pressure
+- Coronary artery disease
+- Diabetes
+- Obesity
+- Smoking
+- Alcohol or drug abuse
+
+Diagnosis:
+- Physical examination
+- Blood tests (BNP, NT-proBNP)
+- Chest X-ray
+- Electrocardiogram (ECG)
+- Echocardiogram
+- Stress test
+- Cardiac catheterization
+- CT or MRI scans
+
+Treatment:
+- Medications: ACE inhibitors, beta-blockers, diuretics, aldosterone antagonists
+- Lifestyle changes: low-sodium diet, fluid restriction, weight management
+- Implantable devices (pacemakers, ICDs)
+- Surgery (bypass, valve repair, transplant)
+- Cardiac rehabilitation

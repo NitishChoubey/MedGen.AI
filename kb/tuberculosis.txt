@@ -1,0 +1,45 @@
+Tuberculosis (TB)
+
+Tuberculosis is a potentially serious infectious disease caused by the bacterium Mycobacterium tuberculosis. TB primarily affects the lungs but can also affect other parts of the body.
+
+Common Symptoms:
+- Persistent cough lasting more than 3 weeks
+- Coughing up blood or sputum
+- Chest pain
+- Unintentional weight loss
+- Fatigue and weakness
+- Fever and night sweats
+- Chills
+- Loss of appetite
+
+Types:
+1. Latent TB: Bacteria present but inactive, no symptoms, not contagious
+2. Active TB: Bacteria multiply and cause illness, contagious
+
+Risk Factors:
+- Weakened immune system (HIV/AIDS, diabetes, kidney disease)
+- Close contact with infected individuals
+- Living in or traveling to high-risk areas
+- Poverty and malnutrition
+- Substance abuse
+- Healthcare work
+
+Diagnosis:
+- Tuberculin skin test (TST/PPD)
+- Interferon-gamma release assays (IGRAs)
+- Chest X-ray
+- Sputum smear microscopy
+- Culture tests
+- Molecular tests (GeneXpert)
+
+Treatment:
+- Combination antibiotic therapy for 6-9 months
+- Common medications: isoniazid, rifampin, ethambutol, pyrazinamide
+- Directly observed therapy (DOT) recommended
+- Multi-drug resistant TB requires longer treatment with second-line drugs
+
+Prevention:
+- BCG vaccine (in high-risk countries)
+- Screening and treatment of latent TB
+- Infection control measures
+- Isolation of active TB patients until non-contagious

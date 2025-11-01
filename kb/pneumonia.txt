@@ -1,0 +1,36 @@
+Pneumonia
+
+Pneumonia is an infection that inflames the air sacs in one or both lungs. The air sacs may fill with fluid or pus, causing cough with phlegm or pus, fever, chills, and difficulty breathing.
+
+Common Symptoms:
+- Cough with phlegm or pus
+- Fever, sweating and shaking chills
+- Shortness of breath
+- Chest pain that worsens when breathing or coughing
+- Fatigue and weakness
+- Nausea, vomiting, or diarrhea
+- Confusion (especially in older adults)
+
+Risk Factors:
+- Age (children under 2 and adults over 65)
+- Weakened immune system
+- Chronic diseases (asthma, COPD, heart disease)
+- Smoking
+- Hospitalization (especially in ICU)
+
+Common Causes:
+- Bacterial infections (Streptococcus pneumoniae most common)
+- Viral infections (influenza, respiratory syncytial virus)
+- Fungal infections (less common)
+
+Diagnosis typically involves:
+- Chest X-ray
+- Blood tests
+- Sputum culture
+- Pulse oximetry
+
+Treatment depends on cause and severity:
+- Antibiotics for bacterial pneumonia
+- Supportive care (rest, fluids, fever reducers)
+- Hospitalization for severe cases
+- Oxygen therapy if needed

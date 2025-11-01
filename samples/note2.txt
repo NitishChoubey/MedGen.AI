@@ -1,0 +1,34 @@
+Patient: John Smith, 68-year-old male
+
+Chief Complaint: Increasing shortness of breath and leg swelling
+
+History of Present Illness:
+Patient reports progressive dyspnea over the past 3 weeks, now occurring at rest. He has difficulty sleeping flat and needs 3 pillows. Notes significant bilateral lower extremity edema up to knees. Reports 8-pound weight gain in past week. Denies chest pain but reports fatigue and decreased exercise tolerance. Previously could walk 2 blocks, now gets short of breath after 20 feet.
+
+Past Medical History:
+- Coronary artery disease, s/p MI 3 years ago
+- Hypertension
+- Hyperlipidemia
+- Former smoker (quit 5 years ago, 40 pack-year history)
+
+Medications:
+- Aspirin 81mg daily
+- Atorvastatin 40mg daily
+- Carvedilol 25mg twice daily
+- Lisinopril 20mg daily
+- Furosemide 40mg daily (admits to missing doses)
+
+Physical Examination:
+- Temperature: 98.6°F
+- BP: 145/90 mmHg
+- Heart Rate: 88 bpm, irregular
+- Respiratory Rate: 24/min
+- O2 Saturation: 91% on room air
+- JVP elevated at 10 cm
+- Lung exam: Bibasilar crackles
+- Heart: Irregular rhythm, S3 gallop present
+- 3+ pitting edema bilateral lower extremities
+- Hepatomegaly noted
+
+Assessment and Plan:
+Clinical presentation consistent with decompensated heart failure, likely due to medication non-compliance. Will admit for IV diuresis and cardiac monitoring. Order echocardiogram, BNP, troponin, BMP, and chest X-ray. Reinforce medication compliance. Consider uptitration of guideline-directed medical therapy.

@@ -1,0 +1,27 @@
+Patient: Jane Doe, 45-year-old female
+
+Chief Complaint: Persistent cough and fever for 5 days
+
+History of Present Illness:
+Patient presents with a productive cough that started 5 days ago. The cough produces yellow-green sputum. She reports fever up to 101.5°F, chills, and shortness of breath with exertion. She also complains of right-sided chest pain that worsens with deep breathing and coughing. No known sick contacts. No recent travel.
+
+Past Medical History:
+- Hypertension (controlled with medication)
+- Type 2 Diabetes Mellitus
+- No history of lung disease
+
+Medications:
+- Lisinopril 10mg daily
+- Metformin 1000mg twice daily
+
+Physical Examination:
+- Temperature: 100.8°F
+- BP: 135/85 mmHg
+- Heart Rate: 98 bpm
+- Respiratory Rate: 22/min
+- O2 Saturation: 93% on room air
+- Lung exam: Decreased breath sounds and crackles in right lower lobe
+- No cyanosis
+
+Assessment and Plan:
+Concern for community-acquired pneumonia. Ordered chest X-ray, CBC, and basic metabolic panel. Will start empiric antibiotic therapy pending results. Patient advised to rest, increase fluid intake, and return if symptoms worsen.

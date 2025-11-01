@@ -1,0 +1,331 @@
+# ====================================
+# MedGen.AI - Git Ignore Configuration
+# ====================================
+
+# ==================
+# Environment Files & Secrets
+# ==================
+.env
+.env.local
+.env.development
+.env.test
+.env.production
+.env.staging
+.env*.local
+*.env
+!.env.example
+
+# API Keys and Secrets
+secrets/
+*.key
+*.pem
+*.crt
+*.cer
+*.p12
+*.pfx
+config/secrets.json
+config/credentials.json
+credentials.json
+secrets.json
+.secrets
+api_keys.txt
+*.credentials
+
+# Cloud Provider Secrets
+.aws/
+.azure/
+.gcp/
+gcloud-service-key.json
+
+# ==================
+# Dependencies
+# ==================
+node_modules/
+.pnp
+.pnp.js
+
+# ==================
+# Testing
+# ==================
+coverage/
+.nyc_output
+htmlcov/
+.tox/
+.nox/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+*.py,cover
+.hypothesis/
+.pytest_cache/
+cover/
+
+# ==================
+# Next.js
+# ==================
+.next/
+out/
+build/
+dist/
+.vercel
+.turbo
+
+# ==================
+# Python
+# ==================
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+.venv
+.virtualenv
+python_env/
+py_env/
+conda_env/
+
+# Python packages
+*.egg
+*.egg-info/
+.eggs/
+.installed.cfg
+*.manifest
+*.spec
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+share/python-wheels/
+
+# Jupyter Notebook
+.ipynb_checkpoints
+*.ipynb
+
+# IPython
+profile_default/
+ipython_config.py
+
+# pyenv
+.python-version
+
+# mypy
+.mypy_cache/
+.dmypy.json
+dmypy.json
+
+# Pyre type checker
+.pyre/
+
+# pytype static type analyzer
+.pytype/
+
+# Cython debug symbols
+cython_debug/
+
+# ==================
+# Flutter/Dart
+# ==================
+.dart_tool/
+.flutter-plugins
+.flutter-plugins-dependencies
+.packages
+.pub-cache/
+.pub/
+build/
+
+# Flutter build outputs
+**/doc/api/
+**/ios/Flutter/.last_build_id
+app.*.symbols
+app.*.map.json
+
+# Android
+**/android/app/debug
+**/android/app/profile
+**/android/app/release
+**/android/.gradle/
+**/android/local.properties
+
+# iOS
+**/ios/Pods/
+**/ios/.symlinks/
+**/ios/Flutter/Flutter.framework
+**/ios/Flutter/Flutter.podspec
+**/ios/Flutter/Generated.xcconfig
+**/ios/Flutter/ephemeral
+**/ios/Runner.xcworkspace
+
+# ==================
+# IDEs
+# ==================
+# VS Code
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+*.code-workspace
+.history/
+
+# IntelliJ / Android Studio
+.idea/
+*.iml
+*.iws
+*.ipr
+.gradle/
+local.properties
+
+# PyCharm
+.idea/
+
+# Sublime Text
+*.sublime-workspace
+*.sublime-project
+
+# Other editors
+*.swp
+*.swo
+*~
+
+# ==================
+# Operating Systems
+# ==================
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+.Spotlight-V100
+.Trashes
+
+# Windows
+Thumbs.db
+Thumbs.db:encryptable
+ehthumbs.db
+ehthumbs_vista.db
+*.stackdump
+[Dd]esktop.ini
+$RECYCLE.BIN/
+*.cab
+*.msi
+*.msix
+*.msm
+*.msp
+*.lnk
+
+# Linux
+.fuse_hidden*
+.directory
+.Trash-*
+.nfs*
+
+# ==================
+# Logs
+# ==================
+logs/
+*.log
+*.log.*
+log/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+lerna-debug.log*
+.pnpm-debug.log*
+
+# ==================
+# AI Models & Cache
+# ==================
+# Large model files (should be downloaded separately)
+*.bin
+*.pt
+*.pth
+*.h5
+*.pkl
+*.pickle
+*.joblib
+*.safetensors
+models/
+checkpoints/
+weights/
+
+# FAISS indexes (regenerated on startup)
+*.index
+*.faiss
+
+# Model cache directories
+.cache/
+cache/
+model_cache/
+transformers_cache/
+torch_cache/
+huggingface/
+
+# ==================
+# Databases
+# ==================
+*.db
+*.sqlite
+*.sqlite3
+*.sql
+*.rdb
+data/
+database/
+db_backups/
+
+# ==================
+# Application Specific
+# ==================
+# User uploaded files (if storing locally)
+uploads/
+user_uploads/
+patient_data/
+medical_records/
+
+# Generated reports
+reports/
+output/
+
+# Backup files
+*.bak
+*.backup
+backup/
+
+# ==================
+# Temporary Files
+# ==================
+tmp/
+temp/
+*.tmp
+*.temp
+
+# ==================
+# Docker
+# ==================
+.dockerignore
+docker-compose.override.yml
+
+# ==================
+# Deployment
+# ==================
+.netlify
+.render
+.railway
+
+# ==================
+# Miscellaneous
+# ==================
+*.zip
+*.tar.gz
+*.rar
+.env.backup
+.husky
