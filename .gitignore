@@ -3,6 +3,16 @@
 # ====================================
 
 # ==================
+# Documentation Files (Keep only essential)
+# ==================
+# Exclude all markdown files by default
+*.md
+
+# But keep these essential files
+!README.md
+!SETUP.md
+
+# ==================
 # Environment Files & Secrets
 # ==================
 .env
