@@ -20,9 +20,9 @@ export default function ResultsPage() {
 
   if (!resp) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 flex items-center justify-center">
+      <div className="min-h-screen bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950 flex items-center justify-center">
         <div className="text-center">
-          <div className="animate-spin rounded-full h-16 w-16 border-t-4 border-purple-500 mx-auto mb-4"></div>
+          <div className="animate-spin rounded-full h-16 w-16 border-t-4 border-cyan-500 mx-auto mb-4"></div>
           <p className="text-white text-lg">Loading results...</p>
         </div>
       </div>
@@ -30,32 +30,32 @@ export default function ResultsPage() {
   }
 
   return (
-    <main className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 relative overflow-hidden">
+    <main className="min-h-screen bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950 relative overflow-hidden">
       {/* Animated Background Effects */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-1/4 -left-48 w-96 h-96 bg-purple-500 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob"></div>
-        <div className="absolute top-1/3 -right-48 w-96 h-96 bg-blue-500 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob animation-delay-2000"></div>
-        <div className="absolute bottom-1/4 left-1/3 w-96 h-96 bg-pink-500 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob animation-delay-4000"></div>
+        <div className="absolute top-1/4 -left-48 w-96 h-96 bg-cyan-500 rounded-full mix-blend-multiply filter blur-3xl opacity-15 animate-blob"></div>
+        <div className="absolute top-1/3 -right-48 w-96 h-96 bg-blue-500 rounded-full mix-blend-multiply filter blur-3xl opacity-15 animate-blob animation-delay-2000"></div>
+        <div className="absolute bottom-1/4 left-1/3 w-96 h-96 bg-teal-500 rounded-full mix-blend-multiply filter blur-3xl opacity-15 animate-blob animation-delay-4000"></div>
       </div>
 
       {/* Header */}
-      <div className="bg-white/5 backdrop-blur-xl border-b border-white/10 sticky top-0 z-50 shadow-2xl">
+      <div className="glass-effect-strong border-b border-white/10 sticky top-0 z-50 shadow-2xl">
         <div className="max-w-7xl mx-auto px-6 py-5">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-4">
               <div className="relative">
-                <div className="absolute inset-0 bg-gradient-to-r from-blue-600 to-purple-600 rounded-2xl blur-lg opacity-75 animate-pulse"></div>
-                <div className="relative w-14 h-14 bg-gradient-to-br from-blue-500 via-purple-500 to-pink-500 rounded-2xl flex items-center justify-center shadow-2xl">
+                <div className="absolute inset-0 bg-gradient-to-r from-cyan-500 to-blue-600 rounded-2xl blur-lg opacity-75 animate-pulse"></div>
+                <div className="relative w-14 h-14 bg-gradient-to-br from-cyan-500 via-blue-500 to-teal-500 rounded-2xl flex items-center justify-center shadow-2xl border-2 border-white/10">
                   <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
                   </svg>
                 </div>
               </div>
               <div>
-                <h1 className="text-3xl font-black font-display bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent tracking-tight">
+                <h1 className="text-3xl font-black font-display bg-gradient-to-r from-cyan-400 via-blue-400 to-teal-400 bg-clip-text text-transparent tracking-tight">
                   MedGen.AI
                 </h1>
-                <p className="text-sm text-gray-400 font-medium tracking-wide">Clinical Analysis Results</p>
+                <p className="text-sm text-gray-300 font-medium tracking-wide">Clinical Analysis Results</p>
               </div>
             </div>
             <button
@@ -89,8 +89,8 @@ export default function ResultsPage() {
           </div>
 
           {/* Summary Card */}
-          <div className="relative bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-2xl rounded-3xl border border-white/20 overflow-hidden shadow-2xl animate-slide-in-right">
-            <div className="bg-gradient-to-r from-blue-600 via-cyan-600 to-sky-600 p-6">
+          <div className="relative glass-effect rounded-3xl border border-white/20 overflow-hidden shadow-2xl animate-slide-in-right hover:shadow-cyan-500/10 transition-all duration-300">
+            <div className="bg-gradient-to-r from-cyan-600 via-blue-600 to-teal-600 p-6">
               <h2 className="text-xl font-black font-display text-white flex items-center gap-3">
                 <div className="w-10 h-10 bg-white/20 rounded-xl flex items-center justify-center backdrop-blur-xl">
                   <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -109,8 +109,8 @@ export default function ResultsPage() {
 
           {/* Ranked Diagnoses Card */}
           {resp.ranked_diagnoses && resp.ranked_diagnoses.length > 0 && (
-            <div className="relative bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-2xl rounded-3xl border border-white/20 overflow-hidden shadow-2xl animate-slide-in-right animation-delay-100">
-              <div className="bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 p-6">
+            <div className="relative glass-effect rounded-3xl border border-white/20 overflow-hidden shadow-2xl animate-slide-in-right animation-delay-100 hover:shadow-blue-500/10 transition-all duration-300">
+              <div className="bg-gradient-to-r from-blue-600 via-indigo-600 to-blue-700 p-6">
                 <h2 className="text-xl font-black font-display text-white flex items-center gap-3">
                   <div className="w-10 h-10 bg-white/20 rounded-xl flex items-center justify-center backdrop-blur-xl">
                     <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -119,7 +119,7 @@ export default function ResultsPage() {
                   </div>
                   Prioritized Differential Diagnoses
                 </h2>
-                <p className="text-purple-100 text-sm mt-2">Ranked by confidence score with severity indicators</p>
+                <p className="text-blue-100 text-sm mt-2">Ranked by confidence score with severity indicators</p>
               </div>
               <div className="p-8 space-y-5">
                 {resp.ranked_diagnoses.map((diagnosis) => {
@@ -204,7 +204,7 @@ export default function ResultsPage() {
                         {diagnosis.supporting_findings.length > 0 && (
                           <div className="mt-4 pt-4 border-t border-white/10">
                             <p className="text-xs font-bold text-gray-300 mb-2 flex items-center gap-1">
-                              <svg className="w-3.5 h-3.5 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                              <svg className="w-3.5 h-3.5 text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4" />
                               </svg>
                               Supporting Findings ({diagnosis.supporting_findings.length})
@@ -212,11 +212,11 @@ export default function ResultsPage() {
                             <div className="grid gap-2">
                               {diagnosis.supporting_findings.map((finding, idx) => (
                                 <div key={idx} className="flex items-start gap-2 p-2 bg-white/5 rounded-lg">
-                                  <span className="flex-shrink-0 inline-block px-2 py-0.5 rounded bg-purple-500/20 border border-purple-400/30 text-xs font-semibold text-purple-300">
+                                  <span className="flex-shrink-0 inline-block px-2 py-0.5 rounded bg-cyan-500/20 border border-cyan-400/30 text-xs font-semibold text-cyan-300">
                                     {finding.category}
                                   </span>
                                   <span className="text-xs text-gray-300 italic flex-1">&quot;{finding.text}&quot;</span>
-                                  <span className="text-xs font-bold text-purple-400 flex-shrink-0">
+                                  <span className="text-xs font-bold text-cyan-400 flex-shrink-0">
                                     {(finding.relevance * 100).toFixed(1)}%
                                   </span>
                                 </div>
@@ -265,7 +265,7 @@ export default function ResultsPage() {
           )}
 
           {/* Differential & Plan Card */}
-          <div className="relative bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-2xl rounded-3xl border border-white/20 overflow-hidden shadow-2xl animate-slide-in-right animation-delay-200">
+          <div className="relative glass-effect rounded-3xl border border-white/20 overflow-hidden shadow-2xl animate-slide-in-right animation-delay-200 hover:shadow-orange-500/10 transition-all duration-300">
             <div className="bg-gradient-to-r from-orange-600 via-red-600 to-rose-600 p-6">
               <h2 className="text-xl font-black font-display text-white flex items-center gap-3">
                 <div className="w-10 h-10 bg-white/20 rounded-xl flex items-center justify-center backdrop-blur-xl">
@@ -285,8 +285,8 @@ export default function ResultsPage() {
 
           {/* Input Findings Card - Traceability */}
           {resp.input_findings && resp.input_findings.length > 0 && (
-            <div className="relative bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-2xl rounded-3xl border border-white/20 overflow-hidden shadow-2xl animate-slide-in-right animation-delay-200">
-              <div className="bg-gradient-to-r from-purple-600 via-fuchsia-600 to-pink-600 p-6">
+            <div className="relative glass-effect rounded-3xl border border-white/20 overflow-hidden shadow-2xl animate-slide-in-right animation-delay-200 hover:shadow-violet-500/10 transition-all duration-300">
+              <div className="bg-gradient-to-r from-violet-600 via-violet-700 to-indigo-600 p-6">
                 <h2 className="text-xl font-black font-display text-white flex items-center gap-3">
                   <div className="w-10 h-10 bg-white/20 rounded-xl flex items-center justify-center backdrop-blur-xl">
                     <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -295,15 +295,15 @@ export default function ResultsPage() {
                   </div>
                   Key Findings from Patient Note
                 </h2>
-                <p className="text-purple-100 text-sm mt-2">Traced evidence from your input text</p>
+                <p className="text-violet-100 text-sm mt-2">Traced evidence from your input text</p>
               </div>
               <div className="p-8">
                 <div className="grid md:grid-cols-2 gap-4">
                   {resp.input_findings.map((finding, idx) => (
-                    <div key={idx} className="p-4 bg-gradient-to-r from-purple-500/10 to-pink-500/10 backdrop-blur-xl rounded-xl border border-purple-500/30 hover:border-purple-400/50 transition-all duration-300">
+                    <div key={idx} className="p-4 bg-gradient-to-r from-violet-500/10 to-indigo-500/10 backdrop-blur-xl rounded-xl border border-violet-500/30 hover:border-violet-400/50 transition-all duration-300">
                       <div className="flex items-start gap-3">
                         <div className="flex-shrink-0 mt-0.5">
-                          <span className="inline-flex items-center px-2.5 py-1 rounded-lg bg-purple-500/20 border border-purple-400/30 text-xs font-bold text-purple-300">
+                          <span className="inline-flex items-center px-2.5 py-1 rounded-lg bg-violet-500/20 border border-violet-400/30 text-xs font-bold text-violet-300">
                             {finding.category}
                           </span>
                         </div>
@@ -319,7 +319,7 @@ export default function ResultsPage() {
           )}
 
           {/* Evidence Card */}
-          <div className="relative bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-2xl rounded-3xl border border-white/20 overflow-hidden shadow-2xl animate-slide-in-right animation-delay-300">
+          <div className="relative glass-effect rounded-3xl border border-white/20 overflow-hidden shadow-2xl animate-slide-in-right animation-delay-300 hover:shadow-emerald-500/10 transition-all duration-300">
             <div className="bg-gradient-to-r from-emerald-600 via-teal-600 to-green-600 p-6">
               <h2 className="text-xl font-black font-display text-white flex items-center gap-3">
                 <div className="w-10 h-10 bg-white/20 rounded-xl flex items-center justify-center backdrop-blur-xl">
@@ -384,7 +384,7 @@ export default function ResultsPage() {
           <div className="flex items-center justify-center gap-4 pt-8">
             <button
               onClick={() => window.print()}
-              className="px-8 py-4 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-2xl font-bold hover:shadow-2xl hover:shadow-purple-500/50 hover:scale-105 transition-all duration-300 flex items-center gap-3"
+              className="px-8 py-4 bg-gradient-to-r from-cyan-600 to-blue-600 text-white rounded-2xl font-bold hover:shadow-2xl hover:shadow-cyan-500/50 hover:scale-105 transition-all duration-300 flex items-center gap-3 border-2 border-cyan-400/20"
             >
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z" />
