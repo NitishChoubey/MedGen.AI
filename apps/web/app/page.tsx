@@ -56,44 +56,52 @@ export default function LandingPage() {
   ];
 
   return (
-    <main className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 relative overflow-hidden">
+    <main className="min-h-screen bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950 relative overflow-hidden">
       {/* Animated Background Effects */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-1/4 -left-48 w-96 h-96 bg-purple-500 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob"></div>
+        <div className="absolute top-1/4 -left-48 w-96 h-96 bg-cyan-500 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob"></div>
         <div className="absolute top-1/3 -right-48 w-96 h-96 bg-blue-500 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob animation-delay-2000"></div>
-        <div className="absolute bottom-1/4 left-1/3 w-96 h-96 bg-pink-500 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob animation-delay-4000"></div>
+        <div className="absolute bottom-1/4 left-1/3 w-96 h-96 bg-teal-500 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob animation-delay-4000"></div>
+      </div>
+
+      {/* Grid Pattern Overlay */}
+      <div className="absolute inset-0 pointer-events-none opacity-5">
+        <div className="absolute inset-0" style={{
+          backgroundImage: 'linear-gradient(rgba(6, 182, 212, 0.3) 1px, transparent 1px), linear-gradient(90deg, rgba(6, 182, 212, 0.3) 1px, transparent 1px)',
+          backgroundSize: '50px 50px'
+        }}></div>
       </div>
 
       <div className="relative z-10 flex flex-col items-center justify-center min-h-screen px-6 py-12">
         {/* Hero Section */}
         <div className="text-center mb-20 animate-fade-in-up">
-          <div className="relative inline-block mb-8">
-            <div className="absolute inset-0 bg-gradient-to-r from-blue-600 to-purple-600 rounded-3xl blur-2xl opacity-50 animate-pulse"></div>
-            <div className="relative w-24 h-24 mx-auto bg-gradient-to-br from-blue-500 via-purple-500 to-pink-500 rounded-3xl flex items-center justify-center shadow-2xl">
-              <svg className="w-14 h-14 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <div className="relative inline-block mb-8 animate-float">
+            <div className="absolute inset-0 bg-gradient-to-r from-cyan-500 to-blue-600 rounded-3xl blur-3xl opacity-50 animate-pulse"></div>
+            <div className="relative w-28 h-28 mx-auto bg-gradient-to-br from-cyan-500 via-blue-500 to-teal-500 rounded-3xl flex items-center justify-center shadow-2xl border-4 border-white/10">
+              <svg className="w-16 h-16 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
               </svg>
             </div>
           </div>
 
-          <h1 className="text-7xl md:text-8xl font-black font-display bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent mb-6 tracking-tight">
+          <h1 className="text-7xl md:text-8xl font-black font-display bg-gradient-to-r from-cyan-400 via-blue-400 to-teal-400 bg-clip-text text-transparent mb-6 tracking-tight drop-shadow-2xl">
             MedGen.AI
           </h1>
-          
-          <p className="text-2xl md:text-3xl text-gray-300 font-medium mb-4 tracking-wide">
+
+          <p className="text-2xl md:text-3xl text-gray-200 font-semibold mb-4 tracking-wide">
             Intelligent Medical Documentation Analysis
           </p>
-          
+
           <p className="text-lg md:text-xl text-gray-400 max-w-3xl mx-auto mb-12 leading-relaxed">
-            Transform unstructured clinical notes into actionable insights with AI-powered summarization, 
+            Transform unstructured clinical notes into actionable insights with AI-powered summarization,
             differential diagnosis generation, and evidence-based recommendations
           </p>
 
           <button
             onClick={() => router.push('/upload')}
-            className="group relative px-12 py-5 bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 text-white rounded-2xl font-black text-xl hover:shadow-2xl hover:shadow-purple-500/50 hover:scale-105 transition-all duration-300 overflow-hidden"
+            className="group relative px-12 py-5 bg-gradient-to-r from-cyan-600 via-blue-600 to-teal-600 text-white rounded-2xl font-black text-xl hover:shadow-2xl hover:shadow-cyan-500/50 hover:scale-105 transition-all duration-300 overflow-hidden border-2 border-cyan-400/20"
           >
-            <div className="absolute inset-0 bg-gradient-to-r from-pink-600 via-purple-600 to-blue-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+            <div className="absolute inset-0 bg-gradient-to-r from-teal-600 via-cyan-600 to-blue-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
             <span className="relative flex items-center gap-3">
               Get Started
               <svg className="w-6 h-6 group-hover:translate-x-2 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -109,31 +117,33 @@ export default function LandingPage() {
             <h2 className="text-4xl font-black font-display text-center text-white mb-16 animate-fade-in-up">
               Powered by Advanced AI Technology
             </h2>
-            
+
             <div className="grid md:grid-cols-2 gap-8">
               {features.map((feature, index) => (
                 <div
                   key={index}
-                  className="relative bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-2xl rounded-3xl border border-white/20 p-8 hover:bg-white/15 hover:border-purple-500/50 transition-all duration-300 animate-slide-in-right shadow-2xl"
+                  className="group relative glass-effect rounded-3xl p-8 hover:glass-effect-strong hover:border-cyan-500/50 transition-all duration-500 animate-slide-in-right shadow-2xl"
                   style={{ animationDelay: feature.delay }}
                 >
-                  <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-purple-500/20 to-transparent rounded-full blur-2xl"></div>
-                  
+                  <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-cyan-500/20 to-transparent rounded-full blur-2xl group-hover:opacity-100 opacity-50 transition-opacity"></div>
+
                   <div className="relative">
-                    <div className="w-16 h-16 bg-gradient-to-br from-blue-500 to-purple-600 rounded-2xl flex items-center justify-center mb-6 shadow-lg">
+                    <div className="w-16 h-16 bg-gradient-to-br from-cyan-500 to-blue-600 rounded-2xl flex items-center justify-center mb-6 shadow-lg group-hover:shadow-cyan-500/50 group-hover:scale-110 transition-all duration-300">
                       <div className="text-white">
                         {feature.icon}
                       </div>
                     </div>
-                    
-                    <h3 className="text-2xl font-black font-display text-white mb-4">
+
+                    <h3 className="text-2xl font-black font-display text-white mb-4 group-hover:text-cyan-400 transition-colors">
                       {feature.title}
                     </h3>
-                    
-                    <p className="text-gray-300 leading-relaxed">
+
+                    <p className="text-gray-300 leading-relaxed group-hover:text-gray-200 transition-colors">
                       {feature.description}
                     </p>
                   </div>
+
+                  <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-cyan-500/0 to-blue-600/0 group-hover:from-cyan-500/5 group-hover:to-blue-600/5 transition-all duration-500 pointer-events-none"></div>
                 </div>
               ))}
             </div>
@@ -142,12 +152,15 @@ export default function LandingPage() {
 
         {/* Footer Info */}
         <div className="mt-20 text-center animate-fade-in-up" style={{ animationDelay: "0.8s" }}>
-          <div className="inline-flex items-center gap-3 px-6 py-3 bg-white/5 backdrop-blur-xl rounded-full border border-white/10">
-            <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
-            <span className="text-green-400 text-sm font-semibold">AI System Online & Ready</span>
+          <div className="inline-flex items-center gap-3 px-8 py-4 glass-effect rounded-full border border-emerald-400/30 shadow-lg shadow-emerald-500/20">
+            <div className="relative">
+              <div className="w-3 h-3 bg-emerald-400 rounded-full animate-pulse"></div>
+              <div className="absolute inset-0 w-3 h-3 bg-emerald-400 rounded-full animate-ping"></div>
+            </div>
+            <span className="text-emerald-400 text-sm font-bold tracking-wide">AI System Online & Ready</span>
           </div>
-          
-          <p className="text-gray-500 text-sm mt-6">
+
+          <p className="text-gray-400 text-sm mt-6 font-medium">
             Powered by DistilBART, FAISS & Sentence Transformers
           </p>
         </div>
