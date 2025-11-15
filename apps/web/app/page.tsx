@@ -6,10 +6,34 @@ import { useRouter } from "next/navigation";
 export default function LandingPage() {
   const router = useRouter();
   const [mounted, setMounted] = useState(false);
+  const [darkMode, setDarkMode] = useState(false);
 
   useEffect(() => {
     setMounted(true);
+    const savedTheme = localStorage.getItem('theme');
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    const isDark = savedTheme === 'dark' || (!savedTheme && prefersDark);
+    setDarkMode(isDark);
+    
+    // Apply immediately on mount
+    if (isDark) {
+      document.documentElement.classList.add('dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+    }
   }, []);
+
+  useEffect(() => {
+    if (!mounted) return; // Only run after component is mounted
+    
+    if (darkMode) {
+      document.documentElement.classList.add('dark');
+      localStorage.setItem('theme', 'dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+      localStorage.setItem('theme', 'light');
+    }
+  }, [darkMode, mounted]);
 
   const features = [
     {
@@ -62,9 +86,9 @@ export default function LandingPage() {
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50">
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 transition-colors duration-300">
       {/* Navigation */}
-      <nav className="sticky top-0 z-50 bg-white/80 backdrop-blur-lg border-b border-gray-200/50 shadow-sm">
+      <nav className="sticky top-0 z-50 bg-white/80 dark:bg-gray-900/80 backdrop-blur-lg border-b border-gray-200/50 dark:border-gray-700/50 shadow-sm">
         <div className="max-w-7xl mx-auto px-6 py-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-3">
@@ -77,12 +101,35 @@ export default function LandingPage() {
                 MedGen.AI
               </span>
             </div>
-            <button
-              onClick={() => router.push('/upload')}
-              className="px-6 py-2.5 bg-gradient-to-r from-blue-600 to-indigo-600 text-white rounded-xl font-semibold hover:shadow-lg hover:scale-105 transition-all duration-200"
-            >
-              Get Started
-            </button>
+            <div className="flex items-center gap-4">
+              {/* Dark Mode Toggle Button - More Prominent */}
+              <button
+                onClick={() => {
+                  const newMode = !darkMode;
+                  setDarkMode(newMode);
+                  console.log('Dark mode toggled:', newMode);
+                }}
+                className="p-2.5 text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 border-2 border-gray-300 dark:border-gray-600 hover:border-blue-500 rounded-lg transition-all duration-200 hover:scale-110"
+                aria-label="Toggle dark mode"
+                title={darkMode ? "Switch to light mode" : "Switch to dark mode"}
+              >
+                {darkMode ? (
+                  <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 20 20">
+                    <path fillRule="evenodd" d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" clipRule="evenodd" />
+                  </svg>
+                ) : (
+                  <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 20 20">
+                    <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z" />
+                  </svg>
+                )}
+              </button>
+              <button
+                onClick={() => router.push('/upload')}
+                className="px-6 py-2.5 bg-gradient-to-r from-blue-600 to-indigo-600 text-white rounded-xl font-semibold hover:shadow-lg hover:scale-105 transition-all duration-200"
+              >
+                Get Started
+              </button>
+            </div>
           </div>
         </div>
       </nav>
@@ -97,20 +144,20 @@ export default function LandingPage() {
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             {/* Left Column - Content */}
             <div className="space-y-8">
-              <div className="inline-flex items-center gap-2 px-4 py-2 bg-blue-100 rounded-full border border-blue-200">
+              <div className="inline-flex items-center gap-2 px-4 py-2 bg-blue-100 dark:bg-blue-900/30 rounded-full border border-blue-200 dark:border-blue-700">
                 <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
-                <span className="text-sm font-medium text-blue-700">AI System Online</span>
+                <span className="text-sm font-medium text-blue-700 dark:text-blue-300">AI System Online</span>
               </div>
 
               <h1 className="text-5xl sm:text-6xl lg:text-7xl font-black leading-tight">
-                <span className="text-gray-900">Transform Medical</span>
+                <span className="text-gray-900 dark:text-white">Transform Medical</span>
                 <br />
                 <span className="bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 bg-clip-text text-transparent">
                   Notes Into Insights
                 </span>
               </h1>
 
-              <p className="text-xl text-gray-600 leading-relaxed">
+              <p className="text-xl text-gray-600 dark:text-gray-300 leading-relaxed">
                 AI-powered clinical documentation analysis that delivers instant summaries, 
                 ranked differential diagnoses, and evidence-based recommendations in seconds.
               </p>
@@ -132,7 +179,7 @@ export default function LandingPage() {
                       featuresSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
                     }
                   }}
-                  className="px-8 py-4 bg-white text-gray-700 rounded-xl font-semibold text-lg border-2 border-gray-200 hover:border-blue-300 hover:shadow-lg hover:bg-blue-50 transition-all duration-200 flex items-center justify-center gap-2"
+                  className="px-8 py-4 bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-200 rounded-xl font-semibold text-lg border-2 border-gray-200 dark:border-gray-600 hover:border-blue-300 hover:shadow-lg hover:bg-blue-50 dark:hover:bg-gray-700 transition-all duration-200 flex items-center justify-center gap-2"
                 >
                   Learn More
                   <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -144,28 +191,28 @@ export default function LandingPage() {
               {/* Stats */}
               <div className="grid grid-cols-3 gap-6 pt-8">
                 <div>
-                  <div className="text-3xl font-black text-blue-600">3-8s</div>
-                  <div className="text-sm text-gray-600">Analysis Time</div>
+                  <div className="text-3xl font-black text-blue-600 dark:text-blue-400">3-8s</div>
+                  <div className="text-sm text-gray-600 dark:text-gray-400">Analysis Time</div>
                 </div>
                 <div>
-                  <div className="text-3xl font-black text-indigo-600">12+</div>
-                  <div className="text-sm text-gray-600">Conditions</div>
+                  <div className="text-3xl font-black text-indigo-600 dark:text-indigo-400">12+</div>
+                  <div className="text-sm text-gray-600 dark:text-gray-400">Conditions</div>
                 </div>
                 <div>
-                  <div className="text-3xl font-black text-purple-600">100%</div>
-                  <div className="text-sm text-gray-600">Offline</div>
+                  <div className="text-3xl font-black text-purple-600 dark:text-purple-400">100%</div>
+                  <div className="text-sm text-gray-600 dark:text-gray-400">Offline</div>
                 </div>
               </div>
             </div>
 
             {/* Right Column - Visual */}
             <div className="relative">
-              <div className="relative bg-white rounded-3xl shadow-2xl p-8 border border-gray-100 overflow-hidden group hover:shadow-3xl transition-all duration-300">
+              <div className="relative bg-white dark:bg-gray-800 rounded-3xl shadow-2xl p-8 border border-gray-100 dark:border-gray-700 overflow-hidden group hover:shadow-3xl transition-all duration-300">
                 {/* Gradient Background Effect */}
                 <div className="absolute inset-0 bg-gradient-to-br from-blue-50/50 via-indigo-50/30 to-purple-50/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                 
                 {/* Header */}
-                <div className="relative flex items-center justify-between pb-4 border-b border-gray-200 mb-6">
+                <div className="relative flex items-center justify-between pb-4 border-b border-gray-200 dark:border-gray-600 mb-6">
                   <div className="flex items-center gap-3">
                     <div className="relative w-14 h-14 bg-gradient-to-br from-blue-500 via-indigo-600 to-purple-600 rounded-xl flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-300">
                       <div className="absolute inset-0 bg-gradient-to-br from-blue-400 to-purple-500 rounded-xl blur opacity-50"></div>
@@ -174,8 +221,8 @@ export default function LandingPage() {
                       </svg>
                     </div>
                     <div>
-                      <div className="font-bold text-lg text-gray-900">Clinical Analysis</div>
-                      <div className="flex items-center gap-2 text-sm text-gray-500">
+                      <div className="font-bold text-lg text-gray-900 dark:text-white">Clinical Analysis</div>
+                      <div className="flex items-center gap-2 text-sm text-gray-500 dark:text-gray-400">
                         <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
                         <span>Processing...</span>
                       </div>
@@ -194,83 +241,83 @@ export default function LandingPage() {
                 {/* Analysis Results Preview */}
                 <div className="relative space-y-4">
                   {/* Diagnosis Card 1 */}
-                  <div className="p-5 bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 rounded-2xl border-2 border-blue-100 hover:border-blue-300 transition-all duration-300 hover:shadow-lg group/card">
+                  <div className="p-5 bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 dark:from-blue-900/20 dark:via-indigo-900/20 dark:to-purple-900/20 rounded-2xl border-2 border-blue-100 dark:border-blue-800 hover:border-blue-300 dark:hover:border-blue-600 transition-all duration-300 hover:shadow-lg group/card">
                     <div className="flex items-start justify-between mb-3">
                       <div className="flex items-center gap-3">
                         <div className="w-10 h-10 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-lg flex items-center justify-center text-white font-black text-sm shadow-md">
                           #1
                         </div>
                         <div>
-                          <div className="font-bold text-gray-900 text-sm">Heart Failure</div>
-                          <div className="text-xs text-gray-500">High Severity</div>
+                          <div className="font-bold text-gray-900 dark:text-white text-sm">Heart Failure</div>
+                          <div className="text-xs text-gray-500 dark:text-gray-400">High Severity</div>
                         </div>
                       </div>
                       <div className="px-3 py-1 bg-green-100 text-green-700 rounded-lg text-xs font-bold">
                         87%
                       </div>
                     </div>
-                    <div className="h-2 bg-gray-200 rounded-full overflow-hidden">
+                    <div className="h-3 bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden">
                       <div className="h-full bg-gradient-to-r from-blue-500 to-indigo-600 rounded-full" style={{ width: '87%' }}></div>
                     </div>
                   </div>
 
                   {/* Diagnosis Card 2 */}
-                  <div className="p-5 bg-gradient-to-br from-purple-50 via-pink-50 to-rose-50 rounded-2xl border-2 border-purple-100 hover:border-purple-300 transition-all duration-300 hover:shadow-lg">
+                  <div className="p-5 bg-gradient-to-br from-purple-50 via-pink-50 to-rose-50 dark:from-purple-900/20 dark:via-pink-900/20 dark:to-rose-900/20 rounded-2xl border-2 border-purple-100 dark:border-purple-800 hover:border-purple-300 dark:hover:border-purple-600 transition-all duration-300 hover:shadow-lg">
                     <div className="flex items-start justify-between mb-3">
                       <div className="flex items-center gap-3">
                         <div className="w-10 h-10 bg-gradient-to-br from-purple-500 to-pink-600 rounded-lg flex items-center justify-center text-white font-black text-sm shadow-md">
                           #2
                         </div>
                         <div>
-                          <div className="font-bold text-gray-900 text-sm">Pneumonia</div>
-                          <div className="text-xs text-gray-500">Medium Severity</div>
+                          <div className="font-bold text-gray-900 dark:text-white text-sm">Pneumonia</div>
+                          <div className="text-xs text-gray-400 dark:text-gray-400">Medium Severity</div>
                         </div>
                       </div>
                       <div className="px-3 py-1 bg-yellow-100 text-yellow-700 rounded-lg text-xs font-bold">
                         65%
                       </div>
                     </div>
-                    <div className="h-2 bg-gray-200 rounded-full overflow-hidden">
+                    <div className="h-2 bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden">
                       <div className="h-full bg-gradient-to-r from-purple-500 to-pink-600 rounded-full" style={{ width: '65%' }}></div>
                     </div>
                   </div>
 
                   {/* Diagnosis Card 3 */}
-                  <div className="p-5 bg-gradient-to-br from-emerald-50 via-teal-50 to-cyan-50 rounded-2xl border-2 border-emerald-100 hover:border-emerald-300 transition-all duration-300 hover:shadow-lg">
+                  <div className="p-5 bg-gradient-to-br from-emerald-50 via-teal-50 to-cyan-50 dark:from-emerald-900/20 dark:via-teal-900/20 dark:to-cyan-900/20 rounded-2xl border-2 border-emerald-100 dark:border-emerald-800 hover:border-emerald-300 dark:hover:border-emerald-600 transition-all duration-300 hover:shadow-lg">
                     <div className="flex items-start justify-between mb-3">
                       <div className="flex items-center gap-3">
                         <div className="w-10 h-10 bg-gradient-to-br from-emerald-500 to-teal-600 rounded-lg flex items-center justify-center text-white font-black text-sm shadow-md">
                           #3
                         </div>
                         <div>
-                          <div className="font-bold text-gray-900 text-sm">Anemia</div>
-                          <div className="text-xs text-gray-500">Low Severity</div>
+                          <div className="font-bold text-gray-900 dark:text-white text-sm">Anemia</div>
+                          <div className="text-xs text-gray-500 dark:text-gray-400">Low Severity</div>
                         </div>
                       </div>
                       <div className="px-3 py-1 bg-blue-100 text-blue-700 rounded-lg text-xs font-bold">
                         42%
                       </div>
                     </div>
-                    <div className="h-2 bg-gray-200 rounded-full overflow-hidden">
+                    <div className="h-2 bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden">
                       <div className="h-full bg-gradient-to-r from-emerald-500 to-teal-600 rounded-full" style={{ width: '42%' }}></div>
                     </div>
                   </div>
                 </div>
 
                 {/* Footer Stats */}
-                <div className="relative mt-6 pt-6 border-t border-gray-200">
+                <div className="relative mt-6 pt-6 border-t border-gray-200 dark:border-gray-600">
                   <div className="grid grid-cols-3 gap-4 text-center">
                     <div>
-                      <div className="text-lg font-black text-blue-600">3.2s</div>
-                      <div className="text-xs text-gray-500">Processed</div>
+                      <div className="text-lg font-black text-blue-600 dark:text-blue-400">3.2s</div>
+                      <div className="text-xs text-gray-500 dark:text-gray-400">Processed</div>
                     </div>
                     <div>
-                      <div className="text-lg font-black text-indigo-600">5</div>
-                      <div className="text-xs text-gray-500">Diagnoses</div>
+                      <div className="text-lg font-black text-indigo-600 dark:text-indigo-400">5</div>
+                      <div className="text-xs text-gray-500 dark:text-gray-400">Diagnoses</div>
                     </div>
                     <div>
-                      <div className="text-lg font-black text-purple-600">12</div>
-                      <div className="text-xs text-gray-500">Findings</div>
+                      <div className="text-lg font-black text-purple-600 dark:text-purple-400">12</div>
+                      <div className="text-xs text-gray-500 dark:text-gray-400">Findings</div>
                     </div>
                   </div>
                 </div>
@@ -281,13 +328,13 @@ export default function LandingPage() {
       </section>
 
       {/* Features Section */}
-      <section id="features-section" className="py-24 px-6 bg-white">
+      <section id="features-section" className="py-24 px-6 bg-white dark:bg-gray-900">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
-            <h2 className="text-4xl sm:text-5xl font-black text-gray-900 mb-4">
+            <h2 className="text-4xl sm:text-5xl font-black text-gray-900 dark:text-white mb-4">
               Powerful Features
             </h2>
-            <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+            <p className="text-xl text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
               Everything you need for intelligent medical documentation analysis
             </p>
           </div>
@@ -296,13 +343,13 @@ export default function LandingPage() {
             {features.map((feature, index) => (
               <div
                 key={index}
-                className="group p-8 bg-gradient-to-br from-gray-50 to-white rounded-2xl border border-gray-200 hover:border-blue-300 hover:shadow-xl transition-all duration-300 hover:-translate-y-2"
+                className="group p-8 bg-gradient-to-br from-gray-50 to-white dark:from-gray-800 dark:to-gray-800 rounded-2xl border border-gray-200 dark:border-gray-700 hover:border-blue-300 dark:hover:border-blue-500 hover:shadow-xl transition-all duration-300 hover:-translate-y-2"
               >
                 <div className={`w-16 h-16 bg-gradient-to-br ${feature.gradient} rounded-2xl flex items-center justify-center text-white mb-6 group-hover:scale-110 transition-transform duration-300`}>
                   {feature.icon}
                 </div>
-                <h3 className="text-xl font-bold text-gray-900 mb-3">{feature.title}</h3>
-                <p className="text-gray-600 leading-relaxed">{feature.description}</p>
+                <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-3">{feature.title}</h3>
+                <p className="text-gray-600 dark:text-gray-300 leading-relaxed">{feature.description}</p>
               </div>
             ))}
           </div>
@@ -310,14 +357,14 @@ export default function LandingPage() {
       </section>
 
       {/* Benefits Section */}
-      <section className="py-24 px-6 bg-gradient-to-br from-blue-50 to-indigo-50">
+      <section className="py-24 px-6 bg-gradient-to-br from-blue-50 to-indigo-50 dark:from-gray-800 dark:to-gray-900">
         <div className="max-w-7xl mx-auto">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div>
-              <h2 className="text-4xl sm:text-5xl font-black text-gray-900 mb-6">
+              <h2 className="text-4xl sm:text-5xl font-black text-gray-900 dark:text-white mb-6">
                 Why Choose MedGen.AI?
               </h2>
-              <p className="text-xl text-gray-600 mb-8">
+              <p className="text-xl text-gray-600 dark:text-gray-300 mb-8">
                 Streamline your clinical workflow with AI-powered insights that save time 
                 and improve diagnostic accuracy.
               </p>
@@ -329,31 +376,31 @@ export default function LandingPage() {
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                       </svg>
                     </div>
-                    <span className="text-lg text-gray-700 font-medium">{benefit}</span>
+                    <span className="text-lg text-gray-700 dark:text-gray-200 font-medium">{benefit}</span>
                   </div>
                 ))}
               </div>
             </div>
             <div className="relative">
-              <div className="bg-white rounded-3xl shadow-2xl p-8 border border-gray-100">
+              <div className="bg-white dark:bg-gray-800 rounded-3xl shadow-2xl p-8 border border-gray-100 dark:border-gray-700">
                 <div className="space-y-6">
-                  <div className="text-center">
-                    <div className="text-5xl font-black bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent mb-2">
-                      87%
-                    </div>
-                    <div className="text-gray-600">Average Confidence Score</div>
+                    <div className="text-center">
+                      <div className="text-5xl font-black bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent mb-2">
+                        87%
+                      </div>
+                      <div className="text-gray-600 dark:text-gray-300">Average Confidence Score</div>
                   </div>
                   <div className="h-3 bg-gray-200 rounded-full overflow-hidden">
                     <div className="h-full bg-gradient-to-r from-blue-500 to-indigo-600 rounded-full" style={{ width: '87%' }}></div>
                   </div>
-                  <div className="grid grid-cols-2 gap-4 pt-4">
-                    <div className="text-center p-4 bg-blue-50 rounded-xl">
-                      <div className="text-2xl font-black text-blue-600">5</div>
-                      <div className="text-sm text-gray-600">Top Diagnoses</div>
-                    </div>
-                    <div className="text-center p-4 bg-indigo-50 rounded-xl">
-                      <div className="text-2xl font-black text-indigo-600">12+</div>
-                      <div className="text-sm text-gray-600">Conditions</div>
+                    <div className="grid grid-cols-2 gap-4 pt-4">
+                      <div className="text-center p-4 bg-blue-50 dark:bg-blue-900/20 rounded-xl">
+                        <div className="text-2xl font-black text-blue-600 dark:text-blue-400">5</div>
+                        <div className="text-sm text-gray-600 dark:text-gray-400">Top Diagnoses</div>
+                      </div>
+                      <div className="text-center p-4 bg-indigo-50 dark:bg-indigo-900/20 rounded-xl">
+                        <div className="text-2xl font-black text-indigo-600 dark:text-indigo-400">12+</div>
+                        <div className="text-sm text-gray-600 dark:text-gray-400">Conditions</div>
                     </div>
                   </div>
                 </div>
@@ -364,13 +411,13 @@ export default function LandingPage() {
       </section>
 
       {/* How It Works */}
-      <section className="py-24 px-6 bg-white">
+      <section className="py-24 px-6 bg-white dark:bg-gray-900">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
-            <h2 className="text-4xl sm:text-5xl font-black text-gray-900 mb-4">
+            <h2 className="text-4xl sm:text-5xl font-black text-gray-900 dark:text-white mb-4">
               How It Works
             </h2>
-            <p className="text-xl text-gray-600">
+            <p className="text-xl text-gray-600 dark:text-gray-300">
               Simple, fast, and accurate medical note analysis
             </p>
           </div>
@@ -385,7 +432,7 @@ export default function LandingPage() {
               ].map((step, index) => (
                 <div key={index} className="flex items-center">
                   {/* Step Card */}
-                  <div className="relative bg-gradient-to-br from-gray-50 to-white rounded-2xl p-8 border-2 border-gray-200 hover:border-blue-300 hover:shadow-2xl transition-all duration-300 text-center w-64 lg:w-72 group">
+                  <div className="relative bg-gradient-to-br from-gray-50 to-white dark:from-gray-800 dark:to-gray-800 rounded-2xl p-8 border-2 border-gray-200 dark:border-gray-700 hover:border-blue-300 dark:hover:border-blue-500 hover:shadow-2xl transition-all duration-300 text-center w-64 lg:w-72 group">
                     {/* Gradient Background on Hover */}
                     <div className={`absolute inset-0 bg-gradient-to-br ${step.color} opacity-0 group-hover:opacity-5 rounded-2xl transition-opacity duration-300`}></div>
                     
@@ -394,12 +441,12 @@ export default function LandingPage() {
                       <div className={`w-16 h-16 bg-gradient-to-br ${step.color} rounded-full flex items-center justify-center text-white font-black text-xl mx-auto mb-4 shadow-lg group-hover:scale-110 transition-transform duration-300`}>
                         {step.num}
                       </div>
-                      <h3 className="text-xl font-bold text-gray-900 mb-3">{step.title}</h3>
-                      <p className="text-gray-600 leading-relaxed">{step.desc}</p>
+                      <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-3">{step.title}</h3>
+                      <p className="text-gray-600 dark:text-gray-300 leading-relaxed">{step.desc}</p>
                     </div>
                   </div>
 
-                  {/* Arrow Between Steps */}
+                  {/* Arrow Between Steps (Mobile) */}
                   {index < 2 && (
                     <div className="flex-shrink-0 mx-2 lg:mx-4">
                       <svg className="w-12 h-12 lg:w-16 lg:h-16 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -420,7 +467,7 @@ export default function LandingPage() {
               ].map((step, index) => (
                 <div key={index} className="relative">
                   {/* Step Card */}
-                  <div className="bg-gradient-to-br from-gray-50 to-white rounded-2xl p-8 border-2 border-gray-200 hover:border-blue-300 hover:shadow-2xl transition-all duration-300 text-center group">
+                  <div className="bg-gradient-to-br from-gray-50 to-white dark:from-gray-800 dark:to-gray-800 rounded-2xl p-8 border-2 border-gray-200 dark:border-gray-700 hover:border-blue-300 dark:hover:border-blue-500 hover:shadow-2xl transition-all duration-300 text-center group">
                     {/* Gradient Background on Hover */}
                     <div className={`absolute inset-0 bg-gradient-to-br ${step.color} opacity-0 group-hover:opacity-5 rounded-2xl transition-opacity duration-300`}></div>
                     
@@ -429,8 +476,8 @@ export default function LandingPage() {
                       <div className={`w-16 h-16 bg-gradient-to-br ${step.color} rounded-full flex items-center justify-center text-white font-black text-xl mx-auto mb-4 shadow-lg group-hover:scale-110 transition-transform duration-300`}>
                         {step.num}
                       </div>
-                      <h3 className="text-xl font-bold text-gray-900 mb-3">{step.title}</h3>
-                      <p className="text-gray-600 leading-relaxed">{step.desc}</p>
+                      <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-3">{step.title}</h3>
+                      <p className="text-gray-600 dark:text-gray-300 leading-relaxed">{step.desc}</p>
                     </div>
                   </div>
 
