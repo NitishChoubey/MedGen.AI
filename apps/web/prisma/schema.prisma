@@ -1,0 +1,235 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+// Note: SQLite doesn't support enums, so we use String with default values
+// Valid roles: DOCTOR, NURSE, ADMIN, STUDENT, RESEARCHER
+// Valid statuses: ACTIVE, SUSPENDED, PENDING_VERIFICATION, INACTIVE
+
+// User Model
+model User {
+  id                String         @id @default(cuid())
+  email             String         @unique
+  emailVerified     DateTime?
+  password          String?        // Nullable for OAuth users
+  name              String?
+  image             String?
+  role              String         @default("DOCTOR")
+  status            String         @default("PENDING_VERIFICATION")
+  
+  // Professional Information
+  hospital          String?
+  department        String?
+  specialty         String?
+  licenseNumber     String?        @unique
+  phone             String?
+  
+  // Settings & Preferences
+  darkMode          Boolean        @default(false)
+  language          String         @default("en")
+  notifications     Boolean        @default(true)
+  
+  // Subscription & Limits
+  subscriptionTier  String         @default("FREE") // FREE, PRO, HOSPITAL, ENTERPRISE
+  monthlyAnalyses   Int            @default(0)      // Counter reset monthly
+  analysisLimit     Int            @default(10)     // Based on subscription
+  
+  // Relationships
+  accounts          Account[]
+  sessions          Session[]
+  analyses          Analysis[]
+  apiKeys           ApiKey[]
+  auditLogs         AuditLog[]
+  
+  // Timestamps
+  createdAt         DateTime       @default(now())
+  updatedAt         DateTime       @updatedAt
+  lastLoginAt       DateTime?
+  
+  @@index([email])
+  @@index([role])
+  @@index([status])
+}
+
+// OAuth Accounts (Google, GitHub, etc.)
+model Account {
+  id                String  @id @default(cuid())
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String?
+  access_token      String?
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String?
+  session_state     String?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+  @@index([userId])
+}
+
+// Session Management
+model Session {
+  id           String   @id @default(cuid())
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+}
+
+// Email Verification Tokens
+model VerificationToken {
+  identifier String
+  token      String   @unique
+  expires    DateTime
+
+  @@unique([identifier, token])
+}
+
+// Password Reset Tokens
+model PasswordResetToken {
+  id        String   @id @default(cuid())
+  email     String
+  token     String   @unique
+  expires   DateTime
+  used      Boolean  @default(false)
+  createdAt DateTime @default(now())
+
+  @@index([email])
+  @@index([token])
+}
+
+// Medical Analysis Records
+model Analysis {
+  id            String   @id @default(cuid())
+  userId        String
+  user          User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  
+  // Input Data
+  patientNote   String
+  patientId     String?  // Anonymized patient identifier
+  
+  // AI Results
+  summary       String
+  diagnoses     String   // Array of top 5 diagnoses with confidence scores
+  findings      String   // Key findings extracted
+  citations     String   // KB citations used
+  
+  // Metadata
+  processingTime Float   // In seconds
+  modelVersion   String  @default("v1.0")
+  status         String  @default("COMPLETED") // PENDING, PROCESSING, COMPLETED, FAILED
+  
+  // Collaboration
+  sharedWith    String   // Array of user IDs stored as JSON
+  isPublic      Boolean  @default(false)
+  tags          String   // Array of tags stored as JSON
+  
+  // Timestamps
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+  
+  @@index([userId])
+  @@index([createdAt])
+  @@index([status])
+}
+
+// API Keys for Programmatic Access
+model ApiKey {
+  id          String   @id @default(cuid())
+  userId      String
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  
+  name        String   // e.g., "Production API", "Test Key"
+  key         String   @unique
+  
+  // Usage & Limits
+  usageCount  Int      @default(0)
+  rateLimit   Int      @default(100) // Requests per day
+  lastUsedAt  DateTime?
+  
+  // Status
+  active      Boolean  @default(true)
+  expiresAt   DateTime?
+  
+  // Timestamps
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  
+  @@index([userId])
+  @@index([key])
+}
+
+// Audit Logs for HIPAA Compliance
+model AuditLog {
+  id          String   @id @default(cuid())
+  userId      String
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  
+  // Action Details
+  action      String   // LOGIN, LOGOUT, CREATE_ANALYSIS, VIEW_ANALYSIS, EXPORT, etc.
+  resourceId  String?  // ID of the resource being accessed (e.g., analysisId)
+  resourceType String? // ANALYSIS, USER, SETTINGS, etc.
+  
+  // Request Details
+  ipAddress   String?
+  userAgent   String?
+  metadata    String?  // Additional context
+  
+  // Result
+  success     Boolean  @default(true)
+  errorMessage String?
+  
+  // Timestamp
+  createdAt   DateTime @default(now())
+  
+  @@index([userId])
+  @@index([action])
+  @@index([createdAt])
+}
+
+// Knowledge Base Articles (For Admin Management)
+model KnowledgeBase {
+  id            String   @id @default(cuid())
+  
+  // Content
+  condition     String   @unique // e.g., "Heart Failure", "Pneumonia"
+  description   String
+  symptoms      String   // Array of symptoms
+  diagnostics   String   // Diagnostic criteria
+  treatment     String   // Treatment options
+  references    String   // Medical references
+  
+  // Metadata
+  version       String   @default("1.0")
+  category      String   // CARDIOLOGY, PULMONOLOGY, etc.
+  severity      String   // LOW, MEDIUM, HIGH, CRITICAL
+  icd10Codes    String   // ICD-10 codes stored as JSON array
+  
+  // Management
+  active        Boolean  @default(true)
+  reviewedBy    String?  // User ID of reviewer
+  lastReviewedAt DateTime?
+  
+  // Timestamps
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+  
+  @@index([condition])
+  @@index([category])
+  @@index([active])
+}

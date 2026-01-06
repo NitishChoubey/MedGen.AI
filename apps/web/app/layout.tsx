@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import { Inter, Poppins, Space_Grotesk } from 'next/font/google'
 import './globals.css'
+import { AuthProvider } from './providers'
 
 const inter = Inter({ 
   subsets: ['latin'],
@@ -33,7 +34,11 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={`${inter.variable} ${poppins.variable} ${spaceGrotesk.variable} font-sans antialiased`}>{children}</body>
+      <body className={`${inter.variable} ${poppins.variable} ${spaceGrotesk.variable} font-sans antialiased`}>
+        <AuthProvider>
+          {children}
+        </AuthProvider>
+      </body>
     </html>
   )
 }
