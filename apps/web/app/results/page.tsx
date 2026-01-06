@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import { SummarizeResp } from "@/lib/api";
+import { SummarizeResp } from "../lib/api";
 
 export default function ResultsPage() {
   const [resp, setResp] = useState<SummarizeResp | null>(null);

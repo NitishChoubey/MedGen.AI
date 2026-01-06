@@ -2,7 +2,7 @@
 
 import { useState, useRef } from "react";
 import { useRouter } from "next/navigation";
-import { extractPdf, summarizeHypothesize, SummarizeResp } from "@/lib/api";
+import { extractPdf, summarizeHypothesize, SummarizeResp } from "../lib/api";
 
 export default function UploadPage() {
   const [file, setFile] = useState<File | null>(null);
