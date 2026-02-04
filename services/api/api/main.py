@@ -11,9 +11,26 @@ from PyPDF2 import PdfReader
 app = FastAPI(title="MediScribe.AI API")
 
 # Add CORS middleware
+# Allow frontend origins (add your Render frontend URL here)
+allowed_origins = [
+    "http://localhost:3000",
+    "http://127.0.0.1:3000",
+    "http://localhost:3001",
+    "http://127.0.0.1:3001",
+    "https://medgen-ai-2.onrender.com",  # Your Render frontend URL
+]
+
+# Add Render frontend URL from environment variable if set
+frontend_url = os.getenv("FRONTEND_URL") or os.getenv("NEXT_PUBLIC_FRONTEND_URL")
+if frontend_url:
+    allowed_origins.append(frontend_url)
+
+# In production, use specific origins; in development, allow all
+is_production = os.getenv("ENVIRONMENT") == "production" or os.getenv("RENDER")
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:3000", "http://127.0.0.1:3000", "http://localhost:3001", "http://127.0.0.1:3001"],
+    allow_origins=allowed_origins if is_production else ["*"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],

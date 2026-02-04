@@ -2,7 +2,8 @@ fastapi==0.115.2
 uvicorn[standard]==0.30.6
 transformers==4.44.2
 torch>=2.1.0
-sentencepiece
+sentencepiece==0.1.99
+tokenizers==0.15.0
 faiss-cpu
 sentence-transformers==3.0.1
 pydantic==2.9.2
