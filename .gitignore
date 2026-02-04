@@ -111,6 +111,8 @@ conda_env/
 *.spec
 lib/
 lib64/
+# Exception: Allow app/lib in Next.js web app
+!apps/web/app/lib/
 parts/
 sdist/
 var/
