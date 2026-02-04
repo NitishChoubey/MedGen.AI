@@ -61,7 +61,25 @@ print("Initializing embedding model for KB...")
 embedder = get_embedder()
 
 # build KB index
-KB_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "..", "..", "kb"))
+# Try multiple possible KB directory locations
+possible_kb_paths = [
+    os.getenv("KB_DIR"),  # Environment variable
+    os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "..", "..", "kb")),  # Relative to api/main.py
+    os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "..", "kb")),  # Alternative relative path
+    "/app/kb",  # Docker absolute path
+    "./kb",  # Current directory
+]
+
+KB_DIR = None
+for path in possible_kb_paths:
+    if path and os.path.exists(path) and os.path.isdir(path):
+        KB_DIR = path
+        break
+
+if not KB_DIR:
+    # Default fallback
+    KB_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "..", "..", "kb"))
+
 print(f"Looking for KB documents in: {KB_DIR}")
 docs, meta = [], []
 for path in sorted(glob.glob(os.path.join(KB_DIR, "*.txt"))):

@@ -24,9 +24,10 @@ RUN pip install --upgrade pip setuptools wheel && \
 # Copy application code
 COPY api/ ./api/
 
-# Copy KB directory (adjust path based on your repo structure)
-# If KB is at the root level, copy it
-COPY ../kb/ ./kb/ 2>/dev/null || echo "KB directory not found, will use environment variable"
+# Note: KB directory will be accessed via environment variable or mounted volume
+# The KB path is set in the code to look for ../../kb/ relative to api/main.py
+# which translates to /app/../../kb/ from WORKDIR /app
+# For Render, you may need to set KB_DIR environment variable
 
 # Expose port
 EXPOSE 8000

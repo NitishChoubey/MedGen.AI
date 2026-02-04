@@ -1,0 +1,14 @@
+services:
+  - type: web
+    name: medgen-api
+    env: python
+    buildCommand: chmod +x build.sh && ./build.sh || pip install --upgrade pip setuptools wheel && pip install --prefer-binary --no-cache-dir -r requirements.txt
+    startCommand: uvicorn api.main:app --host 0.0.0.0 --port $PORT
+    envVars:
+      - key: PORT
+        value: 8000
+      - key: FRONTEND_URL
+        value: https://medgen-ai-2.onrender.com
+      - key: KB_DIR
+        value: ../../kb
+
