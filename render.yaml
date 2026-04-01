@@ -1,0 +1,54 @@
+databases:
+  - name: medgen-db
+    databaseName: medgen
+    user: medgen
+
+services:
+  - type: web
+    name: medgen-api
+    runtime: python
+    rootDir: services/api
+    buildCommand: chmod +x build.sh && ./build.sh
+    startCommand: uvicorn api.main:app --host 0.0.0.0 --port $PORT
+    envVars:
+      - key: PORT
+        value: 8000
+      - key: KB_DIR
+        value: ../../kb
+      - key: FRONTEND_URL
+        fromService:
+          type: web
+          name: medgen-web
+          property: url
+
+  - type: web
+    name: medgen-web
+    runtime: node
+    rootDir: apps/web
+    buildCommand: npm ci && npm run build
+    startCommand: npm run start
+    envVars:
+      - key: NODE_VERSION
+        value: 20.18.0
+      - key: DATABASE_URL
+        fromDatabase:
+          name: medgen-db
+          property: connectionString
+      - key: NEXTAUTH_URL
+        fromService:
+          type: web
+          name: medgen-web
+          property: url
+      - key: NEXTAUTH_SECRET
+        generateValue: true
+      - key: NEXT_PUBLIC_API_URL
+        fromService:
+          type: web
+          name: medgen-api
+          property: url
+      - key: AUTH_TRUST_HOST
+        value: true
+      - key: GOOGLE_CLIENT_ID
+        sync: false
+      - key: GOOGLE_CLIENT_SECRET
+        sync: false
