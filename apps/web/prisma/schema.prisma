@@ -6,12 +6,12 @@ generator client {
 }
 
 datasource db {
-  provider = "sqlite"
+  provider = "postgresql"
   url      = env("DATABASE_URL")
 }
 
-// Note: SQLite doesn't support enums, so we use String with default values
-// Valid roles: DOCTOR, NURSE, ADMIN, STUDENT, RESEARCHER
+// Note: Role and status are currently modeled as String for compatibility.
+// Valid roles: DOCTOR, PATIENT
 // Valid statuses: ACTIVE, SUSPENDED, PENDING_VERIFICATION, INACTIVE
 
 // User Model
@@ -25,12 +25,20 @@ model User {
   role              String         @default("DOCTOR")
   status            String         @default("PENDING_VERIFICATION")
   
-  // Professional Information
+  // Professional Information (for DOCTOR role)
   hospital          String?
   department        String?
   specialty         String?
   licenseNumber     String?        @unique
   phone             String?
+  
+  // Patient Information (for PATIENT role)
+  dateOfBirth       DateTime?
+  gender            String?        // MALE, FEMALE, OTHER
+  bloodType         String?        // A+, A-, B+, B-, AB+, AB-, O+, O-
+  allergies         String?        // JSON array of allergies
+  medicalHistory    String?        // JSON array of medical conditions
+  emergencyContact  String?        // JSON object with name and phone
   
   // Settings & Preferences
   darkMode          Boolean        @default(false)
@@ -122,17 +130,37 @@ model Analysis {
   // Input Data
   patientNote   String
   patientId     String?  // Anonymized patient identifier
+  patientName   String?  // Patient name for display
+  documentType  String   @default("medical_report") // medical_report, lab_results, prescription, etc.
+  originalFileName String? // Original uploaded file name
   
-  // AI Results
+  // AI Results (Raw - before doctor review)
   summary       String
   diagnoses     String   // Array of top 5 diagnoses with confidence scores
   findings      String   // Key findings extracted
   citations     String   // KB citations used
   
+  // Doctor Review Fields
+  reviewStatus    String  @default("ai_processing") // ai_processing, pending_review, approved, rejected
+  reviewedBy      String? // Doctor user ID who reviewed
+  reviewedAt      DateTime?
+  reviewNotes     String? // Doctor's notes on the review
+  
+  // Edited content (doctor can modify AI output)
+  editedSummary   String? // Doctor's edited version of summary
+  editedDiagnoses String? // Doctor's edited diagnoses
+  editedFindings  String? // Doctor's edited findings
+  
+  // Final approved content (what patient sees)
+  finalSummary    String? // Approved summary for patient
+  finalDiagnoses  String? // Approved diagnoses for patient
+  finalFindings   String? // Approved findings for patient
+  
   // Metadata
-  processingTime Float   // In seconds
+  processingTime Float   @default(0) // In seconds
   modelVersion   String  @default("v1.0")
   status         String  @default("COMPLETED") // PENDING, PROCESSING, COMPLETED, FAILED
+  priority       String  @default("normal") // low, normal, high, urgent
   
   // Collaboration
   sharedWith    String   // Array of user IDs stored as JSON
@@ -146,6 +174,8 @@ model Analysis {
   @@index([userId])
   @@index([createdAt])
   @@index([status])
+  @@index([reviewStatus])
+  @@index([reviewedBy])
 }
 
 // API Keys for Programmatic Access

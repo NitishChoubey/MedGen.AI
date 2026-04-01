@@ -2,9 +2,11 @@
 
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
+import { useSession } from "next-auth/react";
 
 export default function LandingPage() {
   const router = useRouter();
+  const { status } = useSession();
   const [mounted, setMounted] = useState(false);
   const [darkMode, setDarkMode] = useState(false);
 
@@ -123,12 +125,29 @@ export default function LandingPage() {
                   </svg>
                 )}
               </button>
-              <button
-                onClick={() => router.push('/upload')}
-                className="px-6 py-2.5 bg-gradient-to-r from-blue-600 to-indigo-600 text-white rounded-xl font-semibold hover:shadow-lg hover:scale-105 transition-all duration-200"
-              >
-                Get Started
-              </button>
+              {status === "authenticated" ? (
+                <button
+                  onClick={() => router.push('/dashboard')}
+                  className="px-6 py-2.5 bg-gradient-to-r from-blue-600 to-indigo-600 text-white rounded-xl font-semibold hover:shadow-lg hover:scale-105 transition-all duration-200"
+                >
+                  Dashboard
+                </button>
+              ) : (
+                <>
+                  <button
+                    onClick={() => router.push('/auth/signin')}
+                    className="px-5 py-2.5 border-2 border-blue-600 text-blue-700 dark:text-blue-400 rounded-xl font-semibold hover:bg-blue-50 dark:hover:bg-blue-900/20 transition-all duration-200"
+                  >
+                    Sign In
+                  </button>
+                  <button
+                    onClick={() => router.push('/auth/signup')}
+                    className="px-6 py-2.5 bg-gradient-to-r from-blue-600 to-indigo-600 text-white rounded-xl font-semibold hover:shadow-lg hover:scale-105 transition-all duration-200"
+                  >
+                    Sign Up
+                  </button>
+                </>
+              )}
             </div>
           </div>
         </div>

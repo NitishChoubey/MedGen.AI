@@ -8,10 +8,6 @@
 # Exclude all markdown files by default
 *.md
 
-# But keep these essential files
-!README.md
-!SETUP.md
-
 # ==================
 # Environment Files & Secrets
 # ==================
@@ -28,11 +24,31 @@
 # API Keys and Secrets
 secrets/
 *.key
+*.keystore
+*.jks
 *.pem
 *.crt
 *.cer
 *.p12
 *.pfx
+*.ovpn
+*.kubeconfig
+*.tfvars
+*.tfvars.json
+*.secret
+*.secrets
+*.token
+*.jwt
+*.pub
+id_rsa
+id_dsa
+id_ecdsa
+id_ed25519
+.npmrc
+.pypirc
+.netrc
+.envrc
+.direnv/
 config/secrets.json
 config/credentials.json
 credentials.json
@@ -40,6 +56,9 @@ secrets.json
 .secrets
 api_keys.txt
 *.credentials
+service-account*.json
+serviceAccount*.json
+firebase-adminsdk*.json
 
 # Cloud Provider Secrets
 .aws/

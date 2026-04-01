@@ -9,28 +9,44 @@ export default function UploadPage() {
   const [text, setText] = useState("");
   const [topK, setTopK] = useState(4);
   const [loading, setLoading] = useState(false);
-  const [resp, setResp] = useState<SummarizeResp | null>(null);
+  const [extracting, setExtracting] = useState(false);
   const [err, setErr] = useState<string | null>(null);
   const inputRef = useRef<HTMLInputElement>(null);
   const router = useRouter();
 
-  async function handleExtract() {
-    if (!file) { setErr("Select a PDF first."); return; }
-    setErr(null); setResp(null); setLoading(true);
+  async function handleExtract(selectedFile: File) {
+    setFile(selectedFile);
+    setErr(null); 
+    setExtracting(true);
     try {
-      const { text } = await extractPdf(file);
+      const { text } = await extractPdf(selectedFile);
       setText(text || "");
     } catch (e: any) {
       setErr(e?.response?.data || e?.message || "Extract failed.");
-    } finally { setLoading(false); }
+    } finally { setExtracting(false); }
   }
+
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const f = e.target.files?.[0];
+    if (f) handleExtract(f);
+  };
+
+  const handleDrop = (e: React.DragEvent<HTMLDivElement>) => {
+    e.preventDefault();
+    const f = e.dataTransfer.files?.[0];
+    if (f && f.type === "application/pdf") {
+      handleExtract(f);
+    } else if (f) {
+      setErr("Please upload a PDF file.");
+    }
+  };
 
   async function generate() {
     if (!text.trim()) { setErr("No text to process."); return; }
-    setErr(null); setResp(null); setLoading(true);
+    setErr(null); 
+    setLoading(true);
     try {
       const data = await summarizeHypothesize(text.trim(), topK);
-      // Store results in sessionStorage and navigate to results page
       sessionStorage.setItem('analysisResults', JSON.stringify(data));
       router.push('/results');
     } catch (e: any) {
@@ -39,285 +55,154 @@ export default function UploadPage() {
   }
 
   return (
-    <main className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 relative overflow-hidden">
-      {/* Animated Background Effects */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-1/4 -left-48 w-96 h-96 bg-purple-500 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob"></div>
-        <div className="absolute top-1/3 -right-48 w-96 h-96 bg-blue-500 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob animation-delay-2000"></div>
-        <div className="absolute bottom-1/4 left-1/3 w-96 h-96 bg-pink-500 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob animation-delay-4000"></div>
-      </div>
-
-      {/* Header */}
-      <div className="glass border-b border-white/10 sticky top-0 z-50 shadow-xl backdrop-blur-2xl">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 py-4">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center gap-3 sm:gap-4">
-              <div className="relative">
-                <div className="absolute inset-0 bg-gradient-to-r from-blue-600 to-purple-600 rounded-2xl blur-lg opacity-60 animate-pulse"></div>
-                <div className="relative w-12 h-12 sm:w-14 sm:h-14 bg-gradient-to-br from-blue-500 via-purple-500 to-pink-500 rounded-2xl flex items-center justify-center shadow-2xl ring-2 ring-purple-500/20">
-                  <svg className="w-6 h-6 sm:w-8 sm:h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-                  </svg>
-                </div>
-              </div>
-              <div>
-                <h1 className="text-2xl sm:text-3xl font-black font-display gradient-text tracking-tight">
-                  MedGen.AI
-                </h1>
-                <p className="text-xs sm:text-sm text-gray-400 font-medium">AI-Powered Medical Intelligence Platform</p>
-              </div>
+    <div className="min-h-screen bg-slate-50 text-slate-900 font-sans selection:bg-indigo-500/30">
+      <nav className="sticky top-0 z-50 border-b border-slate-200 bg-slate-50/80 backdrop-blur-md">
+        <div className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
+          <div className="flex items-center gap-3">
+            <div className="w-8 h-8 rounded-lg bg-indigo-500/10 border border-indigo-500/20 flex items-center justify-center text-indigo-400">
+              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z" />
+              </svg>
             </div>
-            <div className="flex items-center gap-2 sm:gap-3">
-              <div className="px-3 sm:px-4 py-2 bg-green-500/20 border border-green-500/30 rounded-xl flex items-center gap-2">
-                <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse shadow-lg shadow-green-400/50"></div>
-                <span className="text-green-400 text-xs sm:text-sm font-semibold">AI Online</span>
-              </div>
-            </div>
+            <span className="font-semibold text-slate-900 tracking-tight">MedGen<span className="text-slate-9000">.AI</span></span>
+          </div>
+          <div className="flex items-center gap-4">
+             <div className="flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-xs font-medium">
+               <span className="relative flex h-2 w-2">
+                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                 <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+               </span>
+               System Online
+             </div>
           </div>
         </div>
-      </div>
+      </nav>
 
-      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 py-8 sm:py-12">
-        {/* Progress Steps */}
-        <div className="mb-10 sm:mb-12">
-          <div className="flex items-center justify-center gap-3 sm:gap-4 flex-wrap">
-            {[
-              { num: 1, label: 'Upload', active: !!file },
-              { num: 2, label: 'Extract', active: !!text },
-              { num: 3, label: 'Analyze', active: !!resp }
-            ].map((step, idx) => (
-              <div key={step.num} className="flex items-center gap-3 sm:gap-4">
-                <div className="flex flex-col items-center gap-2">
-                  <div className={`relative w-14 h-14 sm:w-16 sm:h-16 rounded-2xl flex items-center justify-center font-black text-lg sm:text-xl transition-all duration-500 ${
-                    step.active 
-                      ? 'bg-gradient-to-br from-blue-500 to-purple-600 shadow-2xl shadow-purple-500/50 scale-110 ring-2 ring-purple-500/30' 
-                      : 'glass border-2 border-white/10'
-                  }`}>
-                    <div className="absolute inset-0 bg-gradient-to-br from-blue-500 to-purple-600 rounded-2xl blur-lg opacity-0 group-hover:opacity-50 transition-opacity"></div>
-                    <span className={`relative ${step.active ? 'text-white' : 'text-gray-500'}`}>{step.num}</span>
-                  </div>
-                  <span className={`text-xs sm:text-sm font-bold ${step.active ? 'text-purple-400' : 'text-gray-500'}`}>
-                    {step.label}
-                  </span>
-                </div>
-                {idx < 2 && (
-                  <div className="w-16 sm:w-24 h-1.5 bg-white/5 rounded-full overflow-hidden">
-                    <div className={`h-full bg-gradient-to-r from-blue-500 to-purple-600 transition-all duration-500 ${
-                      idx === 0 ? (text ? 'w-full' : 'w-0') : (resp ? 'w-full' : 'w-0')
-                    }`}></div>
-                  </div>
-                )}
-              </div>
-            ))}
+      <main className="max-w-6xl mx-auto px-6 py-12 md:py-20 lg:grid lg:grid-cols-12 gap-12 items-start">
+        <div className="lg:col-span-5 space-y-8">
+          <div>
+            <h1 className="text-3xl md:text-4xl font-bold tracking-tight text-slate-900 mb-3">
+              Clinical Note Analysis
+            </h1>
+            <p className="text-slate-600 text-sm md:text-base leading-relaxed">
+              Upload a patient's medical document or paste clinical notes to generate a differential diagnosis instantly.
+            </p>
           </div>
-        </div>
 
-        <div className="grid lg:grid-cols-2 gap-8">
-          {/* Left Column - Input */}
-          <div className="space-y-6">
-            {/* File Upload Card */}
-            <div className="relative glass-strong rounded-3xl overflow-hidden shadow-2xl card-hover">
-              <div className="bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 p-5 sm:p-6">
-                <h2 className="text-lg sm:text-xl font-black font-display text-white flex items-center gap-3">
-                  <div className="w-10 h-10 bg-white/20 rounded-xl flex items-center justify-center backdrop-blur-xl ring-1 ring-white/20">
-                    <svg className="w-5 h-5 sm:w-6 sm:h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
-                    </svg>
-                  </div>
-                  Upload Medical Document
-                </h2>
-              </div>
-              <div className="p-6 sm:p-8">
-                <div
-                  className="border-2 border-dashed border-white/20 rounded-2xl p-8 sm:p-12 text-center hover:border-purple-500/50 hover:bg-white/5 transition-all duration-300 cursor-pointer group"
-                  onClick={() => inputRef.current?.click()}
-                >
-                  <input
-                    ref={inputRef}
-                    type="file"
-                    accept="application/pdf"
-                    className="hidden"
-                    onChange={(e) => setFile(e.target.files?.[0] ?? null)}
-                  />
-                  <div className="w-16 h-16 sm:w-20 sm:h-20 mx-auto mb-6 bg-gradient-to-br from-blue-500/20 to-purple-500/20 rounded-3xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300 border border-white/10 ring-2 ring-purple-500/10">
-                    <svg className="w-8 h-8 sm:w-10 sm:h-10 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z" />
-                    </svg>
-                  </div>
-                  {file ? (
-                    <div className="space-y-3">
-                      <p className="text-base sm:text-lg font-bold text-white">{file.name}</p>
-                      <p className="text-xs sm:text-sm text-gray-400">{(file.size / 1024).toFixed(2)} KB</p>
-                      <span className="inline-flex items-center gap-2 px-4 py-2 bg-green-500/20 text-green-400 rounded-xl text-xs sm:text-sm font-bold border border-green-500/30">
-                        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                        </svg>
-                        Ready
-                      </span>
-                    </div>
+          <div className="space-y-4">
+             <label className="text-sm font-medium text-slate-700">1. Upload Source Document</label>
+             <div 
+               onDragOver={(e) => e.preventDefault()}
+               onDrop={handleDrop}
+               onClick={() => inputRef.current?.click()}
+               className={`group border-2 border-dashed rounded-2xl p-8 transition-all cursor-pointer flex flex-col items-center justify-center gap-4 text-center ${file ? 'border-indigo-500/50 bg-indigo-500/5' : 'border-slate-200 hover:border-slate-300 bg-white/90/50 hover:bg-slate-100/50'}`}
+             >
+               <input
+                 ref={inputRef}
+                 type="file"
+                 accept="application/pdf"
+                 className="hidden"
+                 onChange={handleFileChange}
+               />
+               <div className={`w-12 h-12 rounded-full flex items-center justify-center transition-colors ${file ? 'bg-indigo-500/20 text-indigo-400' : 'bg-slate-100 text-slate-600 group-hover:text-slate-700'}`}>
+                 {extracting ? (
+                   <svg className="animate-spin h-6 w-6" fill="none" viewBox="0 0 24 24">
+                     <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                     <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                   </svg>
+                 ) : file ? (
+                   <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                   </svg>
+                 ) : (
+                   <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
+                   </svg>
+                 )}
+               </div>
+               <div>
+                  {extracting ? (
+                    <span className="text-slate-700 font-medium">Extracting text...</span>
+                  ) : file ? (
+                    <span className="text-indigo-300 font-medium">{file.name}</span>
                   ) : (
-                    <div>
-                      <p className="text-base sm:text-lg font-bold text-gray-300 mb-2">Click to upload or drag & drop</p>
-                      <p className="text-xs sm:text-sm text-gray-500">PDF files only • Max 10MB</p>
-                    </div>
+                    <>
+                      <span className="text-slate-700 font-medium block">Click to upload or drag and drop</span>
+                      <span className="text-slate-9000 text-xs mt-1 block">PDF files only (Max 10MB)</span>
+                    </>
                   )}
+               </div>
+             </div>
+             
+             {err && (
+                <div className="bg-red-500/10 border border-red-500/20 text-red-400 text-sm p-3 rounded-lg flex items-start gap-2">
+                  <svg className="w-5 h-5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" /></svg>
+                  <span>{err}</span>
                 </div>
-
-                <button
-                  onClick={handleExtract}
-                  disabled={!file || loading}
-                  className="mt-6 w-full px-6 sm:px-8 py-4 sm:py-5 bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 text-white rounded-2xl font-bold text-base sm:text-lg tracking-wide hover:shadow-2xl hover:shadow-purple-500/50 hover:scale-105 active:scale-100 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100 flex items-center justify-center gap-3 relative overflow-hidden group/btn focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 focus:ring-offset-slate-900"
-                >
-                  <div className="absolute inset-0 bg-gradient-to-r from-pink-600 via-purple-600 to-blue-600 opacity-0 group-hover/btn:opacity-100 transition-opacity duration-300"></div>
-                  <span className="relative flex items-center gap-3">
-                    {loading ? (
-                      <>
-                        <svg className="animate-spin h-5 w-5 sm:h-6 sm:w-6" fill="none" viewBox="0 0 24 24">
-                          <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-                          <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                        </svg>
-                        <span className="text-sm sm:text-base">Extracting Text...</span>
-                      </>
-                    ) : (
-                      <>
-                        <svg className="w-5 h-5 sm:w-6 sm:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
-                        </svg>
-                        <span className="text-sm sm:text-base">Extract Text from PDF</span>
-                      </>
-                    )}
-                  </span>
-                </button>
-
-                {err && (
-                  <div className="mt-4 p-4 bg-red-500/20 border border-red-500/30 rounded-xl flex items-start gap-3 animate-shake-error">
-                    <svg className="w-5 h-5 sm:w-6 sm:h-6 text-red-400 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                    </svg>
-                    <div>
-                      <p className="text-xs sm:text-sm font-bold text-red-300">Error</p>
-                      <p className="text-xs sm:text-sm text-red-200">{err}</p>
-                    </div>
-                  </div>
-                )}
-              </div>
-            </div>
-
-            {/* Medical Note Card */}
-            <div className="relative glass-strong rounded-3xl overflow-hidden shadow-2xl card-hover">
-              <div className="bg-gradient-to-r from-emerald-600 via-teal-600 to-green-600 p-5 sm:p-6">
-                <h2 className="text-lg sm:text-xl font-black font-display text-white flex items-center gap-3">
-                  <div className="w-10 h-10 bg-white/20 rounded-xl flex items-center justify-center backdrop-blur-xl ring-1 ring-white/20">
-                    <svg className="w-5 h-5 sm:w-6 sm:h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-                    </svg>
-                  </div>
-                  Medical Note
-                </h2>
-              </div>
-              <div className="p-6 sm:p-8">
-                <textarea
-                  className="w-full h-72 sm:h-80 bg-white/5 border-2 border-white/10 rounded-2xl p-4 sm:p-5 text-white placeholder-gray-500 focus:ring-2 focus:ring-purple-500/50 focus:border-purple-500/50 transition-all resize-none text-sm leading-relaxed backdrop-blur-xl focus:outline-none"
-                  placeholder="📄 Extracted text will appear here...
-
-You can also paste or type medical notes directly for instant analysis."
-                  value={text}
-                  onChange={(e) => setText(e.target.value)}
-                />
-                <p className="mt-3 text-xs text-gray-400 flex items-center gap-2">
-                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                  </svg>
-                  {text.length} characters • {text.split(/\s+/).filter(w => w).length} words
-                </p>
-              </div>
-            </div>
-
-            {/* Analysis Settings */}
-            <div className="relative glass-strong rounded-3xl overflow-hidden shadow-2xl card-hover">
-              <div className="bg-gradient-to-r from-purple-600 via-fuchsia-600 to-pink-600 p-5 sm:p-6">
-                <h2 className="text-lg sm:text-xl font-black font-display text-white flex items-center gap-3">
-                  <div className="w-10 h-10 bg-white/20 rounded-xl flex items-center justify-center backdrop-blur-xl ring-1 ring-white/20">
-                    <svg className="w-5 h-5 sm:w-6 sm:h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4" />
-                    </svg>
-                  </div>
-                  Knowledge Base Evidence
-                </h2>
-              </div>
-              <div className="p-6 sm:p-8">
-                <div className="flex items-center gap-3 sm:gap-4 mb-4">
-                  <input
-                    type="range"
-                    min={2}
-                    max={6}
-                    value={topK}
-                    onChange={(e) => setTopK(parseInt(e.target.value))}
-                    className="flex-1 h-2 sm:h-3 bg-gradient-to-r from-purple-200/20 to-pink-200/20 rounded-full appearance-none cursor-pointer accent-purple-600 focus:outline-none"
-                    style={{
-                      background: `linear-gradient(to right, rgb(147 51 234) 0%, rgb(147 51 234) ${((topK - 2) / 4) * 100}%, rgba(243, 232, 255, 0.1) ${((topK - 2) / 4) * 100}%, rgba(243, 232, 255, 0.1) 100%)`
-                    }}
-                  />
-                  <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-2xl bg-gradient-to-br from-purple-600 to-pink-600 flex items-center justify-center shadow-2xl shadow-purple-500/50 ring-2 ring-purple-500/30">
-                    <span className="text-2xl sm:text-3xl font-black text-white">{topK}</span>
-                  </div>
-                </div>
-                <p className="text-xs sm:text-sm text-gray-300 bg-white/5 p-3 sm:p-4 rounded-xl border border-white/10">
-                  💡 Retrieves <span className="text-purple-400 font-bold">{topK}</span> most relevant medical knowledge passages from our AI database to support the differential diagnosis.
-                </p>
-
-                <button
-                  onClick={generate}
-                  disabled={!text.trim() || loading}
-                  className="mt-6 w-full px-6 sm:px-8 py-4 sm:py-5 bg-gradient-to-r from-purple-600 via-fuchsia-600 to-pink-600 text-white rounded-2xl font-bold text-base sm:text-lg tracking-wide hover:shadow-2xl hover:shadow-pink-500/50 hover:scale-105 active:scale-100 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100 flex items-center justify-center gap-3 relative overflow-hidden group/btn focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 focus:ring-offset-slate-900"
-                >
-                  <div className="absolute inset-0 bg-gradient-to-r from-pink-600 via-fuchsia-600 to-purple-600 opacity-0 group-hover/btn:opacity-100 transition-opacity duration-300"></div>
-                  <span className="relative flex items-center gap-3">
-                    {loading ? (
-                      <>
-                        <svg className="animate-spin h-5 w-5 sm:h-6 sm:w-6" fill="none" viewBox="0 0 24 24">
-                          <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-                          <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                        </svg>
-                        <span className="text-sm sm:text-base">Analyzing...</span>
-                      </>
-                    ) : (
-                      <>
-                        <svg className="w-5 h-5 sm:w-6 sm:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
-                        </svg>
-                        <span className="text-sm sm:text-base">Generate AI Analysis</span>
-                      </>
-                    )}
-                  </span>
-                </button>
-              </div>
-            </div>
+              )}
           </div>
 
-          {/* Right Column - Ready Message */}
-          <div className="space-y-6">
-            <div className="relative glass-strong rounded-3xl p-12 sm:p-16 md:p-20 text-center shadow-2xl card-hover">
-              <div className="relative w-24 h-24 sm:w-32 sm:h-32 mx-auto mb-6 sm:mb-8">
-                <div className="absolute inset-0 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 rounded-3xl blur-2xl opacity-30 animate-pulse"></div>
-                <div className="relative w-full h-full bg-gradient-to-br from-blue-500/20 to-purple-500/20 rounded-3xl flex items-center justify-center border border-white/10 ring-2 ring-purple-500/20">
-                  <svg className="w-12 h-12 sm:w-16 sm:h-16 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
-                  </svg>
-                </div>
-              </div>
-              <h3 className="text-2xl sm:text-3xl font-black font-display text-white mb-4">Ready for AI Analysis</h3>
-              <p className="text-sm sm:text-base text-gray-400 max-w-md mx-auto leading-relaxed">Upload a medical document or paste text to generate comprehensive AI-powered clinical summaries, differential diagnoses, and evidence-based recommendations.</p>
-              <div className="mt-6 sm:mt-8 flex items-center justify-center gap-2 text-xs sm:text-sm text-purple-400">
-                <svg className="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
-                </svg>
-                <span>Analysis results will open in a new page</span>
-              </div>
-            </div>
+          <div className="space-y-4 pt-4">
+             <div className="flex items-center justify-between">
+                <label className="text-sm font-medium text-slate-700">Analysis Depth (Evidence)</label>
+                <span className="text-xs text-slate-9000">{topK} Passages</span>
+             </div>
+             <input
+               type="range"
+               min={2}
+               max={8}
+               value={topK}
+               onChange={(e) => setTopK(parseInt(e.target.value))}
+               className="w-full h-2 bg-slate-100 rounded-lg appearance-none cursor-pointer accent-indigo-500"
+             />
+             <p className="text-xs text-slate-9000 leading-relaxed">
+               Controls how many medical knowledge passages are retrieved to support the diagnosis. A higher depth considers more sources.
+             </p>
           </div>
         </div>
-      </div>
-    </main>
+
+        <div className="lg:col-span-7 flex flex-col mt-12 lg:mt-0 space-y-6 h-[600px] lg:h-auto">
+           <div className="flex-1 bg-white/90 border border-slate-200 rounded-2xl overflow-hidden flex flex-col shadow-xl">
+             <div className="bg-white/90/50 border-b border-slate-200 px-5 py-4 flex items-center justify-between">
+               <label className="text-sm font-medium text-slate-700">2. Review & Edit Clinical Note</label>
+               <span className="text-xs font-mono text-slate-9000 bg-slate-100 px-2 py-1 rounded-md">
+                 {text.split(/\s+/).filter(w => w).length} words
+               </span>
+             </div>
+             <textarea
+                className="w-full h-full min-h-[300px] bg-transparent p-5 text-slate-700 placeholder-slate-400 focus:outline-none focus:ring-0 resize-none text-sm md:text-base leading-relaxed"
+                placeholder="The extracted text from your PDF will appear here.
+
+You can also type or paste a clinical note manually..."
+                value={text}
+                onChange={(e) => setText(e.target.value)}
+             />
+           </div>
+
+           <button
+              onClick={generate}
+              disabled={!text.trim() || loading}
+              className="w-full py-4 bg-indigo-600 hover:bg-indigo-500 text-white rounded-xl font-semibold shadow-lg shadow-indigo-500/20 active:scale-[0.98] transition-all disabled:opacity-50 disabled:cursor-not-allowed disabled:active:scale-100 flex items-center justify-center gap-2 group"
+           >
+              {loading ? (
+                <>
+                  <svg className="animate-spin h-5 w-5" fill="none" viewBox="0 0 24 24">
+                    <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                    <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                  </svg>
+                  <span>Processing Analysis...</span>
+                </>
+              ) : (
+                <>
+                  <span>Generate Complete Analysis</span>
+                  <svg className="w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                  </svg>
+                </>
+              )}
+           </button>
+        </div>
+      </main>
+    </div>
   );
 }

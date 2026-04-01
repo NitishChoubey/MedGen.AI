@@ -57,7 +57,9 @@ export default function SignInPage() {
             </span>
           </div>
           <h1 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">Welcome Back</h1>
-          <p className="text-gray-600 dark:text-gray-300">Sign in to continue to your dashboard</p>
+          <p className="text-gray-600 dark:text-gray-300">Sign in to access your {" "}
+            <span className="font-semibold">medical dashboard</span>
+          </p>
         </div>
 
         {/* Sign In Form */}
@@ -79,7 +81,7 @@ export default function SignInPage() {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 required
-                className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent dark:bg-gray-700 dark:text-white"
+                className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-400"
                 placeholder="doctor@example.com"
               />
             </div>
@@ -94,7 +96,7 @@ export default function SignInPage() {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 required
-                className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent dark:bg-gray-700 dark:text-white"
+                className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-400"
                 placeholder="••••••••"
               />
             </div>

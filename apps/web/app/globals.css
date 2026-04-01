@@ -22,6 +22,12 @@
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     letter-spacing: -0.011em;
+    @apply bg-slate-50 text-gray-900;
+  }
+
+  /* Dark mode body styles */
+  .dark body,
+  body.dark {
     @apply bg-slate-900 text-gray-100;
   }
 
@@ -29,7 +35,7 @@
     font-family: var(--font-poppins), sans-serif;
     font-weight: 700;
     letter-spacing: -0.02em;
-    @apply text-white;
+    @apply text-gray-900 dark:text-white;
   }
 
   .font-display {
@@ -38,12 +44,25 @@
     letter-spacing: -0.03em;
   }
 
+  /* Global input styling - ensures text is visible in both modes */
+  input,
+  textarea,
+  select {
+    @apply text-gray-900 bg-white placeholder-gray-400;
+  }
+
+  .dark input,
+  .dark textarea,
+  .dark select {
+    @apply text-white bg-gray-700 placeholder-gray-400;
+  }
+
   /* Improved focus states for accessibility */
   button:focus-visible,
   input:focus-visible,
   textarea:focus-visible,
   select:focus-visible {
-    @apply outline-none ring-2 ring-purple-500 ring-offset-2 ring-offset-slate-900;
+    @apply outline-none ring-2 ring-purple-500 ring-offset-2 ring-offset-white dark:ring-offset-slate-900;
   }
 }
 

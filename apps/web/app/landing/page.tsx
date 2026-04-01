@@ -2,15 +2,15 @@
 
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
+import { useSession } from "next-auth/react";
 
 export default function LandingPage() {
   const router = useRouter();
-  const [mounted, setMounted] = useState(false);
+  const { status } = useSession();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [darkMode, setDarkMode] = useState(false);
 
   useEffect(() => {
-    setMounted(true);
     // Check for saved theme preference or default to light mode
     const savedTheme = localStorage.getItem('theme');
     const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
@@ -115,12 +115,29 @@ export default function LandingPage() {
                   </svg>
                 )}
               </button>
-              <button
-                onClick={() => router.push('/upload')}
-                className="px-6 py-2.5 bg-gradient-to-r from-blue-600 to-indigo-600 text-white rounded-xl font-semibold hover:shadow-lg hover:scale-105 transition-all duration-200"
-              >
-                Get Started
-              </button>
+              {status === "authenticated" ? (
+                <button
+                  onClick={() => router.push('/dashboard')}
+                  className="px-6 py-2.5 bg-gradient-to-r from-blue-600 to-indigo-600 text-white rounded-xl font-semibold hover:shadow-lg hover:scale-105 transition-all duration-200"
+                >
+                  Dashboard
+                </button>
+              ) : (
+                <>
+                  <button
+                    onClick={() => router.push('/auth/signin')}
+                    className="px-5 py-2.5 border-2 border-blue-600 text-blue-700 dark:text-blue-400 rounded-xl font-semibold hover:bg-blue-50 dark:hover:bg-blue-900/20 transition-all duration-200"
+                  >
+                    Sign In
+                  </button>
+                  <button
+                    onClick={() => router.push('/auth/signup')}
+                    className="px-6 py-2.5 bg-gradient-to-r from-blue-600 to-indigo-600 text-white rounded-xl font-semibold hover:shadow-lg hover:scale-105 transition-all duration-200"
+                  >
+                    Sign Up
+                  </button>
+                </>
+              )}
             </div>
 
             {/* Mobile Menu Button */}
@@ -161,7 +178,14 @@ export default function LandingPage() {
               <button onClick={() => { document.getElementById('features')?.scrollIntoView({ behavior: 'smooth' }); setMobileMenuOpen(false); }} className="block w-full text-left px-4 py-2 text-gray-700 dark:text-gray-300 hover:bg-blue-50 dark:hover:bg-gray-700 hover:text-blue-600 dark:hover:text-blue-400 rounded-lg transition-colors">Features</button>
               <button onClick={() => { document.getElementById('benefits')?.scrollIntoView({ behavior: 'smooth' }); setMobileMenuOpen(false); }} className="block w-full text-left px-4 py-2 text-gray-700 dark:text-gray-300 hover:bg-blue-50 dark:hover:bg-gray-700 hover:text-blue-600 dark:hover:text-blue-400 rounded-lg transition-colors">Benefits</button>
               <button onClick={() => { document.getElementById('how-it-works')?.scrollIntoView({ behavior: 'smooth' }); setMobileMenuOpen(false); }} className="block w-full text-left px-4 py-2 text-gray-700 dark:text-gray-300 hover:bg-blue-50 dark:hover:bg-gray-700 hover:text-blue-600 dark:hover:text-blue-400 rounded-lg transition-colors">How It Works</button>
-              <button onClick={() => router.push('/upload')} className="block w-full px-4 py-2.5 bg-gradient-to-r from-blue-600 to-indigo-600 text-white rounded-xl font-semibold hover:shadow-lg transition-all duration-200">Get Started</button>
+              {status === "authenticated" ? (
+                <button onClick={() => { router.push('/dashboard'); setMobileMenuOpen(false); }} className="block w-full px-4 py-2.5 bg-gradient-to-r from-blue-600 to-indigo-600 text-white rounded-xl font-semibold hover:shadow-lg transition-all duration-200">Dashboard</button>
+              ) : (
+                <>
+                  <button onClick={() => { router.push('/auth/signin'); setMobileMenuOpen(false); }} className="block w-full px-4 py-2.5 border-2 border-blue-600 text-blue-700 dark:text-blue-400 rounded-xl font-semibold hover:bg-blue-50 dark:hover:bg-blue-900/20 transition-all duration-200">Sign In</button>
+                  <button onClick={() => { router.push('/auth/signup'); setMobileMenuOpen(false); }} className="block w-full px-4 py-2.5 bg-gradient-to-r from-blue-600 to-indigo-600 text-white rounded-xl font-semibold hover:shadow-lg transition-all duration-200">Sign Up</button>
+                </>
+              )}
             </div>
           )}
         </div>

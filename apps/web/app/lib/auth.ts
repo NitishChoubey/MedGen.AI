@@ -35,10 +35,6 @@ export const authOptions: NextAuthOptions = {
           throw new Error("Account suspended. Please contact support.")
         }
 
-        if (user.status === "PENDING_VERIFICATION") {
-          throw new Error("Please verify your email before logging in.")
-        }
-
         const isPasswordValid = await bcrypt.compare(
           credentials.password,
           user.password
@@ -142,21 +138,10 @@ export const authOptions: NextAuthOptions = {
       return session
     },
 
-    async signIn({ user, account, profile }) {
+    async signIn({ account }) {
       // Allow OAuth sign in
       if (account?.provider === "google") {
         return true
-      }
-
-      // For credentials, check if email is verified
-      if (account?.provider === "credentials") {
-        const dbUser = await prisma.user.findUnique({
-          where: { email: user.email! }
-        })
-
-        if (!dbUser?.emailVerified && dbUser?.status === "PENDING_VERIFICATION") {
-          return false
-        }
       }
 
       return true

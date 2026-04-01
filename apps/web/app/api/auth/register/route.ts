@@ -1,17 +1,41 @@
 import { NextRequest, NextResponse } from "next/server"
 import { prisma } from "../../../lib/prisma"
 import bcrypt from "bcryptjs"
-import { randomBytes } from "crypto"
 
 export async function POST(req: NextRequest) {
   try {
     const body = await req.json()
-    const { email, password, name, role, hospital, specialty } = body
+    const { 
+      email, 
+      password, 
+      name, 
+      role, 
+      // Doctor fields
+      hospital, 
+      specialty, 
+      licenseNumber,
+      phone,
+      // Patient fields
+      dateOfBirth,
+      gender,
+      bloodType,
+      allergies,
+      medicalHistory,
+      emergencyContact
+    } = body
 
     // Validation
-    if (!email || !password || !name) {
+    if (!email || !password || !name || !role) {
       return NextResponse.json(
         { error: "Missing required fields" },
+        { status: 400 }
+      )
+    }
+
+    // Role validation
+    if (!['DOCTOR', 'PATIENT'].includes(role)) {
+      return NextResponse.json(
+        { error: "Invalid role. Must be DOCTOR or PATIENT" },
         { status: 400 }
       )
     }
@@ -36,6 +60,21 @@ export async function POST(req: NextRequest) {
       )
     }
 
+    // Role-specific validation
+    if (role === 'DOCTOR' && !specialty) {
+      return NextResponse.json(
+        { error: "Specialty is required for doctors" },
+        { status: 400 }
+      )
+    }
+
+    if (role === 'PATIENT' && !dateOfBirth) {
+      return NextResponse.json(
+        { error: "Date of birth is required for patients" },
+        { status: 400 }
+      )
+    }
+
     // Check if user already exists
     const existingUser = await prisma.user.findUnique({
       where: { email: email.toLowerCase() }
@@ -51,30 +90,34 @@ export async function POST(req: NextRequest) {
     // Hash password
     const hashedPassword = await bcrypt.hash(password, 12)
 
-    // Generate verification token
-    const verificationToken = randomBytes(32).toString('hex')
-    const tokenExpiry = new Date(Date.now() + 24 * 60 * 60 * 1000) // 24 hours
+    // Prepare user data based on role
+    const userData: any = {
+      email: email.toLowerCase(),
+      password: hashedPassword,
+      name,
+      role,
+      status: "ACTIVE",
+      emailVerified: new Date(),
+    }
+
+    // Add role-specific fields
+    if (role === 'DOCTOR') {
+      userData.hospital = hospital
+      userData.specialty = specialty
+      userData.licenseNumber = licenseNumber
+      userData.phone = phone
+    } else if (role === 'PATIENT') {
+      userData.dateOfBirth = dateOfBirth ? new Date(dateOfBirth) : null
+      userData.gender = gender
+      userData.bloodType = bloodType
+      userData.allergies = allergies ? JSON.stringify(allergies) : null
+      userData.medicalHistory = medicalHistory ? JSON.stringify(medicalHistory) : null
+      userData.emergencyContact = emergencyContact ? JSON.stringify(emergencyContact) : null
+    }
 
     // Create user
     const user = await prisma.user.create({
-      data: {
-        email: email.toLowerCase(),
-        password: hashedPassword,
-        name,
-        role: role || "DOCTOR",
-        hospital,
-        specialty,
-        status: "PENDING_VERIFICATION",
-      }
-    })
-
-    // Create verification token
-    await prisma.verificationToken.create({
-      data: {
-        identifier: user.email,
-        token: verificationToken,
-        expires: tokenExpiry,
-      }
+      data: userData
     })
 
     // Log audit event
@@ -88,13 +131,11 @@ export async function POST(req: NextRequest) {
       }
     })
 
-    // TODO: Send verification email
-    console.log(`Verification link: ${process.env.NEXTAUTH_URL}/auth/verify?token=${verificationToken}`)
-
     return NextResponse.json(
       { 
-        message: "User registered successfully. Please check your email to verify your account.",
-        userId: user.id
+        message: "User registered successfully.",
+        userId: user.id,
+        role: user.role
       },
       { status: 201 }
     )

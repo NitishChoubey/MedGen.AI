@@ -3,7 +3,7 @@ uvicorn[standard]==0.30.6
 transformers==4.44.2
 torch>=2.1.0
 sentencepiece==0.1.99
-tokenizers==0.15.0
+tokenizers==0.15.2
 faiss-cpu
 sentence-transformers==3.0.1
 pydantic==2.9.2
