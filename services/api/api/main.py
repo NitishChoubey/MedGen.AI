@@ -87,9 +87,13 @@ def get_embedder():
     return embedder
 
 def get_pdf_reader():
-    """Lazy load PDF reader"""
-    from pypdf import PdfReader
-    return PdfReader
+    """Lazy load PDF reader with backward-compatible fallback."""
+    try:
+        from pypdf import PdfReader
+        return PdfReader
+    except ImportError:
+        from PyPDF2 import PdfReader
+        return PdfReader
 
 # build KB index
 # Try multiple possible KB directory locations
