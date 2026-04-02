@@ -120,9 +120,17 @@ export default async function AnalysisDetailPage({ params }: Props) {
   const diagnoses = parseJSON(analysis.finalDiagnoses || analysis.diagnoses, []);
   const rawFindings = parseJSON(analysis.finalFindings || analysis.findings, []);
   const citations = parseJSON(analysis.citations, []);
-  const recommendations = parseJSON(analysis.recommendations, []);
-  const riskFactors = parseJSON(analysis.riskFactors, []);
-  const medications = parseJSON(analysis.medications, []);
+
+  // Optional legacy fields are not part of the current Prisma Analysis model.
+  const analysisExtras = analysis as typeof analysis & {
+    recommendations?: string | null;
+    riskFactors?: string | null;
+    medications?: string | null;
+  };
+
+  const recommendations = parseJSON(analysisExtras.recommendations ?? null, []);
+  const riskFactors = parseJSON(analysisExtras.riskFactors ?? null, []);
+  const medications = parseJSON(analysisExtras.medications ?? null, []);
 
   // Filter out empty findings - only keep findings with actual content
   const findings = rawFindings.filter((finding: any) => {
