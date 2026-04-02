@@ -1,1 +1,1 @@
-# Removed - let Render use its default Python
+python-3.11

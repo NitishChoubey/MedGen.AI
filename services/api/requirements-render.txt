@@ -1,4 +1,4 @@
-# Requirements for Render deployment with Python 3.14
+# Requirements for Render deployment with Python 3.11
 # All packages have pre-built wheels - NO compilation needed
 
 # Web framework
@@ -8,7 +8,7 @@ pydantic>=2.10.0
 python-multipart
 pypdf
 
-# ML packages - versions with Python 3.14 wheels
+# ML packages
 torch>=2.9.0
 numpy>=2.0.0
 transformers>=4.50.0
