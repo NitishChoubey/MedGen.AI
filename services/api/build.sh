@@ -9,6 +9,9 @@ export RUSTUP_HOME=/tmp/rustup
 export CARGO_TARGET_DIR=/tmp/cargo-target
 export PATH="$CARGO_HOME/bin:$PATH"
 
+# Allow PyO3-based packages to build against newer Python versions when needed.
+export PYO3_USE_ABI3_FORWARD_COMPATIBILITY=1
+
 # Create directories
 mkdir -p $CARGO_HOME $RUSTUP_HOME $CARGO_TARGET_DIR
 
