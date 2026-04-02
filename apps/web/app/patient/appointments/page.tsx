@@ -1,9 +1,12 @@
 import { Calendar, Plus, Clock } from "lucide-react";
-import Link from "next/link";
+
+type Appointment = {
+  id: string;
+};
 
 export default function AppointmentsPage() {
   // Mock upcoming appointments - will be replaced with real data
-  const upcomingAppointments = [];
+  const upcomingAppointments: Appointment[] = [];
 
   return (
     <div className="space-y-6">
@@ -43,7 +46,7 @@ export default function AppointmentsPage() {
 
         {upcomingAppointments.length > 0 ? (
           <div className="divide-y divide-gray-200">
-            {upcomingAppointments.map((appointment: any, index: number) => (
+            {upcomingAppointments.map((_, index) => (
               <div key={index} className="p-6 hover:bg-gray-50">
                 {/* Appointment card content will go here */}
               </div>
