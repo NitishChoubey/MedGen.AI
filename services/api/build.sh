@@ -3,6 +3,10 @@ set -e
 
 echo "=== Starting Build Process ==="
 
+# Verify Python version (should be 3.11.x)
+python --version
+echo "Expected Python 3.11.x for pre-built wheel compatibility"
+
 # Set writable locations for Rust BEFORE anything else
 export CARGO_HOME=/tmp/cargo
 export RUSTUP_HOME=/tmp/rustup

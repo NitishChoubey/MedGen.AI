@@ -2,6 +2,7 @@ services:
   - type: web
     name: medgen-api
     runtime: python
+    pythonVersion: "3.11.6"
     rootDir: services/api
     buildCommand: chmod +x build.sh && ./build.sh
     startCommand: uvicorn api.main:app --host 0.0.0.0 --port $PORT
