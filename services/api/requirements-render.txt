@@ -1,9 +1,9 @@
 # Optimized requirements for Render deployment
-# Compatible with Python 3.11+ including 3.14
+# Compatible with Python 3.14 - uses only pre-built wheels
 
 fastapi==0.115.2
 uvicorn[standard]==0.30.6
-pydantic==2.9.2
+pydantic>=2.10.0
 python-multipart
 PyPDF2
 
