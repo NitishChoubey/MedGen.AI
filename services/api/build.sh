@@ -3,32 +3,23 @@ set -e
 
 echo "=== Starting Build Process ==="
 
-# Display Python version
+# Render creates a venv at /opt/render/project/src/.venv
+# We need to activate it and use it
+if [ -d "/opt/render/project/src/.venv" ]; then
+    echo "Activating Render's virtual environment..."
+    source /opt/render/project/src/.venv/bin/activate
+fi
+
+# Display current Python version
 echo "Current Python version:"
 python --version
 
-# Try to use Python 3.11 if available by modifying PATH
-if [ -f "/opt/python/cp311/bin/python3.11" ]; then
-    echo "Found Python 3.11 at /opt/python/cp311/bin/python3.11"
-    export PATH="/opt/python/cp311/bin:$PATH"
-    export PYTHON="/opt/python/cp311/bin/python3.11"
-elif command -v python3.11 &> /dev/null; then
-    echo "Found Python 3.11 in PATH"
-    export PYTHON="python3.11"
-else
-    echo "Python 3.11 not found, using default Python (may be 3.14+)"
-    export PYTHON="python"
-fi
-
-echo "Using: $($PYTHON --version)"
-
-echo "Step 1: Upgrading pip..."
-$PYTHON -m pip install --upgrade pip setuptools wheel
+echo "Step 1: Upgrading pip in virtual environment..."
+python -m pip install --upgrade pip setuptools wheel
 
 echo "Step 2: Installing Python dependencies..."
-# Use --only-binary for packages that should have wheels
-# Allow source builds for packages without Python 3.14 wheels yet
-$PYTHON -m pip install --prefer-binary --no-cache-dir -r requirements-render.txt
+# Install dependencies - Render's venv should handle this properly
+python -m pip install --prefer-binary --no-cache-dir -r requirements-render.txt
 
 echo "=== Build completed successfully! ==="
 
