@@ -1,15 +1,33 @@
+import sys
+import os
+print("=== MediScribe.AI API Starting ===", flush=True)
+print(f"Python version: {sys.version}", flush=True)
+print(f"PORT: {os.getenv('PORT', 'not set')}", flush=True)
+
 from fastapi import FastAPI, UploadFile, File
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
+print("FastAPI imported", flush=True)
+
 from transformers import pipeline
+print("Transformers imported", flush=True)
+
 from sentence_transformers import SentenceTransformer
-import faiss, os, glob, re
+print("SentenceTransformers imported", flush=True)
+
+import faiss, glob, re
 import threading
 from typing import List, Dict, Any
 from io import BytesIO
-from PyPDF2 import PdfReader
+from pypdf import PdfReader
+print("All imports complete", flush=True)
 
 app = FastAPI(title="MediScribe.AI API")
+
+# Root endpoint for immediate health check (Render port detection)
+@app.get("/")
+def root():
+    return {"status": "ok", "message": "MediScribe.AI API is running"}
 
 # Add CORS middleware
 # Allow frontend origins (add your Render frontend URL here)
