@@ -7,11 +7,12 @@ pydantic==2.9.2
 python-multipart
 PyPDF2
 
-# ML packages - use specific versions with pre-built wheels
+# ML packages - use specific versions with pre-built wheels for Python 3.11
+# Avoid tokenizers 0.19.x which has Python 3.14 compilation issues
 transformers==4.44.2
 torch>=2.1.0,<2.5.0
 sentencepiece==0.1.99
-tokenizers==0.19.1
+tokenizers==0.15.2
 faiss-cpu
 sentence-transformers==3.0.1
 
