@@ -1,17 +1,20 @@
-# Optimized requirements for Render deployment
-# Compatible with Python 3.14 - uses only pre-built wheels
+# Requirements for Render deployment with Python 3.14
+# All packages have pre-built wheels - NO compilation needed
 
-fastapi==0.115.2
-uvicorn[standard]==0.30.6
+# Web framework
+fastapi>=0.115.0
+uvicorn[standard]>=0.30.0
 pydantic>=2.10.0
 python-multipart
-PyPDF2
+pypdf
 
-# ML packages - updated for Python 3.14 compatibility
-transformers==4.44.2
+# ML packages - versions with Python 3.14 wheels
 torch>=2.9.0
-sentencepiece==0.1.99
-tokenizers>=0.15.0
-faiss-cpu
-sentence-transformers==3.0.1
+numpy>=2.0.0
+transformers>=4.50.0
+tokenizers>=0.21.0
+safetensors>=0.4.0
+huggingface-hub>=0.25.0
+sentence-transformers>=3.0.0
+faiss-cpu>=1.9.0
 
