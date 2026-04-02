@@ -4,7 +4,7 @@ services:
     runtime: node
     rootDir: apps/web
     buildCommand: npm ci && npm run build
-    startCommand: npm run start
+    startCommand: npm run start:render
     envVars:
       - key: NODE_VERSION
         value: 20.18.0
