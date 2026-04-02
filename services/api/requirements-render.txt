@@ -1,5 +1,5 @@
 # Optimized requirements for Render deployment
-# Uses pre-built wheels to avoid Rust compilation
+# Compatible with Python 3.11+ including 3.14
 
 fastapi==0.115.2
 uvicorn[standard]==0.30.6
@@ -7,12 +7,11 @@ pydantic==2.9.2
 python-multipart
 PyPDF2
 
-# ML packages - use specific versions with pre-built wheels for Python 3.11
-# Avoid tokenizers 0.19.x which has Python 3.14 compilation issues
+# ML packages - updated for Python 3.14 compatibility
 transformers==4.44.2
-torch>=2.1.0,<2.5.0
+torch>=2.9.0
 sentencepiece==0.1.99
-tokenizers==0.15.2
+tokenizers>=0.15.0
 faiss-cpu
 sentence-transformers==3.0.1
 
