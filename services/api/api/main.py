@@ -7,22 +7,14 @@ print(f"PORT: {os.getenv('PORT', 'not set')}", flush=True)
 from fastapi import FastAPI, UploadFile, File
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
-print("FastAPI imported", flush=True)
-
-from transformers import pipeline
-print("Transformers imported", flush=True)
-
-from sentence_transformers import SentenceTransformer
-print("SentenceTransformers imported", flush=True)
-
-import faiss, glob, re
+import glob, re
 import threading
 from typing import List, Dict, Any
 from io import BytesIO
-from pypdf import PdfReader
-print("All imports complete", flush=True)
+print("Core imports complete", flush=True)
 
 app = FastAPI(title="MediScribe.AI API")
+print("FastAPI app created - server starting...", flush=True)
 
 # Root endpoint for immediate health check (Render port detection)
 @app.get("/")
@@ -58,28 +50,46 @@ app.add_middleware(
 # Global variables for lazy loading
 summarizer = None
 embedder = None
+faiss_module = None
 docs = []
 meta = []
 index = None
 kb_loaded = False
 kb_lock = threading.Lock()
+ml_lock = threading.Lock()
+
+def get_faiss():
+    """Lazy load faiss module"""
+    global faiss_module
+    if faiss_module is None:
+        import faiss
+        faiss_module = faiss
+    return faiss_module
 
 def get_summarizer():
     global summarizer
-    if summarizer is None:
-        print("Loading summarization model (this may take a minute)...")
-        # Using smaller, faster model
-        summarizer = pipeline("summarization", model="sshleifer/distilbart-cnn-12-6")
-        print("Summarization model loaded!")
+    with ml_lock:
+        if summarizer is None:
+            print("Loading summarization model (this may take a minute)...", flush=True)
+            from transformers import pipeline
+            summarizer = pipeline("summarization", model="sshleifer/distilbart-cnn-12-6")
+            print("Summarization model loaded!", flush=True)
     return summarizer
 
 def get_embedder():
     global embedder
-    if embedder is None:
-        print("Loading embedding model...")
-        embedder = SentenceTransformer("sentence-transformers/all-MiniLM-L6-v2")
-        print("Embedding model loaded!")
+    with ml_lock:
+        if embedder is None:
+            print("Loading embedding model...", flush=True)
+            from sentence_transformers import SentenceTransformer
+            embedder = SentenceTransformer("sentence-transformers/all-MiniLM-L6-v2")
+            print("Embedding model loaded!", flush=True)
     return embedder
+
+def get_pdf_reader():
+    """Lazy load PDF reader"""
+    from pypdf import PdfReader
+    return PdfReader
 
 # build KB index
 # Try multiple possible KB directory locations
@@ -128,6 +138,7 @@ def ensure_kb_index():
 
         if docs:
             emb = get_embedder().encode(docs, normalize_embeddings=True)
+            faiss = get_faiss()
             local_index = faiss.IndexFlatIP(emb.shape[1])
             local_index.add(emb)
             index = local_index
@@ -545,6 +556,7 @@ def summarize_hypothesize(inp: SHReq):
 @app.post("/extract_pdf")
 async def extract_pdf(file: UploadFile = File(...)):
     content = await file.read()
+    PdfReader = get_pdf_reader()
     pdf = PdfReader(BytesIO(content))
     text = "\n".join([p.extract_text() or "" for p in pdf.pages])
     return {"text": text.strip()}
