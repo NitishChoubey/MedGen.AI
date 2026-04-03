@@ -65,20 +65,20 @@ export default function PatientSidebar({ user }: PatientSidebarProps) {
   const pathname = usePathname();
 
   return (
-    <aside className="w-64 bg-white border-r border-gray-200 flex flex-col">
+    <aside className="w-64 bg-white dark:bg-slate-900 border-r border-gray-200 dark:border-gray-800 flex flex-col">
       {/* Logo & Brand */}
-      <div className="p-6 border-b border-gray-200">
+      <div className="p-6 border-b border-gray-200 dark:border-gray-800">
         <Link href="/patient/dashboard" className="flex items-center space-x-2">
           <Heart className="h-8 w-8 text-blue-600" />
           <div>
-            <h1 className="text-xl font-bold text-gray-900">MedGen.AI</h1>
-            <p className="text-xs text-gray-500">Patient Portal</p>
+            <h1 className="text-xl font-bold text-gray-900 dark:text-white">MedGen.AI</h1>
+            <p className="text-xs text-gray-500 dark:text-gray-400">Patient Portal</p>
           </div>
         </Link>
       </div>
 
       {/* User Info */}
-      <div className="p-4 border-b border-gray-200">
+      <div className="p-4 border-b border-gray-200 dark:border-gray-800">
         <div className="flex items-center space-x-3">
           <div className="h-10 w-10 rounded-full bg-blue-100 flex items-center justify-center">
             <span className="text-blue-600 font-semibold">
@@ -86,10 +86,10 @@ export default function PatientSidebar({ user }: PatientSidebarProps) {
             </span>
           </div>
           <div className="flex-1 min-w-0">
-            <p className="text-sm font-medium text-gray-900 truncate">
+            <p className="text-sm font-medium text-gray-900 dark:text-white truncate">
               {user.name || "Patient"}
             </p>
-            <p className="text-xs text-gray-500 truncate">{user.email}</p>
+            <p className="text-xs text-gray-500 dark:text-gray-400 truncate">{user.email}</p>
           </div>
         </div>
       </div>
@@ -107,7 +107,7 @@ export default function PatientSidebar({ user }: PatientSidebarProps) {
               className={`flex items-center space-x-3 px-3 py-2 rounded-lg transition-colors ${
                 isActive
                   ? "bg-blue-50 text-blue-600"
-                  : "text-gray-700 hover:bg-gray-50"
+                  : "text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:bg-slate-950"
               }`}
             >
               <Icon className="h-5 w-5" />
@@ -118,10 +118,10 @@ export default function PatientSidebar({ user }: PatientSidebarProps) {
       </nav>
 
       {/* Logout Button */}
-      <div className="p-4 border-t border-gray-200">
+      <div className="p-4 border-t border-gray-200 dark:border-gray-800">
         <button
           onClick={() => signOut({ callbackUrl: "/" })}
-          className="w-full flex items-center space-x-3 px-3 py-2 rounded-lg text-gray-700 hover:bg-red-50 hover:text-red-600 transition-colors"
+          className="w-full flex items-center space-x-3 px-3 py-2 rounded-lg text-gray-700 dark:text-gray-300 hover:bg-red-50 hover:text-red-600 transition-colors"
         >
           <LogOut className="h-5 w-5" />
           <span className="text-sm font-medium">Logout</span>

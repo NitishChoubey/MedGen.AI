@@ -180,7 +180,7 @@ export default async function AnalysisDetailPage({ params }: Props) {
       );
     }
     return (
-      <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium bg-gray-100 text-gray-800">
+      <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium bg-gray-100 text-gray-800 dark:text-gray-200">
         <FileText className="h-4 w-4" />
         {analysis.status}
       </span>
@@ -190,7 +190,7 @@ export default async function AnalysisDetailPage({ params }: Props) {
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50">
       {/* Header */}
-      <div className="bg-white border-b border-gray-200 sticky top-0 z-10 shadow-sm">
+      <div className="bg-white dark:bg-slate-900 border-b border-gray-200 dark:border-gray-800 sticky top-0 z-10 shadow-sm">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-4">
@@ -198,13 +198,13 @@ export default async function AnalysisDetailPage({ params }: Props) {
                 href="/patient/analyses"
                 className="p-2 hover:bg-gray-100 rounded-lg transition-colors"
               >
-                <ArrowLeft className="h-5 w-5 text-gray-600" />
+                <ArrowLeft className="h-5 w-5 text-gray-600 dark:text-gray-400" />
               </Link>
               <div>
-                <h1 className="text-xl font-bold text-gray-900">
+                <h1 className="text-xl font-bold text-gray-900 dark:text-white">
                   {analysis.originalFileName || "Medical Analysis"}
                 </h1>
-                <div className="flex items-center gap-4 mt-1 text-sm text-gray-500">
+                <div className="flex items-center gap-4 mt-1 text-sm text-gray-500 dark:text-gray-400">
                   <span className="flex items-center gap-1">
                     <Calendar className="h-4 w-4" />
                     {new Date(analysis.createdAt).toLocaleDateString("en-US", {
@@ -284,16 +284,16 @@ export default async function AnalysisDetailPage({ params }: Props) {
 
         {/* Extracted Medical Information - Full Width Horizontal Layout */}
         {analysis.patientNote && (
-          <div className="mb-8 bg-white rounded-2xl shadow-sm border border-gray-200 p-6">
+          <div className="mb-8 bg-white dark:bg-slate-900 rounded-2xl shadow-sm border border-gray-200 dark:border-gray-800 p-6">
             <div className="flex items-center gap-3 mb-6">
               <div className="p-2 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-xl">
                 <ClipboardList className="h-6 w-6 text-white" />
               </div>
               <div>
-                <h2 className="text-xl font-bold text-gray-900">
+                <h2 className="text-xl font-bold text-gray-900 dark:text-white">
                   Extracted Medical Information
                 </h2>
-                <p className="text-sm text-gray-500">
+                <p className="text-sm text-gray-500 dark:text-gray-400">
                   Content parsed from your uploaded document
                 </p>
               </div>
@@ -307,14 +307,14 @@ export default async function AnalysisDetailPage({ params }: Props) {
                     className="bg-gradient-to-br from-slate-50 to-blue-50 rounded-xl p-4 border border-blue-100 hover:border-blue-300 hover:shadow-md transition-all"
                   >
                     <div className="flex items-center gap-2 mb-3">
-                      <div className="p-2 bg-white rounded-lg shadow-sm text-blue-600">
+                      <div className="p-2 bg-white dark:bg-slate-900 rounded-lg shadow-sm text-blue-600">
                         {getSectionIcon(section.icon)}
                       </div>
-                      <h3 className="font-semibold text-gray-900 text-sm">
+                      <h3 className="font-semibold text-gray-900 dark:text-white text-sm">
                         {section.title}
                       </h3>
                     </div>
-                    <p className="text-sm text-gray-700 leading-relaxed line-clamp-4">
+                    <p className="text-sm text-gray-700 dark:text-gray-300 leading-relaxed line-clamp-4">
                       {section.content}
                     </p>
                   </div>
@@ -329,9 +329,9 @@ export default async function AnalysisDetailPage({ params }: Props) {
                   .map((part: string, idx: number) => (
                     <div 
                       key={idx}
-                      className="bg-gradient-to-br from-slate-50 to-gray-50 rounded-xl p-4 border border-gray-200"
+                      className="bg-gradient-to-br from-slate-50 to-gray-50 rounded-xl p-4 border border-gray-200 dark:border-gray-800"
                     >
-                      <p className="text-sm text-gray-700 leading-relaxed">
+                      <p className="text-sm text-gray-700 dark:text-gray-300 leading-relaxed">
                         {part.trim()}
                       </p>
                     </div>
@@ -345,28 +345,28 @@ export default async function AnalysisDetailPage({ params }: Props) {
           {/* Main Content */}
           <div className="lg:col-span-2 space-y-6">
             {/* Summary */}
-            <div className="bg-white rounded-2xl shadow-sm border border-gray-200 p-6">
+            <div className="bg-white dark:bg-slate-900 rounded-2xl shadow-sm border border-gray-200 dark:border-gray-800 p-6">
               <div className="flex items-center gap-3 mb-4">
                 <div className="p-2 bg-purple-100 rounded-lg">
                   <FileText className="h-5 w-5 text-purple-600" />
                 </div>
-                <h2 className="text-lg font-semibold text-gray-900">
+                <h2 className="text-lg font-semibold text-gray-900 dark:text-white">
                   Analysis Summary
                 </h2>
               </div>
-              <p className="text-gray-700 leading-relaxed whitespace-pre-wrap">
+              <p className="text-gray-700 dark:text-gray-300 leading-relaxed whitespace-pre-wrap">
                 {summary || "No summary available yet."}
               </p>
             </div>
 
             {/* Diagnoses */}
             {diagnoses.length > 0 && (
-              <div className="bg-white rounded-2xl shadow-sm border border-gray-200 p-6">
+              <div className="bg-white dark:bg-slate-900 rounded-2xl shadow-sm border border-gray-200 dark:border-gray-800 p-6">
                 <div className="flex items-center gap-3 mb-4">
                   <div className="p-2 bg-red-100 rounded-lg">
                     <Stethoscope className="h-5 w-5 text-red-600" />
                   </div>
-                  <h2 className="text-lg font-semibold text-gray-900">
+                  <h2 className="text-lg font-semibold text-gray-900 dark:text-white">
                     Potential Diagnoses
                   </h2>
                 </div>
@@ -374,17 +374,17 @@ export default async function AnalysisDetailPage({ params }: Props) {
                   {diagnoses.map((diagnosis: any, index: number) => (
                     <div
                       key={index}
-                      className="p-4 bg-gray-50 rounded-xl border border-gray-100"
+                      className="p-4 bg-gray-50 dark:bg-slate-950 rounded-xl border border-gray-100"
                     >
                       <div className="flex items-start justify-between">
                         <div className="flex-1">
-                          <h3 className="font-medium text-gray-900">
+                          <h3 className="font-medium text-gray-900 dark:text-white">
                             {typeof diagnosis === "string"
                               ? diagnosis
                               : diagnosis.condition || diagnosis.name}
                           </h3>
                           {diagnosis.description && (
-                            <p className="text-sm text-gray-600 mt-1">
+                            <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">
                               {diagnosis.description}
                             </p>
                           )}
@@ -403,15 +403,15 @@ export default async function AnalysisDetailPage({ params }: Props) {
 
             {/* Key Findings */}
             {findings.length > 0 && (
-              <div className="bg-white rounded-2xl shadow-sm border border-gray-200 p-6">
+              <div className="bg-white dark:bg-slate-900 rounded-2xl shadow-sm border border-gray-200 dark:border-gray-800 p-6">
                 <div className="flex items-center gap-3 mb-4">
                   <div className="p-2 bg-blue-100 rounded-lg">
                     <Beaker className="h-5 w-5 text-blue-600" />
                   </div>
-                  <h2 className="text-lg font-semibold text-gray-900">
+                  <h2 className="text-lg font-semibold text-gray-900 dark:text-white">
                     Key Findings
                   </h2>
-                  <span className="ml-auto text-sm text-gray-500">
+                  <span className="ml-auto text-sm text-gray-500 dark:text-gray-400">
                     {findings.length} finding{findings.length !== 1 ? 's' : ''}
                   </span>
                 </div>
@@ -429,7 +429,7 @@ export default async function AnalysisDetailPage({ params }: Props) {
                         className="flex items-start gap-3 p-3 bg-blue-50 rounded-lg border border-blue-100"
                       >
                         <CheckCircle className="h-5 w-5 text-green-500 mt-0.5 flex-shrink-0" />
-                        <span className="text-gray-800 text-sm leading-relaxed">
+                        <span className="text-gray-800 dark:text-gray-200 text-sm leading-relaxed">
                           {findingText}
                         </span>
                       </div>
@@ -441,12 +441,12 @@ export default async function AnalysisDetailPage({ params }: Props) {
 
             {/* Recommendations */}
             {recommendations.length > 0 && (
-              <div className="bg-white rounded-2xl shadow-sm border border-gray-200 p-6">
+              <div className="bg-white dark:bg-slate-900 rounded-2xl shadow-sm border border-gray-200 dark:border-gray-800 p-6">
                 <div className="flex items-center gap-3 mb-4">
                   <div className="p-2 bg-green-100 rounded-lg">
                     <Activity className="h-5 w-5 text-green-600" />
                   </div>
-                  <h2 className="text-lg font-semibold text-gray-900">
+                  <h2 className="text-lg font-semibold text-gray-900 dark:text-white">
                     Recommendations
                   </h2>
                 </div>
@@ -456,7 +456,7 @@ export default async function AnalysisDetailPage({ params }: Props) {
                       <span className="flex-shrink-0 w-6 h-6 bg-green-100 text-green-700 rounded-full flex items-center justify-center text-sm font-medium">
                         {index + 1}
                       </span>
-                      <span className="text-gray-700">
+                      <span className="text-gray-700 dark:text-gray-300">
                         {typeof rec === "string" ? rec : rec.recommendation || rec.text}
                       </span>
                     </li>
@@ -467,12 +467,12 @@ export default async function AnalysisDetailPage({ params }: Props) {
 
             {/* Citations */}
             {citations.length > 0 && (
-              <div className="bg-white rounded-2xl shadow-sm border border-gray-200 p-6">
+              <div className="bg-white dark:bg-slate-900 rounded-2xl shadow-sm border border-gray-200 dark:border-gray-800 p-6">
                 <div className="flex items-center gap-3 mb-4">
                   <div className="p-2 bg-indigo-100 rounded-lg">
                     <BookOpen className="h-5 w-5 text-indigo-600" />
                   </div>
-                  <h2 className="text-lg font-semibold text-gray-900">
+                  <h2 className="text-lg font-semibold text-gray-900 dark:text-white">
                     Medical References
                   </h2>
                 </div>
@@ -509,12 +509,12 @@ export default async function AnalysisDetailPage({ params }: Props) {
           <div className="space-y-6">
             {/* Risk Factors */}
             {riskFactors.length > 0 && (
-              <div className="bg-white rounded-2xl shadow-sm border border-gray-200 p-6">
+              <div className="bg-white dark:bg-slate-900 rounded-2xl shadow-sm border border-gray-200 dark:border-gray-800 p-6">
                 <div className="flex items-center gap-3 mb-4">
                   <div className="p-2 bg-orange-100 rounded-lg">
                     <AlertTriangle className="h-5 w-5 text-orange-600" />
                   </div>
-                  <h2 className="text-lg font-semibold text-gray-900">
+                  <h2 className="text-lg font-semibold text-gray-900 dark:text-white">
                     Risk Factors
                   </h2>
                 </div>
@@ -522,7 +522,7 @@ export default async function AnalysisDetailPage({ params }: Props) {
                   {riskFactors.map((risk: any, index: number) => (
                     <li
                       key={index}
-                      className="flex items-center gap-2 text-sm text-gray-700"
+                      className="flex items-center gap-2 text-sm text-gray-700 dark:text-gray-300"
                     >
                       <span className="w-2 h-2 bg-orange-400 rounded-full" />
                       {typeof risk === "string" ? risk : risk.factor || risk.name}
@@ -534,12 +534,12 @@ export default async function AnalysisDetailPage({ params }: Props) {
 
             {/* Medications */}
             {medications.length > 0 && (
-              <div className="bg-white rounded-2xl shadow-sm border border-gray-200 p-6">
+              <div className="bg-white dark:bg-slate-900 rounded-2xl shadow-sm border border-gray-200 dark:border-gray-800 p-6">
                 <div className="flex items-center gap-3 mb-4">
                   <div className="p-2 bg-teal-100 rounded-lg">
                     <Activity className="h-5 w-5 text-teal-600" />
                   </div>
-                  <h2 className="text-lg font-semibold text-gray-900">
+                  <h2 className="text-lg font-semibold text-gray-900 dark:text-white">
                     Medications Mentioned
                   </h2>
                 </div>
@@ -557,51 +557,51 @@ export default async function AnalysisDetailPage({ params }: Props) {
             )}
 
             {/* Analysis Info */}
-            <div className="bg-white rounded-2xl shadow-sm border border-gray-200 p-6">
+            <div className="bg-white dark:bg-slate-900 rounded-2xl shadow-sm border border-gray-200 dark:border-gray-800 p-6">
               <div className="flex items-center gap-3 mb-4">
                 <div className="p-2 bg-gray-100 rounded-lg">
-                  <FileText className="h-5 w-5 text-gray-600" />
+                  <FileText className="h-5 w-5 text-gray-600 dark:text-gray-400" />
                 </div>
-                <h2 className="text-lg font-semibold text-gray-900">
+                <h2 className="text-lg font-semibold text-gray-900 dark:text-white">
                   Document Info
                 </h2>
               </div>
               <dl className="space-y-3 text-sm">
                 <div className="flex justify-between">
-                  <dt className="text-gray-500">Document Type</dt>
-                  <dd className="text-gray-900 font-medium">
+                  <dt className="text-gray-500 dark:text-gray-400">Document Type</dt>
+                  <dd className="text-gray-900 dark:text-white font-medium">
                     {analysis.documentType || "Medical Report"}
                   </dd>
                 </div>
                 <div className="flex justify-between">
-                  <dt className="text-gray-500">Uploaded</dt>
-                  <dd className="text-gray-900">
+                  <dt className="text-gray-500 dark:text-gray-400">Uploaded</dt>
+                  <dd className="text-gray-900 dark:text-white">
                     {new Date(analysis.createdAt).toLocaleDateString()}
                   </dd>
                 </div>
                 <div className="flex justify-between">
-                  <dt className="text-gray-500">Processing Time</dt>
-                  <dd className="text-gray-900">{analysis.processingTime.toFixed(1)}s</dd>
+                  <dt className="text-gray-500 dark:text-gray-400">Processing Time</dt>
+                  <dd className="text-gray-900 dark:text-white">{analysis.processingTime.toFixed(1)}s</dd>
                 </div>
                 <div className="flex justify-between">
-                  <dt className="text-gray-500">Model Version</dt>
-                  <dd className="text-gray-900">{analysis.modelVersion}</dd>
+                  <dt className="text-gray-500 dark:text-gray-400">Model Version</dt>
+                  <dd className="text-gray-900 dark:text-white">{analysis.modelVersion}</dd>
                 </div>
               </dl>
             </div>
 
             {/* Doctor's Notes (if approved) */}
             {isApproved && analysis.reviewNotes && (
-              <div className="bg-white rounded-2xl shadow-sm border border-gray-200 p-6">
+              <div className="bg-white dark:bg-slate-900 rounded-2xl shadow-sm border border-gray-200 dark:border-gray-800 p-6">
                 <div className="flex items-center gap-3 mb-4">
                   <div className="p-2 bg-green-100 rounded-lg">
                     <Stethoscope className="h-5 w-5 text-green-600" />
                   </div>
-                  <h2 className="text-lg font-semibold text-gray-900">
+                  <h2 className="text-lg font-semibold text-gray-900 dark:text-white">
                     Doctor's Notes
                   </h2>
                 </div>
-                <p className="text-sm text-gray-700">{analysis.reviewNotes}</p>
+                <p className="text-sm text-gray-700 dark:text-gray-300">{analysis.reviewNotes}</p>
               </div>
             )}
           </div>

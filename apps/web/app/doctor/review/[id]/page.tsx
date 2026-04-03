@@ -147,25 +147,25 @@ export default function ReviewDetailPage({ params }: { params: { id: string } })
 
       {/* Info Cards */}
       <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-        <div className="bg-white dark:bg-gray-800 rounded-xl p-4 border border-gray-100 dark:border-gray-700">
+        <div className="bg-white dark:bg-slate-900 dark:bg-gray-800 rounded-xl p-4 border border-gray-100 dark:border-gray-700">
           <div className="flex items-center space-x-3">
             <User className="h-5 w-5 text-blue-500" />
             <div><p className="text-xs text-gray-500 dark:text-gray-400">Patient</p><p className="font-medium text-gray-900 dark:text-white">{review.patientName || "N/A"}</p></div>
           </div>
         </div>
-        <div className="bg-white dark:bg-gray-800 rounded-xl p-4 border border-gray-100 dark:border-gray-700">
+        <div className="bg-white dark:bg-slate-900 dark:bg-gray-800 rounded-xl p-4 border border-gray-100 dark:border-gray-700">
           <div className="flex items-center space-x-3">
             <FileText className="h-5 w-5 text-purple-500" />
             <div><p className="text-xs text-gray-500 dark:text-gray-400">Document Type</p><p className="font-medium text-gray-900 dark:text-white">{review.documentType || "Medical Report"}</p></div>
           </div>
         </div>
-        <div className="bg-white dark:bg-gray-800 rounded-xl p-4 border border-gray-100 dark:border-gray-700">
+        <div className="bg-white dark:bg-slate-900 dark:bg-gray-800 rounded-xl p-4 border border-gray-100 dark:border-gray-700">
           <div className="flex items-center space-x-3">
             <Clock className="h-5 w-5 text-orange-500" />
             <div><p className="text-xs text-gray-500 dark:text-gray-400">Submitted</p><p className="font-medium text-gray-900 dark:text-white">{new Date(review.createdAt).toLocaleDateString()}</p></div>
           </div>
         </div>
-        <div className="bg-white dark:bg-gray-800 rounded-xl p-4 border border-gray-100 dark:border-gray-700">
+        <div className="bg-white dark:bg-slate-900 dark:bg-gray-800 rounded-xl p-4 border border-gray-100 dark:border-gray-700">
           <div className="flex items-center space-x-3">
             <AlertCircle className={`h-5 w-5 ${review.priority === "urgent" ? "text-red-500" : "text-green-500"}`} />
             <div><p className="text-xs text-gray-500 dark:text-gray-400">Priority</p><p className={`font-medium ${review.priority === "urgent" ? "text-red-600" : "text-green-600"}`}>{review.priority?.toUpperCase() || "NORMAL"}</p></div>
@@ -175,21 +175,21 @@ export default function ReviewDetailPage({ params }: { params: { id: string } })
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         {/* Original Patient Note */}
-        <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-100 dark:border-gray-700 overflow-hidden">
-          <div className="px-6 py-4 border-b border-gray-100 dark:border-gray-700 bg-gray-50 dark:bg-gray-700/50">
+        <div className="bg-white dark:bg-slate-900 dark:bg-gray-800 rounded-xl border border-gray-100 dark:border-gray-700 overflow-hidden">
+          <div className="px-6 py-4 border-b border-gray-100 dark:border-gray-700 bg-gray-50 dark:bg-slate-950 dark:bg-gray-700/50">
             <h2 className="font-semibold text-gray-900 dark:text-white flex items-center"><FileText className="h-5 w-5 mr-2 text-blue-500" />Original Patient Note</h2>
           </div>
           <div className="p-6"><p className="text-gray-700 dark:text-gray-300 whitespace-pre-wrap text-sm leading-relaxed">{review.patientNote}</p></div>
         </div>
 
         {/* AI Summary */}
-        <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-100 dark:border-gray-700 overflow-hidden">
+        <div className="bg-white dark:bg-slate-900 dark:bg-gray-800 rounded-xl border border-gray-100 dark:border-gray-700 overflow-hidden">
           <div className="px-6 py-4 border-b border-gray-100 dark:border-gray-700 bg-gradient-to-r from-blue-50 to-indigo-50 dark:from-blue-900/20 dark:to-indigo-900/20">
             <h2 className="font-semibold text-gray-900 dark:text-white flex items-center"><Edit3 className="h-5 w-5 mr-2 text-blue-500" />AI Summary {isEditing && <span className="ml-2 text-xs text-blue-600">(Editable)</span>}</h2>
           </div>
           <div className="p-6">
             {isEditing ? (
-              <textarea value={editedSummary} onChange={(e) => setEditedSummary(e.target.value)} className="w-full h-40 p-3 bg-white dark:bg-gray-700 border border-gray-200 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm text-gray-900 dark:text-white placeholder-gray-400" />
+              <textarea value={editedSummary} onChange={(e) => setEditedSummary(e.target.value)} className="w-full h-40 p-3 bg-white dark:bg-slate-900 dark:bg-gray-700 border border-gray-200 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm text-gray-900 dark:text-white placeholder-gray-400" />
             ) : (
               <p className="text-gray-700 dark:text-gray-300 whitespace-pre-wrap text-sm leading-relaxed">{editedSummary}</p>
             )}
@@ -198,7 +198,7 @@ export default function ReviewDetailPage({ params }: { params: { id: string } })
       </div>
 
       {/* Diagnoses */}
-      <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-100 dark:border-gray-700 overflow-hidden">
+      <div className="bg-white dark:bg-slate-900 dark:bg-gray-800 rounded-xl border border-gray-100 dark:border-gray-700 overflow-hidden">
         <div className="px-6 py-4 border-b border-gray-100 dark:border-gray-700 bg-gradient-to-r from-purple-50 to-pink-50 dark:from-purple-900/20 dark:to-pink-900/20">
           <h2 className="font-semibold text-gray-900 dark:text-white">AI Diagnoses</h2>
         </div>
@@ -206,7 +206,7 @@ export default function ReviewDetailPage({ params }: { params: { id: string } })
           {diagnosesList.length > 0 ? (
             <div className="space-y-3">
               {diagnosesList.map((diag: any, i: number) => (
-                <div key={i} className="flex items-center justify-between p-4 bg-gray-50 dark:bg-gray-700/50 rounded-lg">
+                <div key={i} className="flex items-center justify-between p-4 bg-gray-50 dark:bg-slate-950 dark:bg-gray-700/50 rounded-lg">
                   <div><p className="font-medium text-gray-900 dark:text-white">{diag.condition || diag.name || diag}</p>{diag.description && <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">{diag.description}</p>}</div>
                   {diag.confidence && <span className="px-3 py-1 bg-blue-100 text-blue-800 dark:bg-blue-900/30 dark:text-blue-400 rounded-full text-sm font-medium">{Math.round(diag.confidence * 100)}%</span>}
                 </div>
@@ -219,7 +219,7 @@ export default function ReviewDetailPage({ params }: { params: { id: string } })
       </div>
 
       {/* Citations */}
-      <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-100 dark:border-gray-700 overflow-hidden">
+      <div className="bg-white dark:bg-slate-900 dark:bg-gray-800 rounded-xl border border-gray-100 dark:border-gray-700 overflow-hidden">
         <div className="px-6 py-4 border-b border-gray-100 dark:border-gray-700 bg-gradient-to-r from-green-50 to-emerald-50 dark:from-green-900/20 dark:to-emerald-900/20">
           <h2 className="font-semibold text-gray-900 dark:text-white flex items-center"><BookOpen className="h-5 w-5 mr-2 text-green-500" />Medical Citations</h2>
         </div>
@@ -227,7 +227,7 @@ export default function ReviewDetailPage({ params }: { params: { id: string } })
           {citationsList.length > 0 ? (
             <div className="space-y-2">
               {citationsList.map((citation: any, i: number) => (
-                <div key={i} className="p-3 bg-gray-50 dark:bg-gray-700/50 rounded-lg text-sm text-gray-700 dark:text-gray-300">{typeof citation === "string" ? citation : citation.text || JSON.stringify(citation)}</div>
+                <div key={i} className="p-3 bg-gray-50 dark:bg-slate-950 dark:bg-gray-700/50 rounded-lg text-sm text-gray-700 dark:text-gray-300">{typeof citation === "string" ? citation : citation.text || JSON.stringify(citation)}</div>
               ))}
             </div>
           ) : (
@@ -237,13 +237,13 @@ export default function ReviewDetailPage({ params }: { params: { id: string } })
       </div>
 
       {/* Review Notes */}
-      <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-100 dark:border-gray-700 overflow-hidden">
+      <div className="bg-white dark:bg-slate-900 dark:bg-gray-800 rounded-xl border border-gray-100 dark:border-gray-700 overflow-hidden">
         <div className="px-6 py-4 border-b border-gray-100 dark:border-gray-700">
           <h2 className="font-semibold text-gray-900 dark:text-white">Review Notes</h2>
           <p className="text-sm text-gray-500 dark:text-gray-400">Add your notes or comments (required for rejection)</p>
         </div>
         <div className="p-6">
-          <textarea value={reviewNotes} onChange={(e) => setReviewNotes(e.target.value)} placeholder="Enter your review notes here..." className="w-full h-32 p-4 bg-white dark:bg-gray-700 border border-gray-200 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-gray-900 dark:text-white placeholder-gray-400" />
+          <textarea value={reviewNotes} onChange={(e) => setReviewNotes(e.target.value)} placeholder="Enter your review notes here..." className="w-full h-32 p-4 bg-white dark:bg-slate-900 dark:bg-gray-700 border border-gray-200 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-gray-900 dark:text-white placeholder-gray-400" />
         </div>
       </div>
     </div>

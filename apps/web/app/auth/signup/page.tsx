@@ -114,14 +114,14 @@ export default function SignUpPage() {
   if (success) {
     return (
       <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 flex items-center justify-center p-6">
-        <div className="w-full max-w-md bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-8 border border-gray-200 dark:border-gray-700 text-center">
+        <div className="w-full max-w-md bg-white dark:bg-slate-900 dark:bg-gray-800 rounded-2xl shadow-xl p-8 border border-gray-200 dark:border-gray-700 text-center">
           <div className="w-16 h-16 bg-green-100 dark:bg-green-900/20 rounded-full flex items-center justify-center mx-auto mb-4">
             <svg className="w-8 h-8 text-green-600 dark:text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
             </svg>
           </div>
           <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">Registration Successful!</h2>
-          <p className="text-gray-600 dark:text-gray-300 mb-4">
+          <p className="text-gray-600 dark:text-gray-400 dark:text-gray-300 mb-4">
             Your account has been created. You can sign in now.
           </p>
           <p className="text-sm text-gray-500 dark:text-gray-400">
@@ -148,11 +148,11 @@ export default function SignUpPage() {
             </span>
           </div>
           <h1 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">Create Your Account</h1>
-          <p className="text-gray-600 dark:text-gray-300">Choose your role to get started</p>
+          <p className="text-gray-600 dark:text-gray-400 dark:text-gray-300">Choose your role to get started</p>
         </div>
 
         {/* Sign Up Form */}
-        <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-8 border border-gray-200 dark:border-gray-700">
+        <div className="bg-white dark:bg-slate-900 dark:bg-gray-800 rounded-2xl shadow-xl p-8 border border-gray-200 dark:border-gray-700">
           {error && (
             <div className="mb-6 p-4 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-lg">
               <p className="text-sm text-red-600 dark:text-red-400">{error}</p>
@@ -189,7 +189,7 @@ export default function SignUpPage() {
                     <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-1">
                       Patient
                     </h3>
-                    <p className="text-sm text-gray-600 dark:text-gray-300">
+                    <p className="text-sm text-gray-600 dark:text-gray-400 dark:text-gray-300">
                       Upload medical data, track your health, and get AI-powered insights
                     </p>
                   </div>
@@ -225,7 +225,7 @@ export default function SignUpPage() {
                     <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-1">
                       Doctor
                     </h3>
-                    <p className="text-sm text-gray-600 dark:text-gray-300">
+                    <p className="text-sm text-gray-600 dark:text-gray-400 dark:text-gray-300">
                       Review patient data, create diagnoses, and leverage AI assistance
                     </p>
                   </div>
@@ -253,7 +253,7 @@ export default function SignUpPage() {
                   value={formData.name}
                   onChange={handleChange}
                   required
-                  className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-400"
+                  className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-slate-900 dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-400"
                   placeholder={selectedRole === "DOCTOR" ? "Dr. John Smith" : "John Smith"}
                 />
               </div>
@@ -269,7 +269,7 @@ export default function SignUpPage() {
                   value={formData.email}
                   onChange={handleChange}
                   required
-                  className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-400"
+                  className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-slate-900 dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-400"
                   placeholder="your@email.com"
                 />
               </div>
@@ -287,7 +287,7 @@ export default function SignUpPage() {
                   value={formData.password}
                   onChange={handleChange}
                   required
-                  className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-400"
+                  className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-slate-900 dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-400"
                   placeholder="••••••••"
                 />
               </div>
@@ -303,7 +303,7 @@ export default function SignUpPage() {
                   value={formData.confirmPassword}
                   onChange={handleChange}
                   required
-                  className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-400"
+                  className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-slate-900 dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-400"
                   placeholder="••••••••"
                 />
               </div>
@@ -330,7 +330,7 @@ export default function SignUpPage() {
                       value={formData.specialty}
                       onChange={handleChange}
                       required={selectedRole === "DOCTOR"}
-                      className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-400"
+                      className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-slate-900 dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-400"
                       placeholder="e.g., Cardiology, Neurology"
                     />
                   </div>
@@ -345,7 +345,7 @@ export default function SignUpPage() {
                       type="text"
                       value={formData.hospital}
                       onChange={handleChange}
-                      className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-400"
+                      className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-slate-900 dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-400"
                       placeholder="City Hospital"
                     />
                   </div>
@@ -362,7 +362,7 @@ export default function SignUpPage() {
                       type="text"
                       value={formData.licenseNumber}
                       onChange={handleChange}
-                      className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-400"
+                      className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-slate-900 dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-400"
                       placeholder="License number"
                     />
                   </div>
@@ -377,7 +377,7 @@ export default function SignUpPage() {
                       type="tel"
                       value={formData.phone}
                       onChange={handleChange}
-                      className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-400"
+                      className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-slate-900 dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-400"
                       placeholder="+1 (555) 123-4567"
                     />
                   </div>
@@ -406,7 +406,7 @@ export default function SignUpPage() {
                       value={formData.dateOfBirth}
                       onChange={handleChange}
                       required={selectedRole === "PATIENT"}
-                      className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-400"
+                      className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-slate-900 dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-400"
                     />
                   </div>
 
@@ -462,7 +462,7 @@ export default function SignUpPage() {
                     type="text"
                     value={formData.allergies}
                     onChange={handleChange}
-                    className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-400"
+                    className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-slate-900 dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-400"
                     placeholder="e.g., Penicillin, Peanuts (comma separated)"
                   />
                 </div>
@@ -482,7 +482,7 @@ export default function SignUpPage() {
                         type="text"
                         value={formData.emergencyContactName}
                         onChange={handleChange}
-                        className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-400"
+                        className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-slate-900 dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-400"
                         placeholder="Full name"
                       />
                     </div>
@@ -497,7 +497,7 @@ export default function SignUpPage() {
                         type="tel"
                         value={formData.emergencyContactPhone}
                         onChange={handleChange}
-                        className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-400"
+                        className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-slate-900 dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-400"
                         placeholder="+1 (555) 123-4567"
                       />
                     </div>
@@ -513,7 +513,7 @@ export default function SignUpPage() {
                 required
                 className="w-4 h-4 mt-1 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
               />
-              <label htmlFor="terms" className="ml-2 text-sm text-gray-600 dark:text-gray-300">
+              <label htmlFor="terms" className="ml-2 text-sm text-gray-600 dark:text-gray-400 dark:text-gray-300">
                 I agree to the{" "}
                 <Link href="/terms" className="text-blue-600 hover:text-blue-700 dark:text-blue-400">
                   Terms of Service
@@ -540,7 +540,7 @@ export default function SignUpPage() {
               <div className="w-full border-t border-gray-300 dark:border-gray-600"></div>
             </div>
             <div className="relative flex justify-center text-sm">
-              <span className="px-4 bg-white dark:bg-gray-800 text-gray-500 dark:text-gray-400">Or sign up with</span>
+              <span className="px-4 bg-white dark:bg-slate-900 dark:bg-gray-800 text-gray-500 dark:text-gray-400">Or sign up with</span>
             </div>
           </div>
 
@@ -548,7 +548,7 @@ export default function SignUpPage() {
           <button
             onClick={handleGoogleSignUp}
             type="button"
-            className="w-full px-6 py-3 border-2 border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 rounded-lg font-semibold hover:bg-gray-50 dark:hover:bg-gray-700 transition-all duration-200 flex items-center justify-center gap-3"
+            className="w-full px-6 py-3 border-2 border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 rounded-lg font-semibold hover:bg-gray-50 dark:bg-slate-950 dark:hover:bg-gray-700 transition-all duration-200 flex items-center justify-center gap-3"
           >
             <svg className="w-5 h-5" viewBox="0 0 24 24">
               <path fill="currentColor" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
@@ -560,7 +560,7 @@ export default function SignUpPage() {
           </button>
 
           {/* Sign In Link */}
-          <p className="mt-6 text-center text-sm text-gray-600 dark:text-gray-300">
+          <p className="mt-6 text-center text-sm text-gray-600 dark:text-gray-400 dark:text-gray-300">
             Already have an account?{" "}
             <Link href="/auth/signin" className="font-semibold text-blue-600 hover:text-blue-700 dark:text-blue-400">
               Sign in

@@ -55,12 +55,12 @@ function VerifyEmailContent() {
         </div>
 
         {/* Content */}
-        <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-8 border border-gray-200 dark:border-gray-700">
+        <div className="bg-white dark:bg-slate-900 dark:bg-gray-800 rounded-2xl shadow-xl p-8 border border-gray-200 dark:border-gray-700">
           {status === "loading" && (
             <div className="text-center py-8">
               <div className="w-16 h-16 border-4 border-blue-600 border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
               <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">Verifying Your Email</h2>
-              <p className="text-gray-600 dark:text-gray-300">
+              <p className="text-gray-600 dark:text-gray-400 dark:text-gray-300">
                 Please wait while we verify your email address...
               </p>
             </div>
@@ -74,7 +74,7 @@ function VerifyEmailContent() {
                 </svg>
               </div>
               <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">Email Verified!</h2>
-              <p className="text-gray-600 dark:text-gray-300 mb-6">
+              <p className="text-gray-600 dark:text-gray-400 dark:text-gray-300 mb-6">
                 Your email has been successfully verified. You can now sign in to your account.
               </p>
               <Link
@@ -94,7 +94,7 @@ function VerifyEmailContent() {
                 </svg>
               </div>
               <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">Verification Failed</h2>
-              <p className="text-gray-600 dark:text-gray-300 mb-2">
+              <p className="text-gray-600 dark:text-gray-400 dark:text-gray-300 mb-2">
                 {error}
               </p>
               <p className="text-sm text-gray-500 dark:text-gray-400 mb-6">
@@ -109,7 +109,7 @@ function VerifyEmailContent() {
                 </Link>
                 <Link
                   href="/auth/signin"
-                  className="px-6 py-3 border-2 border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 rounded-lg font-semibold hover:bg-gray-50 dark:hover:bg-gray-700 transition-all duration-200"
+                  className="px-6 py-3 border-2 border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 rounded-lg font-semibold hover:bg-gray-50 dark:bg-slate-950 dark:hover:bg-gray-700 transition-all duration-200"
                 >
                   Back to Sign In
                 </Link>
@@ -127,9 +127,9 @@ export default function VerifyEmailPage() {
     <Suspense fallback={
       <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 flex items-center justify-center p-6">
         <div className="w-full max-w-md">
-          <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-8 border border-gray-200 dark:border-gray-700 text-center">
+          <div className="bg-white dark:bg-slate-900 dark:bg-gray-800 rounded-2xl shadow-xl p-8 border border-gray-200 dark:border-gray-700 text-center">
             <div className="w-16 h-16 border-4 border-blue-600 border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
-            <p className="text-gray-600 dark:text-gray-300">Loading...</p>
+            <p className="text-gray-600 dark:text-gray-400 dark:text-gray-300">Loading...</p>
           </div>
         </div>
       </div>

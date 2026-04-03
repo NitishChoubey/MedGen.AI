@@ -90,7 +90,7 @@ export default function LandingPage() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 transition-colors duration-300">
       {/* Navigation */}
-      <nav className="sticky top-0 z-50 bg-white/80 dark:bg-gray-900/80 backdrop-blur-lg border-b border-gray-200/50 dark:border-gray-700/50 shadow-sm">
+      <nav className="sticky top-0 z-50 bg-white dark:bg-slate-900/80 dark:bg-gray-900/80 backdrop-blur-lg border-b border-gray-200/50 dark:border-gray-700/50 shadow-sm">
         <div className="max-w-7xl mx-auto px-6 py-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-3">
@@ -176,7 +176,7 @@ export default function LandingPage() {
                 </span>
               </h1>
 
-              <p className="text-xl text-gray-600 dark:text-gray-300 leading-relaxed">
+              <p className="text-xl text-gray-600 dark:text-gray-400 dark:text-gray-300 leading-relaxed">
                 AI-powered clinical documentation analysis that delivers instant summaries, 
                 ranked differential diagnoses, and evidence-based recommendations in seconds.
               </p>
@@ -198,7 +198,7 @@ export default function LandingPage() {
                       featuresSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
                     }
                   }}
-                  className="px-8 py-4 bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-200 rounded-xl font-semibold text-lg border-2 border-gray-200 dark:border-gray-600 hover:border-blue-300 hover:shadow-lg hover:bg-blue-50 dark:hover:bg-gray-700 transition-all duration-200 flex items-center justify-center gap-2"
+                  className="px-8 py-4 bg-white dark:bg-slate-900 dark:bg-gray-800 text-gray-700 dark:text-gray-300 dark:text-gray-200 rounded-xl font-semibold text-lg border-2 border-gray-200 dark:border-gray-600 hover:border-blue-300 hover:shadow-lg hover:bg-blue-50 dark:hover:bg-gray-700 transition-all duration-200 flex items-center justify-center gap-2"
                 >
                   Learn More
                   <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -226,7 +226,7 @@ export default function LandingPage() {
 
             {/* Right Column - Visual */}
             <div className="relative">
-              <div className="relative bg-white dark:bg-gray-800 rounded-3xl shadow-2xl p-8 border border-gray-100 dark:border-gray-700 overflow-hidden group hover:shadow-3xl transition-all duration-300">
+              <div className="relative bg-white dark:bg-slate-900 dark:bg-gray-800 rounded-3xl shadow-2xl p-8 border border-gray-100 dark:border-gray-700 overflow-hidden group hover:shadow-3xl transition-all duration-300">
                 {/* Gradient Background Effect */}
                 <div className="absolute inset-0 bg-gradient-to-br from-blue-50/50 via-indigo-50/30 to-purple-50/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                 
@@ -353,7 +353,7 @@ export default function LandingPage() {
             <h2 className="text-4xl sm:text-5xl font-black text-gray-900 dark:text-white mb-4">
               Powerful Features
             </h2>
-            <p className="text-xl text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
+            <p className="text-xl text-gray-600 dark:text-gray-400 dark:text-gray-300 max-w-2xl mx-auto">
               Everything you need for intelligent medical documentation analysis
             </p>
           </div>
@@ -368,7 +368,7 @@ export default function LandingPage() {
                   {feature.icon}
                 </div>
                 <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-3">{feature.title}</h3>
-                <p className="text-gray-600 dark:text-gray-300 leading-relaxed">{feature.description}</p>
+                <p className="text-gray-600 dark:text-gray-400 dark:text-gray-300 leading-relaxed">{feature.description}</p>
               </div>
             ))}
           </div>
@@ -383,7 +383,7 @@ export default function LandingPage() {
               <h2 className="text-4xl sm:text-5xl font-black text-gray-900 dark:text-white mb-6">
                 Why Choose MedGen.AI?
               </h2>
-              <p className="text-xl text-gray-600 dark:text-gray-300 mb-8">
+              <p className="text-xl text-gray-600 dark:text-gray-400 dark:text-gray-300 mb-8">
                 Streamline your clinical workflow with AI-powered insights that save time 
                 and improve diagnostic accuracy.
               </p>
@@ -395,19 +395,19 @@ export default function LandingPage() {
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                       </svg>
                     </div>
-                    <span className="text-lg text-gray-700 dark:text-gray-200 font-medium">{benefit}</span>
+                    <span className="text-lg text-gray-700 dark:text-gray-300 dark:text-gray-200 font-medium">{benefit}</span>
                   </div>
                 ))}
               </div>
             </div>
             <div className="relative">
-              <div className="bg-white dark:bg-gray-800 rounded-3xl shadow-2xl p-8 border border-gray-100 dark:border-gray-700">
+              <div className="bg-white dark:bg-slate-900 dark:bg-gray-800 rounded-3xl shadow-2xl p-8 border border-gray-100 dark:border-gray-700">
                 <div className="space-y-6">
                     <div className="text-center">
                       <div className="text-5xl font-black bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent mb-2">
                         87%
                       </div>
-                      <div className="text-gray-600 dark:text-gray-300">Average Confidence Score</div>
+                      <div className="text-gray-600 dark:text-gray-400 dark:text-gray-300">Average Confidence Score</div>
                   </div>
                   <div className="h-3 bg-gray-200 rounded-full overflow-hidden">
                     <div className="h-full bg-gradient-to-r from-blue-500 to-indigo-600 rounded-full" style={{ width: '87%' }}></div>
@@ -436,7 +436,7 @@ export default function LandingPage() {
             <h2 className="text-4xl sm:text-5xl font-black text-gray-900 dark:text-white mb-4">
               How It Works
             </h2>
-            <p className="text-xl text-gray-600 dark:text-gray-300">
+            <p className="text-xl text-gray-600 dark:text-gray-400 dark:text-gray-300">
               Simple, fast, and accurate medical note analysis
             </p>
           </div>
@@ -461,7 +461,7 @@ export default function LandingPage() {
                         {step.num}
                       </div>
                       <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-3">{step.title}</h3>
-                      <p className="text-gray-600 dark:text-gray-300 leading-relaxed">{step.desc}</p>
+                      <p className="text-gray-600 dark:text-gray-400 dark:text-gray-300 leading-relaxed">{step.desc}</p>
                     </div>
                   </div>
 
@@ -496,7 +496,7 @@ export default function LandingPage() {
                         {step.num}
                       </div>
                       <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-3">{step.title}</h3>
-                      <p className="text-gray-600 dark:text-gray-300 leading-relaxed">{step.desc}</p>
+                      <p className="text-gray-600 dark:text-gray-400 dark:text-gray-300 leading-relaxed">{step.desc}</p>
                     </div>
                   </div>
 
@@ -526,7 +526,7 @@ export default function LandingPage() {
           </p>
           <button
             onClick={() => router.push('/upload')}
-            className="px-10 py-5 bg-white text-blue-600 rounded-xl font-bold text-lg hover:shadow-2xl hover:scale-105 transition-all duration-200"
+            className="px-10 py-5 bg-white dark:bg-slate-900 text-blue-600 rounded-xl font-bold text-lg hover:shadow-2xl hover:scale-105 transition-all duration-200"
           >
             Start Analyzing Now
           </button>

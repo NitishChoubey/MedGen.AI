@@ -14,7 +14,7 @@ import {
 import Link from "next/link";
 
 async function getDashboardData(userId: string) {
-  const [user, analysesCount, recentAnalyses] = await Promise.all([
+  const [user, analysesCount, recentAnalyses, appointmentsCount] = await Promise.all([
     prisma.user.findUnique({
       where: { id: userId },
       select: {
@@ -37,12 +37,20 @@ async function getDashboardData(userId: string) {
         createdAt: true,
       },
     }),
+    prisma.appointment.count({
+      where: { 
+        patientId: userId,
+        scheduledDate: { gte: new Date() },
+        status: { in: ["PENDING", "APPROVED"] },
+      },
+    }),
   ]);
 
   return {
     user,
     analysesCount,
     recentAnalyses,
+    appointmentsCount,
   };
 }
 
@@ -58,7 +66,7 @@ export default async function PatientDashboard() {
 
   const userId = session.user.id;
 
-  const { user, analysesCount, recentAnalyses } = await getDashboardData(userId);
+  const { user, analysesCount, recentAnalyses, appointmentsCount } = await getDashboardData(userId);
 
   const stats = [
     {
@@ -77,10 +85,10 @@ export default async function PatientDashboard() {
     },
     {
       name: "Appointments",
-      value: 0,
+      value: appointmentsCount,
       icon: Calendar,
       color: "bg-purple-500",
-      change: "Book now",
+      change: appointmentsCount > 0 ? "Upcoming" : "Book now",
     },
     {
       name: "Health Score",
@@ -116,10 +124,10 @@ export default async function PatientDashboard() {
     <div className="space-y-8">
       {/* Welcome Section */}
       <div>
-        <h1 className="text-3xl font-bold text-gray-900">
+        <h1 className="text-3xl font-bold text-gray-900 dark:text-white">
           Welcome back, {user?.name || "Patient"}! 👋
         </h1>
-        <p className="mt-2 text-gray-600">
+        <p className="mt-2 text-gray-600 dark:text-gray-400">
           Here's an overview of your health dashboard
         </p>
       </div>
@@ -131,17 +139,17 @@ export default async function PatientDashboard() {
           return (
             <div
               key={stat.name}
-              className="bg-white rounded-lg shadow p-6 hover:shadow-lg transition-shadow"
+              className="bg-white dark:bg-slate-900 rounded-lg shadow p-6 hover:shadow-lg transition-shadow"
             >
               <div className="flex items-center justify-between">
                 <div>
-                  <p className="text-sm font-medium text-gray-600">
+                  <p className="text-sm font-medium text-gray-600 dark:text-gray-400">
                     {stat.name}
                   </p>
-                  <p className="mt-2 text-3xl font-bold text-gray-900">
+                  <p className="mt-2 text-3xl font-bold text-gray-900 dark:text-white">
                     {stat.value}
                   </p>
-                  <p className="mt-2 text-sm text-gray-500">{stat.change}</p>
+                  <p className="mt-2 text-sm text-gray-500 dark:text-gray-400">{stat.change}</p>
                 </div>
                 <div className={`${stat.color} p-3 rounded-lg`}>
                   <Icon className="h-6 w-6 text-white" />
@@ -153,8 +161,8 @@ export default async function PatientDashboard() {
       </div>
 
       {/* Quick Actions */}
-      <div className="bg-white rounded-lg shadow p-6">
-        <h2 className="text-lg font-semibold text-gray-900 mb-4">
+      <div className="bg-white dark:bg-slate-900 rounded-lg shadow p-6">
+        <h2 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">
           Quick Actions
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
@@ -175,9 +183,9 @@ export default async function PatientDashboard() {
       </div>
 
       {/* Recent Activity */}
-      <div className="bg-white rounded-lg shadow p-6">
+      <div className="bg-white dark:bg-slate-900 rounded-lg shadow p-6">
         <div className="flex items-center justify-between mb-6">
-          <h2 className="text-lg font-semibold text-gray-900">
+          <h2 className="text-lg font-semibold text-gray-900 dark:text-white">
             Recent Activity
           </h2>
           <Link
@@ -193,7 +201,7 @@ export default async function PatientDashboard() {
             {recentAnalyses.map((analysis) => (
               <div
                 key={analysis.id}
-                className="flex items-start space-x-4 p-4 rounded-lg hover:bg-gray-50 transition-colors"
+                className="flex items-start space-x-4 p-4 rounded-lg hover:bg-gray-50 dark:bg-slate-950 transition-colors"
               >
                 <div className="flex-shrink-0">
                   <div className="h-10 w-10 rounded-full bg-blue-100 flex items-center justify-center">
@@ -201,14 +209,14 @@ export default async function PatientDashboard() {
                   </div>
                 </div>
                 <div className="flex-1 min-w-0">
-                  <p className="text-sm font-medium text-gray-900">
+                  <p className="text-sm font-medium text-gray-900 dark:text-white">
                     AI Analysis Completed
                   </p>
-                  <p className="text-sm text-gray-500 truncate">
+                  <p className="text-sm text-gray-500 dark:text-gray-400 truncate">
                     {analysis.summary.substring(0, 100)}...
                   </p>
                   <div className="mt-1 flex items-center space-x-4">
-                    <span className="inline-flex items-center text-xs text-gray-500">
+                    <span className="inline-flex items-center text-xs text-gray-500 dark:text-gray-400">
                       <Clock className="h-3 w-3 mr-1" />
                       {new Date(analysis.createdAt).toLocaleDateString()}
                     </span>
@@ -229,10 +237,10 @@ export default async function PatientDashboard() {
         ) : (
           <div className="text-center py-12">
             <Activity className="mx-auto h-12 w-12 text-gray-400" />
-            <h3 className="mt-2 text-sm font-medium text-gray-900">
+            <h3 className="mt-2 text-sm font-medium text-gray-900 dark:text-white">
               No activity yet
             </h3>
-            <p className="mt-1 text-sm text-gray-500">
+            <p className="mt-1 text-sm text-gray-500 dark:text-gray-400">
               Upload your first document to get started
             </p>
             <div className="mt-6">

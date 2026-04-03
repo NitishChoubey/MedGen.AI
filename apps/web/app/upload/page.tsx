@@ -55,8 +55,8 @@ export default function UploadPage() {
   }
 
   return (
-    <div className="min-h-screen bg-slate-50 text-slate-900 font-sans selection:bg-indigo-500/30">
-      <nav className="sticky top-0 z-50 border-b border-slate-200 bg-slate-50/80 backdrop-blur-md">
+    <div className="min-h-screen bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-white font-sans selection:bg-indigo-500/30">
+      <nav className="sticky top-0 z-50 border-b border-slate-200 dark:border-slate-800 bg-slate-50/80 backdrop-blur-md">
         <div className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
           <div className="flex items-center gap-3">
             <div className="w-8 h-8 rounded-lg bg-indigo-500/10 border border-indigo-500/20 flex items-center justify-center text-indigo-400">
@@ -64,7 +64,7 @@ export default function UploadPage() {
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z" />
               </svg>
             </div>
-            <span className="font-semibold text-slate-900 tracking-tight">MedGen<span className="text-slate-9000">.AI</span></span>
+            <span className="font-semibold text-slate-900 dark:text-white tracking-tight">MedGen<span className="text-slate-900 dark:text-white">.AI</span></span>
           </div>
           <div className="flex items-center gap-4">
              <div className="flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-xs font-medium">
@@ -81,21 +81,21 @@ export default function UploadPage() {
       <main className="max-w-6xl mx-auto px-6 py-12 md:py-20 lg:grid lg:grid-cols-12 gap-12 items-start">
         <div className="lg:col-span-5 space-y-8">
           <div>
-            <h1 className="text-3xl md:text-4xl font-bold tracking-tight text-slate-900 mb-3">
+            <h1 className="text-3xl md:text-4xl font-bold tracking-tight text-slate-900 dark:text-white mb-3">
               Clinical Note Analysis
             </h1>
-            <p className="text-slate-600 text-sm md:text-base leading-relaxed">
+            <p className="text-slate-600 dark:text-slate-400 text-sm md:text-base leading-relaxed">
               Upload a patient's medical document or paste clinical notes to generate a differential diagnosis instantly.
             </p>
           </div>
 
           <div className="space-y-4">
-             <label className="text-sm font-medium text-slate-700">1. Upload Source Document</label>
+             <label className="text-sm font-medium text-slate-700 dark:text-slate-300">1. Upload Source Document</label>
              <div 
                onDragOver={(e) => e.preventDefault()}
                onDrop={handleDrop}
                onClick={() => inputRef.current?.click()}
-               className={`group border-2 border-dashed rounded-2xl p-8 transition-all cursor-pointer flex flex-col items-center justify-center gap-4 text-center ${file ? 'border-indigo-500/50 bg-indigo-500/5' : 'border-slate-200 hover:border-slate-300 bg-white/90/50 hover:bg-slate-100/50'}`}
+               className={`group border-2 border-dashed rounded-2xl p-8 transition-all cursor-pointer flex flex-col items-center justify-center gap-4 text-center ${file ? 'border-indigo-500/50 bg-indigo-500/5' : 'border-slate-200 dark:border-slate-800 hover:border-slate-300 bg-white/90/50 hover:bg-slate-100/50'}`}
              >
                <input
                  ref={inputRef}
@@ -104,7 +104,7 @@ export default function UploadPage() {
                  className="hidden"
                  onChange={handleFileChange}
                />
-               <div className={`w-12 h-12 rounded-full flex items-center justify-center transition-colors ${file ? 'bg-indigo-500/20 text-indigo-400' : 'bg-slate-100 text-slate-600 group-hover:text-slate-700'}`}>
+               <div className={`w-12 h-12 rounded-full flex items-center justify-center transition-colors ${file ? 'bg-indigo-500/20 text-indigo-400' : 'bg-slate-100 text-slate-600 dark:text-slate-400 group-hover:text-slate-700 dark:text-slate-300'}`}>
                  {extracting ? (
                    <svg className="animate-spin h-6 w-6" fill="none" viewBox="0 0 24 24">
                      <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
@@ -122,13 +122,13 @@ export default function UploadPage() {
                </div>
                <div>
                   {extracting ? (
-                    <span className="text-slate-700 font-medium">Extracting text...</span>
+                    <span className="text-slate-700 dark:text-slate-300 font-medium">Extracting text...</span>
                   ) : file ? (
                     <span className="text-indigo-300 font-medium">{file.name}</span>
                   ) : (
                     <>
-                      <span className="text-slate-700 font-medium block">Click to upload or drag and drop</span>
-                      <span className="text-slate-9000 text-xs mt-1 block">PDF files only (Max 10MB)</span>
+                      <span className="text-slate-700 dark:text-slate-300 font-medium block">Click to upload or drag and drop</span>
+                      <span className="text-slate-900 dark:text-white text-xs mt-1 block">PDF files only (Max 10MB)</span>
                     </>
                   )}
                </div>
@@ -144,8 +144,8 @@ export default function UploadPage() {
 
           <div className="space-y-4 pt-4">
              <div className="flex items-center justify-between">
-                <label className="text-sm font-medium text-slate-700">Analysis Depth (Evidence)</label>
-                <span className="text-xs text-slate-9000">{topK} Passages</span>
+                <label className="text-sm font-medium text-slate-700 dark:text-slate-300">Analysis Depth (Evidence)</label>
+                <span className="text-xs text-slate-900 dark:text-white">{topK} Passages</span>
              </div>
              <input
                type="range"
@@ -155,22 +155,22 @@ export default function UploadPage() {
                onChange={(e) => setTopK(parseInt(e.target.value))}
                className="w-full h-2 bg-slate-100 rounded-lg appearance-none cursor-pointer accent-indigo-500"
              />
-             <p className="text-xs text-slate-9000 leading-relaxed">
+             <p className="text-xs text-slate-900 dark:text-white leading-relaxed">
                Controls how many medical knowledge passages are retrieved to support the diagnosis. A higher depth considers more sources.
              </p>
           </div>
         </div>
 
         <div className="lg:col-span-7 flex flex-col mt-12 lg:mt-0 space-y-6 h-[600px] lg:h-auto">
-           <div className="flex-1 bg-white/90 border border-slate-200 rounded-2xl overflow-hidden flex flex-col shadow-xl">
-             <div className="bg-white/90/50 border-b border-slate-200 px-5 py-4 flex items-center justify-between">
-               <label className="text-sm font-medium text-slate-700">2. Review & Edit Clinical Note</label>
-               <span className="text-xs font-mono text-slate-9000 bg-slate-100 px-2 py-1 rounded-md">
+           <div className="flex-1 bg-white dark:bg-slate-900/90 border border-slate-200 dark:border-slate-800 rounded-2xl overflow-hidden flex flex-col shadow-xl">
+             <div className="bg-white/90/50 border-b border-slate-200 dark:border-slate-800 px-5 py-4 flex items-center justify-between">
+               <label className="text-sm font-medium text-slate-700 dark:text-slate-300">2. Review & Edit Clinical Note</label>
+               <span className="text-xs font-mono text-slate-900 dark:text-white bg-slate-100 px-2 py-1 rounded-md">
                  {text.split(/\s+/).filter(w => w).length} words
                </span>
              </div>
              <textarea
-                className="w-full h-full min-h-[300px] bg-transparent p-5 text-slate-700 placeholder-slate-400 focus:outline-none focus:ring-0 resize-none text-sm md:text-base leading-relaxed"
+                className="w-full h-full min-h-[300px] bg-transparent p-5 text-slate-700 dark:text-slate-300 placeholder-slate-400 focus:outline-none focus:ring-0 resize-none text-sm md:text-base leading-relaxed"
                 placeholder="The extracted text from your PDF will appear here.
 
 You can also type or paste a clinical note manually..."

@@ -7,8 +7,8 @@ export default function MedicalRecordsPage() {
       {/* Header */}
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-3xl font-bold text-gray-900">Medical Records</h1>
-          <p className="mt-2 text-gray-600">
+          <h1 className="text-3xl font-bold text-gray-900 dark:text-white">Medical Records</h1>
+          <p className="mt-2 text-gray-600 dark:text-gray-400">
             View and manage your medical documents
           </p>
         </div>
@@ -22,13 +22,13 @@ export default function MedicalRecordsPage() {
       </div>
 
       {/* Empty State */}
-      <div className="bg-white rounded-lg shadow">
+      <div className="bg-white dark:bg-slate-900 rounded-lg shadow">
         <div className="text-center py-12 px-6">
           <FileText className="mx-auto h-16 w-16 text-gray-400" />
-          <h3 className="mt-4 text-lg font-medium text-gray-900">
+          <h3 className="mt-4 text-lg font-medium text-gray-900 dark:text-white">
             No medical records yet
           </h3>
-          <p className="mt-2 text-sm text-gray-500 max-w-md mx-auto">
+          <p className="mt-2 text-sm text-gray-500 dark:text-gray-400 max-w-md mx-auto">
             Get started by uploading your medical documents. You can upload lab
             results, prescriptions, imaging reports, and more.
           </p>
@@ -43,8 +43,8 @@ export default function MedicalRecordsPage() {
           </div>
 
           {/* Supported File Types */}
-          <div className="mt-8 pt-8 border-t border-gray-200">
-            <p className="text-xs text-gray-500 font-medium uppercase tracking-wide">
+          <div className="mt-8 pt-8 border-t border-gray-200 dark:border-gray-800">
+            <p className="text-xs text-gray-500 dark:text-gray-400 font-medium uppercase tracking-wide">
               Supported File Types
             </p>
             <div className="mt-4 flex justify-center space-x-6">
@@ -54,7 +54,7 @@ export default function MedicalRecordsPage() {
                     PDF
                   </span>
                 </div>
-                <span className="text-sm text-gray-600">PDF Documents</span>
+                <span className="text-sm text-gray-600 dark:text-gray-400">PDF Documents</span>
               </div>
               <div className="flex items-center space-x-2">
                 <div className="h-8 w-8 rounded bg-green-100 flex items-center justify-center">
@@ -62,7 +62,7 @@ export default function MedicalRecordsPage() {
                     JPG
                   </span>
                 </div>
-                <span className="text-sm text-gray-600">Images</span>
+                <span className="text-sm text-gray-600 dark:text-gray-400">Images</span>
               </div>
               <div className="flex items-center space-x-2">
                 <div className="h-8 w-8 rounded bg-blue-100 flex items-center justify-center">
@@ -70,7 +70,7 @@ export default function MedicalRecordsPage() {
                     PNG
                   </span>
                 </div>
-                <span className="text-sm text-gray-600">Scans</span>
+                <span className="text-sm text-gray-600 dark:text-gray-400">Scans</span>
               </div>
             </div>
           </div>

@@ -76,8 +76,8 @@ export default async function PatientProfile() {
       {/* Header */}
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-3xl font-bold text-gray-900">My Profile</h1>
-          <p className="mt-2 text-gray-600">
+          <h1 className="text-3xl font-bold text-gray-900 dark:text-white">My Profile</h1>
+          <p className="mt-2 text-gray-600 dark:text-gray-400">
             View and manage your personal information
           </p>
         </div>
@@ -91,9 +91,9 @@ export default async function PatientProfile() {
       </div>
 
       {/* Personal Information */}
-      <div className="bg-white rounded-lg shadow">
-        <div className="px-6 py-4 border-b border-gray-200">
-          <h2 className="text-lg font-semibold text-gray-900">
+      <div className="bg-white dark:bg-slate-900 rounded-lg shadow">
+        <div className="px-6 py-4 border-b border-gray-200 dark:border-gray-800">
+          <h2 className="text-lg font-semibold text-gray-900 dark:text-white">
             Personal Information
           </h2>
         </div>
@@ -101,8 +101,8 @@ export default async function PatientProfile() {
           <div className="flex items-start space-x-3">
             <User className="h-5 w-5 text-gray-400 mt-1" />
             <div>
-              <p className="text-sm font-medium text-gray-500">Full Name</p>
-              <p className="mt-1 text-sm text-gray-900">
+              <p className="text-sm font-medium text-gray-500 dark:text-gray-400">Full Name</p>
+              <p className="mt-1 text-sm text-gray-900 dark:text-white">
                 {profile.name || "Not provided"}
               </p>
             </div>
@@ -111,16 +111,16 @@ export default async function PatientProfile() {
           <div className="flex items-start space-x-3">
             <Mail className="h-5 w-5 text-gray-400 mt-1" />
             <div>
-              <p className="text-sm font-medium text-gray-500">Email Address</p>
-              <p className="mt-1 text-sm text-gray-900">{profile.email}</p>
+              <p className="text-sm font-medium text-gray-500 dark:text-gray-400">Email Address</p>
+              <p className="mt-1 text-sm text-gray-900 dark:text-white">{profile.email}</p>
             </div>
           </div>
 
           <div className="flex items-start space-x-3">
             <Calendar className="h-5 w-5 text-gray-400 mt-1" />
             <div>
-              <p className="text-sm font-medium text-gray-500">Date of Birth</p>
-              <p className="mt-1 text-sm text-gray-900">
+              <p className="text-sm font-medium text-gray-500 dark:text-gray-400">Date of Birth</p>
+              <p className="mt-1 text-sm text-gray-900 dark:text-white">
                 {profile.dateOfBirth
                   ? new Date(profile.dateOfBirth).toLocaleDateString()
                   : "Not provided"}
@@ -131,8 +131,8 @@ export default async function PatientProfile() {
           <div className="flex items-start space-x-3">
             <Users className="h-5 w-5 text-gray-400 mt-1" />
             <div>
-              <p className="text-sm font-medium text-gray-500">Gender</p>
-              <p className="mt-1 text-sm text-gray-900">
+              <p className="text-sm font-medium text-gray-500 dark:text-gray-400">Gender</p>
+              <p className="mt-1 text-sm text-gray-900 dark:text-white">
                 {profile.gender || "Not provided"}
               </p>
             </div>
@@ -141,8 +141,8 @@ export default async function PatientProfile() {
           <div className="flex items-start space-x-3">
             <Droplet className="h-5 w-5 text-gray-400 mt-1" />
             <div>
-              <p className="text-sm font-medium text-gray-500">Blood Type</p>
-              <p className="mt-1 text-sm text-gray-900">
+              <p className="text-sm font-medium text-gray-500 dark:text-gray-400">Blood Type</p>
+              <p className="mt-1 text-sm text-gray-900 dark:text-white">
                 {profile.bloodType || "Not provided"}
               </p>
             </div>
@@ -151,8 +151,8 @@ export default async function PatientProfile() {
           <div className="flex items-start space-x-3">
             <Phone className="h-5 w-5 text-gray-400 mt-1" />
             <div>
-              <p className="text-sm font-medium text-gray-500">Phone Number</p>
-              <p className="mt-1 text-sm text-gray-900">
+              <p className="text-sm font-medium text-gray-500 dark:text-gray-400">Phone Number</p>
+              <p className="mt-1 text-sm text-gray-900 dark:text-white">
                 {profile.phone || "Not provided"}
               </p>
             </div>
@@ -161,9 +161,9 @@ export default async function PatientProfile() {
       </div>
 
       {/* Medical Information */}
-      <div className="bg-white rounded-lg shadow">
-        <div className="px-6 py-4 border-b border-gray-200">
-          <h2 className="text-lg font-semibold text-gray-900">
+      <div className="bg-white dark:bg-slate-900 rounded-lg shadow">
+        <div className="px-6 py-4 border-b border-gray-200 dark:border-gray-800">
+          <h2 className="text-lg font-semibold text-gray-900 dark:text-white">
             Medical Information
           </h2>
         </div>
@@ -172,7 +172,7 @@ export default async function PatientProfile() {
           <div className="flex items-start space-x-3">
             <AlertCircle className="h-5 w-5 text-red-500 mt-1" />
             <div className="flex-1">
-              <p className="text-sm font-medium text-gray-500">Allergies</p>
+              <p className="text-sm font-medium text-gray-500 dark:text-gray-400">Allergies</p>
               {allergiesList.length > 0 ? (
                 <div className="mt-2 flex flex-wrap gap-2">
                   {allergiesList.map((allergy, index) => (
@@ -185,7 +185,7 @@ export default async function PatientProfile() {
                   ))}
                 </div>
               ) : (
-                <p className="mt-1 text-sm text-gray-900">
+                <p className="mt-1 text-sm text-gray-900 dark:text-white">
                   No known allergies
                 </p>
               )}
@@ -196,7 +196,7 @@ export default async function PatientProfile() {
           <div className="flex items-start space-x-3">
             <FileText className="h-5 w-5 text-blue-500 mt-1" />
             <div className="flex-1">
-              <p className="text-sm font-medium text-gray-500">
+              <p className="text-sm font-medium text-gray-500 dark:text-gray-400">
                 Medical History
               </p>
               {medicalHistoryList.length > 0 ? (
@@ -204,7 +204,7 @@ export default async function PatientProfile() {
                   {medicalHistoryList.map((condition, index) => (
                     <li
                       key={index}
-                      className="text-sm text-gray-900 flex items-center"
+                      className="text-sm text-gray-900 dark:text-white flex items-center"
                     >
                       <span className="h-1.5 w-1.5 rounded-full bg-blue-500 mr-2"></span>
                       {condition}
@@ -212,7 +212,7 @@ export default async function PatientProfile() {
                   ))}
                 </ul>
               ) : (
-                <p className="mt-1 text-sm text-gray-900">
+                <p className="mt-1 text-sm text-gray-900 dark:text-white">
                   No medical history recorded
                 </p>
               )}
@@ -222,9 +222,9 @@ export default async function PatientProfile() {
       </div>
 
       {/* Emergency Contact */}
-      <div className="bg-white rounded-lg shadow">
-        <div className="px-6 py-4 border-b border-gray-200">
-          <h2 className="text-lg font-semibold text-gray-900">
+      <div className="bg-white dark:bg-slate-900 rounded-lg shadow">
+        <div className="px-6 py-4 border-b border-gray-200 dark:border-gray-800">
+          <h2 className="text-lg font-semibold text-gray-900 dark:text-white">
             Emergency Contact
           </h2>
         </div>
@@ -234,8 +234,8 @@ export default async function PatientProfile() {
               <div className="flex items-start space-x-3">
                 <User className="h-5 w-5 text-gray-400 mt-1" />
                 <div>
-                  <p className="text-sm font-medium text-gray-500">Name</p>
-                  <p className="mt-1 text-sm text-gray-900">
+                  <p className="text-sm font-medium text-gray-500 dark:text-gray-400">Name</p>
+                  <p className="mt-1 text-sm text-gray-900 dark:text-white">
                     {emergencyContactData.name || "Not provided"}
                   </p>
                 </div>
@@ -244,10 +244,10 @@ export default async function PatientProfile() {
               <div className="flex items-start space-x-3">
                 <Phone className="h-5 w-5 text-gray-400 mt-1" />
                 <div>
-                  <p className="text-sm font-medium text-gray-500">
+                  <p className="text-sm font-medium text-gray-500 dark:text-gray-400">
                     Phone Number
                   </p>
-                  <p className="mt-1 text-sm text-gray-900">
+                  <p className="mt-1 text-sm text-gray-900 dark:text-white">
                     {emergencyContactData.phone || "Not provided"}
                   </p>
                 </div>
@@ -256,7 +256,7 @@ export default async function PatientProfile() {
           ) : (
             <div className="text-center py-6">
               <Phone className="mx-auto h-12 w-12 text-gray-400" />
-              <p className="mt-2 text-sm text-gray-500">
+              <p className="mt-2 text-sm text-gray-500 dark:text-gray-400">
                 No emergency contact information on file
               </p>
               <Link
@@ -271,8 +271,8 @@ export default async function PatientProfile() {
       </div>
 
       {/* Account Info */}
-      <div className="bg-gray-50 rounded-lg border border-gray-200 p-4">
-        <p className="text-sm text-gray-600">
+      <div className="bg-gray-50 dark:bg-slate-950 rounded-lg border border-gray-200 dark:border-gray-800 p-4">
+        <p className="text-sm text-gray-600 dark:text-gray-400">
           <span className="font-medium">Member since:</span>{" "}
           {new Date(profile.createdAt).toLocaleDateString("en-US", {
             year: "numeric",

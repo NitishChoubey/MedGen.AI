@@ -19,6 +19,7 @@ import {
   Search,
   Moon,
   Sun,
+  CalendarDays,
 } from "lucide-react";
 
 interface DoctorSidebarProps {
@@ -33,6 +34,7 @@ interface DoctorSidebarProps {
 
 const menuItems = [
   { name: "Dashboard", href: "/doctor/dashboard", icon: LayoutDashboard, description: "Overview & stats" },
+  { name: "Appointments", href: "/doctor/appointments", icon: CalendarDays, description: "Manage bookings", badge: true },
   { name: "Pending Reviews", href: "/doctor/pending-reviews", icon: ClipboardCheck, description: "Documents to review", badge: true },
   { name: "Approved", href: "/doctor/approved", icon: FileCheck, description: "Review history" },
   { name: "Patients", href: "/doctor/patients", icon: Users, description: "Patient list" },
@@ -74,7 +76,7 @@ export default function DoctorSidebar({ user }: DoctorSidebarProps) {
   };
 
   return (
-    <aside className={`${collapsed ? "w-20" : "w-72"} bg-white dark:bg-gray-800 border-r border-gray-200 dark:border-gray-700 flex flex-col transition-all duration-300 shadow-lg`}>
+    <aside className={`${collapsed ? "w-20" : "w-72"} bg-white dark:bg-slate-900 dark:bg-gray-800 border-r border-gray-200 dark:border-gray-700 flex flex-col transition-all duration-300 shadow-lg`}>
       {/* Logo */}
       <div className="p-4 border-b border-gray-200 dark:border-gray-700">
         <Link href="/doctor/dashboard" className="flex items-center space-x-3">
@@ -102,7 +104,7 @@ export default function DoctorSidebar({ user }: DoctorSidebarProps) {
         <div className="px-4 py-3 border-b border-gray-200 dark:border-gray-700">
           <div className="relative">
             <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400" />
-            <input type="text" placeholder="Search patients..." className="w-full pl-10 pr-4 py-2 text-sm bg-gray-50 dark:bg-gray-700 border border-gray-200 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 dark:text-white placeholder-gray-400" />
+            <input type="text" placeholder="Search patients..." className="w-full pl-10 pr-4 py-2 text-sm bg-gray-50 dark:bg-slate-950 dark:bg-gray-700 border border-gray-200 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 dark:text-white placeholder-gray-400" />
           </div>
         </div>
       )}
@@ -145,7 +147,7 @@ export default function DoctorSidebar({ user }: DoctorSidebarProps) {
               {!collapsed && (
                 <div className="flex-1">
                   <span className="text-sm font-medium">{item.name}</span>
-                  {!isActive && <p className="text-xs text-gray-400 dark:text-gray-500">{item.description}</p>}
+                  {!isActive && <p className="text-xs text-gray-400 dark:text-gray-500 dark:text-gray-400">{item.description}</p>}
                 </div>
               )}
             </Link>
@@ -156,7 +158,7 @@ export default function DoctorSidebar({ user }: DoctorSidebarProps) {
       {/* Bottom Actions */}
       <div className="p-4 border-t border-gray-200 dark:border-gray-700 space-y-2">
         <button onClick={toggleDarkMode} className={`w-full flex items-center ${collapsed ? "justify-center" : "space-x-3"} px-3 py-2 rounded-lg text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors`}>
-          {darkMode ? <Sun className="h-5 w-5 text-yellow-500" /> : <Moon className="h-5 w-5 text-gray-500" />}
+          {darkMode ? <Sun className="h-5 w-5 text-yellow-500" /> : <Moon className="h-5 w-5 text-gray-500 dark:text-gray-400" />}
           {!collapsed && <span className="text-sm font-medium">{darkMode ? "Light Mode" : "Dark Mode"}</span>}
         </button>
         <button className={`w-full flex items-center ${collapsed ? "justify-center" : "space-x-3"} px-3 py-2 rounded-lg text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors relative`}>
@@ -168,7 +170,7 @@ export default function DoctorSidebar({ user }: DoctorSidebarProps) {
           <LogOut className="h-5 w-5" />
           {!collapsed && <span className="text-sm font-medium">Logout</span>}
         </button>
-        <button onClick={() => setCollapsed(!collapsed)} className={`w-full flex items-center ${collapsed ? "justify-center" : "space-x-3"} px-3 py-2 rounded-lg text-gray-500 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors`}>
+        <button onClick={() => setCollapsed(!collapsed)} className={`w-full flex items-center ${collapsed ? "justify-center" : "space-x-3"} px-3 py-2 rounded-lg text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors`}>
           {collapsed ? <ChevronRight className="h-5 w-5" /> : <><ChevronLeft className="h-5 w-5" /><span className="text-sm">Collapse</span></>}
         </button>
       </div>

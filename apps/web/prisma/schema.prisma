@@ -57,6 +57,11 @@ model User {
   apiKeys           ApiKey[]
   auditLogs         AuditLog[]
   
+  // Appointment relationships
+  patientAppointments   Appointment[]      @relation("PatientAppointments")
+  doctorAppointments    Appointment[]      @relation("DoctorAppointments")
+  doctorAvailability    DoctorAvailability[]
+  
   // Timestamps
   createdAt         DateTime       @default(now())
   updatedAt         DateTime       @updatedAt
@@ -262,4 +267,85 @@ model KnowledgeBase {
   @@index([condition])
   @@index([category])
   @@index([active])
+}
+
+// Appointment Model
+model Appointment {
+  id            String   @id @default(cuid())
+  
+  // Patient (who booked)
+  patientId     String
+  patient       User     @relation("PatientAppointments", fields: [patientId], references: [id], onDelete: Cascade)
+  
+  // Doctor (who will attend)
+  doctorId      String
+  doctor        User     @relation("DoctorAppointments", fields: [doctorId], references: [id], onDelete: Cascade)
+  
+  // Appointment Details
+  title         String           // e.g., "General Checkup", "Follow-up Visit"
+  description   String?          // Additional notes from patient
+  appointmentType String         @default("general") // general, specialist, follow_up, emergency, lab_test
+  
+  // Date & Time
+  scheduledDate DateTime         // Date and time of appointment
+  duration      Int              @default(30) // Duration in minutes
+  
+  // Status Management
+  // PENDING: Patient booked, awaiting doctor approval
+  // APPROVED: Doctor approved, confirmed
+  // REJECTED: Doctor rejected the appointment
+  // COMPLETED: Appointment has been completed
+  // CANCELLED: Cancelled by patient or doctor
+  // NO_SHOW: Patient didn't show up
+  status        String           @default("PENDING")
+  
+  // Review/Response
+  doctorNotes   String?          // Notes from doctor after approval/rejection
+  rejectionReason String?        // Reason if rejected
+  
+  // Metadata
+  isVirtual     Boolean          @default(false) // Telemedicine appointment
+  meetingLink   String?          // Link for virtual appointments
+  
+  // Timestamps
+  createdAt     DateTime         @default(now())
+  updatedAt     DateTime         @updatedAt
+  approvedAt    DateTime?
+  completedAt   DateTime?
+  cancelledAt   DateTime?
+  
+  @@index([patientId])
+  @@index([doctorId])
+  @@index([scheduledDate])
+  @@index([status])
+}
+
+// Doctor Availability Model
+model DoctorAvailability {
+  id          String   @id @default(cuid())
+  
+  // Doctor
+  doctorId    String
+  doctor      User     @relation(fields: [doctorId], references: [id], onDelete: Cascade)
+  
+  // Day of week (0 = Sunday, 1 = Monday, ..., 6 = Saturday)
+  dayOfWeek   Int
+  
+  // Time slots (stored as HH:MM format)
+  startTime   String   // e.g., "09:00"
+  endTime     String   // e.g., "17:00"
+  
+  // Slot duration in minutes
+  slotDuration Int     @default(30)
+  
+  // Is this slot active?
+  isActive    Boolean  @default(true)
+  
+  // Timestamps
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  
+  @@unique([doctorId, dayOfWeek, startTime])
+  @@index([doctorId])
+  @@index([dayOfWeek])
 }

@@ -120,14 +120,14 @@ export default function UploadPage() {
     <div className="space-y-6">
       {/* Header */}
       <div>
-        <h1 className="text-3xl font-bold text-gray-900">Upload Document</h1>
-        <p className="mt-2 text-gray-600">
+        <h1 className="text-3xl font-bold text-gray-900 dark:text-white">Upload Document</h1>
+        <p className="mt-2 text-gray-600 dark:text-gray-400">
           Upload medical documents for AI analysis
         </p>
       </div>
 
       {/* Upload Card */}
-      <div className="bg-white rounded-lg shadow p-6">
+      <div className="bg-white dark:bg-slate-900 rounded-lg shadow p-6">
         {/* Drag & Drop Area */}
         <div
           onDragEnter={handleDrag}
@@ -145,10 +145,10 @@ export default function UploadPage() {
               dragActive ? "text-blue-500" : "text-gray-400"
             }`}
           />
-          <h3 className="mt-4 text-lg font-medium text-gray-900">
+          <h3 className="mt-4 text-lg font-medium text-gray-900 dark:text-white">
             {dragActive ? "Drop your file here" : "Upload your medical document"}
           </h3>
-          <p className="mt-2 text-sm text-gray-500">
+          <p className="mt-2 text-sm text-gray-500 dark:text-gray-400">
             Drag and drop your file here, or click to browse
           </p>
 
@@ -168,7 +168,7 @@ export default function UploadPage() {
             Select File
           </label>
 
-          <p className="mt-4 text-xs text-gray-500">
+          <p className="mt-4 text-xs text-gray-500 dark:text-gray-400">
             Supported formats: PDF, JPG, PNG (Max 10MB)
           </p>
         </div>
@@ -176,15 +176,15 @@ export default function UploadPage() {
         {/* File Preview */}
         {file && (
           <div className="mt-6">
-            <div className="bg-gray-50 rounded-lg p-4">
+            <div className="bg-gray-50 dark:bg-slate-950 rounded-lg p-4">
               <div className="flex items-center justify-between">
                 <div className="flex items-center space-x-3">
                   <FileText className="h-8 w-8 text-blue-600" />
                   <div>
-                    <p className="text-sm font-medium text-gray-900">
+                    <p className="text-sm font-medium text-gray-900 dark:text-white">
                       {file.name}
                     </p>
-                    <p className="text-xs text-gray-500">
+                    <p className="text-xs text-gray-500 dark:text-gray-400">
                       {(file.size / 1024 / 1024).toFixed(2)} MB
                     </p>
                   </div>
@@ -192,7 +192,7 @@ export default function UploadPage() {
                 {!uploading && (
                   <button
                     onClick={() => setFile(null)}
-                    className="text-gray-400 hover:text-gray-600"
+                    className="text-gray-400 hover:text-gray-600 dark:text-gray-400"
                   >
                     <X className="h-5 w-5" />
                   </button>
@@ -202,7 +202,7 @@ export default function UploadPage() {
               {/* Progress Bar */}
               {uploading && (
                 <div className="mt-4">
-                  <div className="flex items-center justify-between text-sm text-gray-600 mb-2">
+                  <div className="flex items-center justify-between text-sm text-gray-600 dark:text-gray-400 mb-2">
                     <span className="flex items-center">
                       <Loader2 className="h-4 w-4 mr-2 animate-spin" />
                       {statusMessage}
@@ -254,36 +254,36 @@ export default function UploadPage() {
 
       {/* Info Cards */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-        <div className="bg-white rounded-lg shadow p-6">
+        <div className="bg-white dark:bg-slate-900 rounded-lg shadow p-6">
           <div className="h-10 w-10 rounded-lg bg-blue-100 flex items-center justify-center mb-4">
             <FileText className="h-6 w-6 text-blue-600" />
           </div>
-          <h3 className="text-lg font-semibold text-gray-900">
+          <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
             Secure Storage
           </h3>
-          <p className="mt-2 text-sm text-gray-600">
+          <p className="mt-2 text-sm text-gray-600 dark:text-gray-400">
             All documents are encrypted and stored securely with HIPAA compliance
           </p>
         </div>
 
-        <div className="bg-white rounded-lg shadow p-6">
+        <div className="bg-white dark:bg-slate-900 rounded-lg shadow p-6">
           <div className="h-10 w-10 rounded-lg bg-green-100 flex items-center justify-center mb-4">
             <CheckCircle className="h-6 w-6 text-green-600" />
           </div>
-          <h3 className="text-lg font-semibold text-gray-900">AI Analysis</h3>
-          <p className="mt-2 text-sm text-gray-600">
+          <h3 className="text-lg font-semibold text-gray-900 dark:text-white">AI Analysis</h3>
+          <p className="mt-2 text-sm text-gray-600 dark:text-gray-400">
             Advanced AI extracts insights and identifies key medical information
           </p>
         </div>
 
-        <div className="bg-white rounded-lg shadow p-6">
+        <div className="bg-white dark:bg-slate-900 rounded-lg shadow p-6">
           <div className="h-10 w-10 rounded-lg bg-purple-100 flex items-center justify-center mb-4">
             <Upload className="h-6 w-6 text-purple-600" />
           </div>
-          <h3 className="text-lg font-semibold text-gray-900">
+          <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
             Easy Access
           </h3>
-          <p className="mt-2 text-sm text-gray-600">
+          <p className="mt-2 text-sm text-gray-600 dark:text-gray-400">
             Access your documents anytime, anywhere from any device
           </p>
         </div>

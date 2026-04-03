@@ -17,7 +17,7 @@ export default function SettingsPage() {
       </h1>
 
       {/* Notifications */}
-      <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-100 dark:border-gray-700 p-6">
+      <div className="bg-white dark:bg-slate-900 dark:bg-gray-800 rounded-xl shadow-sm border border-gray-100 dark:border-gray-700 p-6">
         <h2 className="text-lg font-semibold text-gray-900 dark:text-white flex items-center mb-4">
           <Bell className="h-5 w-5 mr-2 text-blue-500" />
           Notifications
@@ -26,20 +26,20 @@ export default function SettingsPage() {
           <div className="flex items-center justify-between">
             <div><p className="font-medium text-gray-900 dark:text-white">Push Notifications</p><p className="text-sm text-gray-500 dark:text-gray-400">Receive alerts for new pending reviews</p></div>
             <button onClick={() => setNotifications(!notifications)} className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors ${notifications ? "bg-blue-600" : "bg-gray-200 dark:bg-gray-700"}`}>
-              <span className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform ${notifications ? "translate-x-6" : "translate-x-1"}`} />
+              <span className={`inline-block h-4 w-4 transform rounded-full bg-white dark:bg-slate-900 transition-transform ${notifications ? "translate-x-6" : "translate-x-1"}`} />
             </button>
           </div>
           <div className="flex items-center justify-between">
             <div><p className="font-medium text-gray-900 dark:text-white">Email Alerts</p><p className="text-sm text-gray-500 dark:text-gray-400">Get daily summary of pending documents</p></div>
             <button onClick={() => setEmailAlerts(!emailAlerts)} className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors ${emailAlerts ? "bg-blue-600" : "bg-gray-200 dark:bg-gray-700"}`}>
-              <span className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform ${emailAlerts ? "translate-x-6" : "translate-x-1"}`} />
+              <span className={`inline-block h-4 w-4 transform rounded-full bg-white dark:bg-slate-900 transition-transform ${emailAlerts ? "translate-x-6" : "translate-x-1"}`} />
             </button>
           </div>
         </div>
       </div>
 
       {/* Appearance */}
-      <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-100 dark:border-gray-700 p-6">
+      <div className="bg-white dark:bg-slate-900 dark:bg-gray-800 rounded-xl shadow-sm border border-gray-100 dark:border-gray-700 p-6">
         <h2 className="text-lg font-semibold text-gray-900 dark:text-white flex items-center mb-4">
           <Moon className="h-5 w-5 mr-2 text-purple-500" />
           Appearance
@@ -47,18 +47,18 @@ export default function SettingsPage() {
         <div className="flex items-center justify-between">
           <div><p className="font-medium text-gray-900 dark:text-white">Dark Mode</p><p className="text-sm text-gray-500 dark:text-gray-400">Use dark theme across the dashboard</p></div>
           <button onClick={() => { setDarkMode(!darkMode); document.documentElement.classList.toggle("dark"); }} className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors ${darkMode ? "bg-blue-600" : "bg-gray-200 dark:bg-gray-700"}`}>
-            <span className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform ${darkMode ? "translate-x-6" : "translate-x-1"}`} />
+            <span className={`inline-block h-4 w-4 transform rounded-full bg-white dark:bg-slate-900 transition-transform ${darkMode ? "translate-x-6" : "translate-x-1"}`} />
           </button>
         </div>
       </div>
 
       {/* Language */}
-      <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-100 dark:border-gray-700 p-6">
+      <div className="bg-white dark:bg-slate-900 dark:bg-gray-800 rounded-xl shadow-sm border border-gray-100 dark:border-gray-700 p-6">
         <h2 className="text-lg font-semibold text-gray-900 dark:text-white flex items-center mb-4">
           <Globe className="h-5 w-5 mr-2 text-green-500" />
           Language
         </h2>
-        <select value={language} onChange={(e) => setLanguage(e.target.value)} className="w-full md:w-64 p-3 bg-gray-50 dark:bg-gray-700 border border-gray-200 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+        <select value={language} onChange={(e) => setLanguage(e.target.value)} className="w-full md:w-64 p-3 bg-gray-50 dark:bg-slate-950 dark:bg-gray-700 border border-gray-200 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
           <option value="en">English</option>
           <option value="es">Español</option>
           <option value="fr">Français</option>
@@ -67,7 +67,7 @@ export default function SettingsPage() {
       </div>
 
       {/* Security */}
-      <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-100 dark:border-gray-700 p-6">
+      <div className="bg-white dark:bg-slate-900 dark:bg-gray-800 rounded-xl shadow-sm border border-gray-100 dark:border-gray-700 p-6">
         <h2 className="text-lg font-semibold text-gray-900 dark:text-white flex items-center mb-4">
           <Shield className="h-5 w-5 mr-2 text-red-500" />
           Security

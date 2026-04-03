@@ -51,7 +51,7 @@ export default async function AnalysesPage() {
       case "FAILED":
         return <AlertCircle className="h-5 w-5 text-red-600" />;
       default:
-        return <Activity className="h-5 w-5 text-gray-600" />;
+        return <Activity className="h-5 w-5 text-gray-600 dark:text-gray-400" />;
     }
   };
 
@@ -73,7 +73,7 @@ export default async function AnalysesPage() {
       case "FAILED":
         return "bg-red-100 text-red-800";
       default:
-        return "bg-gray-100 text-gray-800";
+        return "bg-gray-100 text-gray-800 dark:text-gray-200";
     }
   };
 
@@ -90,8 +90,8 @@ export default async function AnalysesPage() {
       {/* Header */}
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-3xl font-bold text-gray-900">AI Analyses</h1>
-          <p className="mt-2 text-gray-600">
+          <h1 className="text-3xl font-bold text-gray-900 dark:text-white">AI Analyses</h1>
+          <p className="mt-2 text-gray-600 dark:text-gray-400">
             Review your medical document analyses
           </p>
         </div>
@@ -106,13 +106,13 @@ export default async function AnalysesPage() {
 
       {/* Stats */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-        <div className="bg-white rounded-lg shadow p-6">
+        <div className="bg-white dark:bg-slate-900 rounded-lg shadow p-6">
           <div className="flex items-center justify-between">
             <div>
-              <p className="text-sm font-medium text-gray-600">
+              <p className="text-sm font-medium text-gray-600 dark:text-gray-400">
                 Total Analyses
               </p>
-              <p className="mt-2 text-3xl font-bold text-gray-900">
+              <p className="mt-2 text-3xl font-bold text-gray-900 dark:text-white">
                 {analyses.length}
               </p>
             </div>
@@ -120,11 +120,11 @@ export default async function AnalysesPage() {
           </div>
         </div>
 
-        <div className="bg-white rounded-lg shadow p-6">
+        <div className="bg-white dark:bg-slate-900 rounded-lg shadow p-6">
           <div className="flex items-center justify-between">
             <div>
-              <p className="text-sm font-medium text-gray-600">Completed</p>
-              <p className="mt-2 text-3xl font-bold text-gray-900">
+              <p className="text-sm font-medium text-gray-600 dark:text-gray-400">Completed</p>
+              <p className="mt-2 text-3xl font-bold text-gray-900 dark:text-white">
                 {analyses.filter((a) => a.status === "COMPLETED").length}
               </p>
             </div>
@@ -132,13 +132,13 @@ export default async function AnalysesPage() {
           </div>
         </div>
 
-        <div className="bg-white rounded-lg shadow p-6">
+        <div className="bg-white dark:bg-slate-900 rounded-lg shadow p-6">
           <div className="flex items-center justify-between">
             <div>
-              <p className="text-sm font-medium text-gray-600">
+              <p className="text-sm font-medium text-gray-600 dark:text-gray-400">
                 Avg. Processing Time
               </p>
-              <p className="mt-2 text-3xl font-bold text-gray-900">
+              <p className="mt-2 text-3xl font-bold text-gray-900 dark:text-white">
                 {analyses.length > 0
                   ? (
                       analyses.reduce((sum, a) => sum + a.processingTime, 0) /
@@ -154,7 +154,7 @@ export default async function AnalysesPage() {
       </div>
 
       {/* Analyses List */}
-      <div className="bg-white rounded-lg shadow">
+      <div className="bg-white dark:bg-slate-900 rounded-lg shadow">
         {analyses.length > 0 ? (
           <div className="divide-y divide-gray-200">
             {analyses.map((analysis) => {
@@ -168,13 +168,13 @@ export default async function AnalysesPage() {
               return (
                 <div
                   key={analysis.id}
-                  className="p-6 hover:bg-gray-50 transition-colors"
+                  className="p-6 hover:bg-gray-50 dark:bg-slate-950 transition-colors"
                 >
                   <div className="flex items-start justify-between">
                     <div className="flex-1">
                       <div className="flex items-center space-x-3">
                         {getStatusIcon(analysis.status, analysis.reviewStatus)}
-                        <h3 className="text-lg font-semibold text-gray-900">
+                        <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
                           {analysis.originalFileName || `Analysis #${analysis.id.slice(0, 8)}`}
                         </h3>
                         <span
@@ -189,14 +189,14 @@ export default async function AnalysesPage() {
 
                       <div className="mt-2 space-y-2">
                         {analysis.patientNote && (
-                          <p className="text-sm text-gray-600">
+                          <p className="text-sm text-gray-600 dark:text-gray-400">
                             <span className="font-medium">Patient Note:</span>{" "}
                             {analysis.patientNote.substring(0, 150)}
                             {analysis.patientNote.length > 150 ? "..." : ""}
                           </p>
                         )}
 
-                        <p className="text-sm text-gray-900">
+                        <p className="text-sm text-gray-900 dark:text-white">
                           <span className="font-medium">Summary:</span>{" "}
                           {(analysis.finalSummary || analysis.summary).substring(0, 200)}
                           {(analysis.finalSummary || analysis.summary).length > 200 ? "..." : ""}
@@ -214,7 +214,7 @@ export default async function AnalysesPage() {
                               </span>
                             ))}
                             {diagnosesList.length > 3 && (
-                              <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-gray-100 text-gray-800">
+                              <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-gray-100 text-gray-800 dark:text-gray-200">
                                 +{diagnosesList.length - 3} more
                               </span>
                             )}
@@ -222,7 +222,7 @@ export default async function AnalysesPage() {
                         )}
                       </div>
 
-                      <div className="mt-4 flex items-center space-x-6 text-sm text-gray-500">
+                      <div className="mt-4 flex items-center space-x-6 text-sm text-gray-500 dark:text-gray-400">
                         <div className="flex items-center space-x-1">
                           <Calendar className="h-4 w-4" />
                           <span>
@@ -238,7 +238,7 @@ export default async function AnalysesPage() {
 
                     <Link
                       href={`/results/${analysis.id}`}
-                      className="ml-4 inline-flex items-center px-3 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50"
+                      className="ml-4 inline-flex items-center px-3 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 dark:text-gray-300 bg-white dark:bg-slate-900 hover:bg-gray-50 dark:bg-slate-950"
                     >
                       View Details
                     </Link>
@@ -250,10 +250,10 @@ export default async function AnalysesPage() {
         ) : (
           <div className="text-center py-12 px-6">
             <Activity className="mx-auto h-16 w-16 text-gray-400" />
-            <h3 className="mt-4 text-lg font-medium text-gray-900">
+            <h3 className="mt-4 text-lg font-medium text-gray-900 dark:text-white">
               No analyses yet
             </h3>
-            <p className="mt-2 text-sm text-gray-500 max-w-md mx-auto">
+            <p className="mt-2 text-sm text-gray-500 dark:text-gray-400 max-w-md mx-auto">
               Upload a medical document to get AI-powered analysis and insights
             </p>
             <div className="mt-6">

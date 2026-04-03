@@ -43,60 +43,60 @@ export default function SettingsPage() {
     <div className="space-y-6">
       {/* Header */}
       <div>
-        <h1 className="text-3xl font-bold text-gray-900">Settings</h1>
-        <p className="mt-2 text-gray-600">
+        <h1 className="text-3xl font-bold text-gray-900 dark:text-white">Settings</h1>
+        <p className="mt-2 text-gray-600 dark:text-gray-400">
           Manage your account settings and preferences
         </p>
       </div>
 
       {/* Account Settings */}
-      <div className="bg-white rounded-lg shadow">
-        <div className="px-6 py-4 border-b border-gray-200">
+      <div className="bg-white dark:bg-slate-900 rounded-lg shadow">
+        <div className="px-6 py-4 border-b border-gray-200 dark:border-gray-800">
           <div className="flex items-center space-x-2">
-            <User className="h-5 w-5 text-gray-600" />
-            <h2 className="text-lg font-semibold text-gray-900">
+            <User className="h-5 w-5 text-gray-600 dark:text-gray-400" />
+            <h2 className="text-lg font-semibold text-gray-900 dark:text-white">
               Account Settings
             </h2>
           </div>
         </div>
         <div className="px-6 py-4 space-y-4">
           <div>
-            <label className="block text-sm font-medium text-gray-700">
+            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">
               Full Name
             </label>
             <input
               type="text"
-              className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm px-4 py-2 border bg-white text-gray-900 placeholder-gray-400"
+              className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm px-4 py-2 border bg-white dark:bg-slate-900 text-gray-900 dark:text-white placeholder-gray-400"
               placeholder="Enter your full name"
             />
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-700">
+            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">
               Phone Number
             </label>
             <input
               type="tel"
-              className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm px-4 py-2 border bg-white text-gray-900 placeholder-gray-400"
+              className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm px-4 py-2 border bg-white dark:bg-slate-900 text-gray-900 dark:text-white placeholder-gray-400"
               placeholder="Enter your phone number"
             />
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-700">
+            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">
               Date of Birth
             </label>
             <input
               type="date"
-              className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm px-4 py-2 border bg-white text-gray-900"
+              className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm px-4 py-2 border bg-white dark:bg-slate-900 text-gray-900 dark:text-white"
             />
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-700">
+            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">
               Blood Type
             </label>
-            <select className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm px-4 py-2 border bg-white text-gray-900">
+            <select className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm px-4 py-2 border bg-white dark:bg-slate-900 text-gray-900 dark:text-white">
               <option value="">Select blood type</option>
               <option value="A+">A+</option>
               <option value="A-">A-</option>
@@ -112,18 +112,18 @@ export default function SettingsPage() {
       </div>
 
       {/* Change Password */}
-      <div className="bg-white rounded-lg shadow">
-        <div className="px-6 py-4 border-b border-gray-200">
+      <div className="bg-white dark:bg-slate-900 rounded-lg shadow">
+        <div className="px-6 py-4 border-b border-gray-200 dark:border-gray-800">
           <div className="flex items-center space-x-2">
-            <Lock className="h-5 w-5 text-gray-600" />
-            <h2 className="text-lg font-semibold text-gray-900">
+            <Lock className="h-5 w-5 text-gray-600 dark:text-gray-400" />
+            <h2 className="text-lg font-semibold text-gray-900 dark:text-white">
               Change Password
             </h2>
           </div>
         </div>
         <form onSubmit={handleChangePassword} className="px-6 py-4 space-y-4">
           <div>
-            <label className="block text-sm font-medium text-gray-700">
+            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">
               Current Password
             </label>
             <input
@@ -132,13 +132,13 @@ export default function SettingsPage() {
               onChange={(e) =>
                 setPasswords({ ...passwords, current: e.target.value })
               }
-              className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm px-4 py-2 border bg-white text-gray-900 placeholder-gray-400"
+              className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm px-4 py-2 border bg-white dark:bg-slate-900 text-gray-900 dark:text-white placeholder-gray-400"
               required
             />
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-700">
+            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">
               New Password
             </label>
             <input
@@ -147,13 +147,13 @@ export default function SettingsPage() {
               onChange={(e) =>
                 setPasswords({ ...passwords, new: e.target.value })
               }
-              className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm px-4 py-2 border bg-white text-gray-900 placeholder-gray-400"
+              className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm px-4 py-2 border bg-white dark:bg-slate-900 text-gray-900 dark:text-white placeholder-gray-400"
               required
             />
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-700">
+            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">
               Confirm New Password
             </label>
             <input
@@ -162,7 +162,7 @@ export default function SettingsPage() {
               onChange={(e) =>
                 setPasswords({ ...passwords, confirm: e.target.value })
               }
-              className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm px-4 py-2 border bg-white text-gray-900 placeholder-gray-400"
+              className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm px-4 py-2 border bg-white dark:bg-slate-900 text-gray-900 dark:text-white placeholder-gray-400"
               required
             />
           </div>
@@ -178,11 +178,11 @@ export default function SettingsPage() {
       </div>
 
       {/* Notification Preferences */}
-      <div className="bg-white rounded-lg shadow">
-        <div className="px-6 py-4 border-b border-gray-200">
+      <div className="bg-white dark:bg-slate-900 rounded-lg shadow">
+        <div className="px-6 py-4 border-b border-gray-200 dark:border-gray-800">
           <div className="flex items-center space-x-2">
-            <Bell className="h-5 w-5 text-gray-600" />
-            <h2 className="text-lg font-semibold text-gray-900">
+            <Bell className="h-5 w-5 text-gray-600 dark:text-gray-400" />
+            <h2 className="text-lg font-semibold text-gray-900 dark:text-white">
               Notification Preferences
             </h2>
           </div>
@@ -190,10 +190,10 @@ export default function SettingsPage() {
         <div className="px-6 py-4 space-y-4">
           <div className="flex items-center justify-between">
             <div>
-              <p className="text-sm font-medium text-gray-900">
+              <p className="text-sm font-medium text-gray-900 dark:text-white">
                 Push Notifications
               </p>
-              <p className="text-sm text-gray-500">
+              <p className="text-sm text-gray-500 dark:text-gray-400">
                 Receive notifications in the app
               </p>
             </div>
@@ -209,7 +209,7 @@ export default function SettingsPage() {
               }`}
             >
               <span
-                className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform ${
+                className={`inline-block h-4 w-4 transform rounded-full bg-white dark:bg-slate-900 transition-transform ${
                   settings.notifications ? "translate-x-6" : "translate-x-1"
                 }`}
               />
@@ -218,10 +218,10 @@ export default function SettingsPage() {
 
           <div className="flex items-center justify-between">
             <div>
-              <p className="text-sm font-medium text-gray-900">
+              <p className="text-sm font-medium text-gray-900 dark:text-white">
                 Email Notifications
               </p>
-              <p className="text-sm text-gray-500">
+              <p className="text-sm text-gray-500 dark:text-gray-400">
                 Receive updates via email
               </p>
             </div>
@@ -237,7 +237,7 @@ export default function SettingsPage() {
               }`}
             >
               <span
-                className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform ${
+                className={`inline-block h-4 w-4 transform rounded-full bg-white dark:bg-slate-900 transition-transform ${
                   settings.emailNotifications
                     ? "translate-x-6"
                     : "translate-x-1"
@@ -248,10 +248,10 @@ export default function SettingsPage() {
 
           <div className="flex items-center justify-between">
             <div>
-              <p className="text-sm font-medium text-gray-900">
+              <p className="text-sm font-medium text-gray-900 dark:text-white">
                 SMS Notifications
               </p>
-              <p className="text-sm text-gray-500">
+              <p className="text-sm text-gray-500 dark:text-gray-400">
                 Receive text message updates
               </p>
             </div>
@@ -267,7 +267,7 @@ export default function SettingsPage() {
               }`}
             >
               <span
-                className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform ${
+                className={`inline-block h-4 w-4 transform rounded-full bg-white dark:bg-slate-900 transition-transform ${
                   settings.smsNotifications ? "translate-x-6" : "translate-x-1"
                 }`}
               />
@@ -277,11 +277,11 @@ export default function SettingsPage() {
       </div>
 
       {/* Display Settings */}
-      <div className="bg-white rounded-lg shadow">
-        <div className="px-6 py-4 border-b border-gray-200">
+      <div className="bg-white dark:bg-slate-900 rounded-lg shadow">
+        <div className="px-6 py-4 border-b border-gray-200 dark:border-gray-800">
           <div className="flex items-center space-x-2">
-            <Moon className="h-5 w-5 text-gray-600" />
-            <h2 className="text-lg font-semibold text-gray-900">
+            <Moon className="h-5 w-5 text-gray-600 dark:text-gray-400" />
+            <h2 className="text-lg font-semibold text-gray-900 dark:text-white">
               Display Settings
             </h2>
           </div>
@@ -289,8 +289,8 @@ export default function SettingsPage() {
         <div className="px-6 py-4">
           <div className="flex items-center justify-between">
             <div>
-              <p className="text-sm font-medium text-gray-900">Dark Mode</p>
-              <p className="text-sm text-gray-500">
+              <p className="text-sm font-medium text-gray-900 dark:text-white">Dark Mode</p>
+              <p className="text-sm text-gray-500 dark:text-gray-400">
                 Switch to dark theme (coming soon)
               </p>
             </div>
@@ -304,7 +304,7 @@ export default function SettingsPage() {
               }`}
             >
               <span
-                className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform ${
+                className={`inline-block h-4 w-4 transform rounded-full bg-white dark:bg-slate-900 transition-transform ${
                   settings.darkMode ? "translate-x-6" : "translate-x-1"
                 }`}
               />
@@ -314,7 +314,7 @@ export default function SettingsPage() {
       </div>
 
       {/* Save Button */}
-      <div className="flex items-center justify-between bg-white rounded-lg shadow p-6">
+      <div className="flex items-center justify-between bg-white dark:bg-slate-900 rounded-lg shadow p-6">
         <div>
           {saved && (
             <div className="flex items-center space-x-2 text-green-600">

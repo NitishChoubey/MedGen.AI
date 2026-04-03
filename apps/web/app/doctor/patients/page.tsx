@@ -39,9 +39,9 @@ export default async function PatientsPage() {
         <div className="mt-4 md:mt-0 flex items-center space-x-3">
           <div className="relative">
             <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400" />
-            <input type="text" placeholder="Search patients..." className="pl-10 pr-4 py-2 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-gray-900 dark:text-white placeholder-gray-400" />
+            <input type="text" placeholder="Search patients..." className="pl-10 pr-4 py-2 bg-white dark:bg-slate-900 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-gray-900 dark:text-white placeholder-gray-400" />
           </div>
-          <button className="flex items-center px-4 py-2 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700">
+          <button className="flex items-center px-4 py-2 bg-white dark:bg-slate-900 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg hover:bg-gray-50 dark:bg-slate-950 dark:hover:bg-gray-700">
             <Filter className="h-4 w-4 mr-2" />Filter
           </button>
         </div>
@@ -49,7 +49,7 @@ export default async function PatientsPage() {
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {patients.map((patient) => (
-          <div key={patient.id} className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-100 dark:border-gray-700 p-6 hover:shadow-lg transition-all">
+          <div key={patient.id} className="bg-white dark:bg-slate-900 dark:bg-gray-800 rounded-xl shadow-sm border border-gray-100 dark:border-gray-700 p-6 hover:shadow-lg transition-all">
             <div className="flex items-start space-x-4">
               <div className="h-14 w-14 rounded-full bg-gradient-to-br from-blue-500 to-indigo-500 flex items-center justify-center">
                 <span className="text-white font-bold text-xl">{patient.name?.charAt(0) || "P"}</span>
@@ -62,15 +62,15 @@ export default async function PatientsPage() {
               </div>
             </div>
             <div className="mt-4 grid grid-cols-3 gap-4 text-center">
-              <div className="bg-gray-50 dark:bg-gray-700/50 rounded-lg p-2">
+              <div className="bg-gray-50 dark:bg-slate-950 dark:bg-gray-700/50 rounded-lg p-2">
                 <p className="text-2xl font-bold text-blue-600">{patient._count.analyses}</p>
                 <p className="text-xs text-gray-500 dark:text-gray-400">Reports</p>
               </div>
-              <div className="bg-gray-50 dark:bg-gray-700/50 rounded-lg p-2">
+              <div className="bg-gray-50 dark:bg-slate-950 dark:bg-gray-700/50 rounded-lg p-2">
                 <p className="text-lg font-semibold text-gray-900 dark:text-white">{patient.gender || "-"}</p>
                 <p className="text-xs text-gray-500 dark:text-gray-400">Gender</p>
               </div>
-              <div className="bg-gray-50 dark:bg-gray-700/50 rounded-lg p-2">
+              <div className="bg-gray-50 dark:bg-slate-950 dark:bg-gray-700/50 rounded-lg p-2">
                 <p className="text-lg font-semibold text-gray-900 dark:text-white">{patient.bloodType || "-"}</p>
                 <p className="text-xs text-gray-500 dark:text-gray-400">Blood</p>
               </div>
@@ -87,7 +87,7 @@ export default async function PatientsPage() {
       </div>
 
       {patients.length === 0 && (
-        <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-700 p-12 text-center">
+        <div className="bg-white dark:bg-slate-900 dark:bg-gray-800 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-700 p-12 text-center">
           <Users className="h-16 w-16 text-gray-400 mx-auto mb-4" />
           <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-2">No Patients Yet</h3>
           <p className="text-gray-500 dark:text-gray-400">Patients will appear here once they register.</p>

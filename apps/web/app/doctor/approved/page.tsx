@@ -32,18 +32,18 @@ export default async function ApprovedPage() {
         <div className="mt-4 md:mt-0 flex items-center space-x-3">
           <div className="relative">
             <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400" />
-            <input type="text" placeholder="Search approved..." className="pl-10 pr-4 py-2 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-gray-900 dark:text-white placeholder-gray-400" />
+            <input type="text" placeholder="Search approved..." className="pl-10 pr-4 py-2 bg-white dark:bg-slate-900 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-gray-900 dark:text-white placeholder-gray-400" />
           </div>
-          <button className="flex items-center px-4 py-2 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700">
+          <button className="flex items-center px-4 py-2 bg-white dark:bg-slate-900 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg hover:bg-gray-50 dark:bg-slate-950 dark:hover:bg-gray-700">
             <Filter className="h-4 w-4 mr-2" />Filter
           </button>
         </div>
       </div>
 
       {approved.length > 0 ? (
-        <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-100 dark:border-gray-700 overflow-hidden">
+        <div className="bg-white dark:bg-slate-900 dark:bg-gray-800 rounded-xl shadow-sm border border-gray-100 dark:border-gray-700 overflow-hidden">
           <table className="w-full">
-            <thead className="bg-gray-50 dark:bg-gray-700/50">
+            <thead className="bg-gray-50 dark:bg-slate-950 dark:bg-gray-700/50">
               <tr>
                 <th className="px-6 py-4 text-left text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase">Patient</th>
                 <th className="px-6 py-4 text-left text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase">Document</th>
@@ -54,7 +54,7 @@ export default async function ApprovedPage() {
             </thead>
             <tbody className="divide-y divide-gray-100 dark:divide-gray-700">
               {approved.map((doc) => (
-                <tr key={doc.id} className="hover:bg-gray-50 dark:hover:bg-gray-700/50 transition-colors">
+                <tr key={doc.id} className="hover:bg-gray-50 dark:bg-slate-950 dark:hover:bg-gray-700/50 transition-colors">
                   <td className="px-6 py-4">
                     <div className="flex items-center space-x-3">
                       <div className="h-10 w-10 rounded-full bg-green-100 dark:bg-green-900/30 flex items-center justify-center">
@@ -92,7 +92,7 @@ export default async function ApprovedPage() {
           </table>
         </div>
       ) : (
-        <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-700 p-12 text-center">
+        <div className="bg-white dark:bg-slate-900 dark:bg-gray-800 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-700 p-12 text-center">
           <FileCheck className="h-16 w-16 text-gray-400 mx-auto mb-4" />
           <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-2">No Approved Documents Yet</h3>
           <p className="text-gray-500 dark:text-gray-400">Documents you approve will appear here.</p>

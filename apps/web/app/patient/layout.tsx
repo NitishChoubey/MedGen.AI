@@ -25,7 +25,7 @@ export default async function PatientLayout({
   }
 
   return (
-    <div className="flex h-screen bg-gray-50">
+    <div className="flex h-screen bg-gray-50 dark:bg-slate-950">
       <PatientSidebar user={session.user} />
       <main className="flex-1 overflow-y-auto">
         <div className="container mx-auto px-4 py-8">
