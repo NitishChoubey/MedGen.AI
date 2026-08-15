@@ -29,8 +29,8 @@ AI-powered medical note analysis system with **Retrieval Augmented Generation (R
 
 ### 1. Clone Repository
 ```bash
-git clone https://github.com/your-username/medgen-ai.git
-cd medgen-ai
+git clone https://github.com/NitishChoubey/MedGen.AI.git
+cd MedGen.AI
 ```
 
 ### 2. Setup Backend (FastAPI)
@@ -154,7 +154,8 @@ This is a hackathon project for Round 1 screening. Round 2 will include:
 
 ## 👥 Team
 
-[Add team member information]
+- **[Nitish Choubey](https://github.com/NitishChoubey)** — Project lead & backend
+- **[Gopal Yadav](https://github.com/gopal5587)** — Full-stack development & deployment
 
 ## 📧 Contact
 
